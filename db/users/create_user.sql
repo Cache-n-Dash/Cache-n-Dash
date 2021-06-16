@@ -1,5 +1,5 @@
 INSERT INTO geo_users
-(username, email, password, admin)
+(username, email, password, isAdmin)
 VALUES
 ($1, $2, $3, false)
 RETURNING *;
