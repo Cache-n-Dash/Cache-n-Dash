@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS geo_users;
-DROP TABLE IF EXISTS geo_locations;
-DROP TABLE IF EXISTS geo_courses;
 DROP TABLE IF EXISTS geo_activities;
+DROP TABLE IF EXISTS geo_courses;
+DROP TABLE IF EXISTS geo_locations;
+DROP TABLE IF EXISTS geo_users;
 
 CREATE TABLE geo_users (
     user_id SERIAL PRIMARY KEY,
