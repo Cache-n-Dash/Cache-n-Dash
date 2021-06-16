@@ -1,13 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Cabin&family=Raleway:wght@100&display=swap");
+
 :root {
    --light-green: #97d18d;
    --medium-green: #6fb164;
-   --dark-green: #55884d;
+   --dark-green: #426d3b;
    --purple: #c78dd1;
    --bg-color: white;
+   --title-font: "Raleway", sans-serif;
+   --body-font: "Cabin", sans-serif;
 }
 
 .App {
    text-align: center;
+   font-family: var(--body-font);
 }
 
 .App-logo {
