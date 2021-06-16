@@ -2,7 +2,7 @@ import { Switch, Route } from "react-router-dom";
 import Home from './components/Home/Home'
 import Auth from './components/Auth/Auth'
 import UserDash from './components/UserDash/UserDash'
-import LeaderBoard from './components/Leaderboard/LeaderBoard'
+import LeaderBoard from './components/LeaderBoard/LeaderBoard'
 import Map from './components/Map/Map'
 import React from "react";
 import Search from './components/Search/Search'
