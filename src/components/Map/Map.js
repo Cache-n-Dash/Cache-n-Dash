@@ -105,3 +105,16 @@ function Map() {
 }
 
 export default Map;
+
+
+// const success = (pos) => {
+//   const crd = pos.coords;
+//   console.log(`Lat: ${crd.latitude}`)
+//   console.log(`long: ${crd.longitude}`)
+// }
+
+// const getPos = () => {
+//   navigator.geolocation.getCurrentPosition(success)
+// }
+
+//<button onClick={getPos}>Determine Position</button>

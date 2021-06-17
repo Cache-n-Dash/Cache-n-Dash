@@ -2,6 +2,7 @@ module.exports ={
   submitEmail: (req, res) => {
     const transporter = req.app.get('transporter')
     const {email, name, message} = req.body
+    console.log(req.body)
     const mailOptions = {
       from: email,
       to: process.env.EMAIL,

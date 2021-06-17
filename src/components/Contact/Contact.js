@@ -8,9 +8,9 @@ function Contact() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const submitEmail = (a, b, c) => {
+  const submitEmail = () => {
     axios
-      .post("/contact", a, b, c)
+      .post("/contact", {name, email, message})
       .then((res) => {
         console.log(res);
         alert("Message sent. Thank you for your feedback.");
@@ -71,7 +71,7 @@ function Contact() {
       <button
         className="submit-button"
         onClick={() => {
-          submitEmail(email, name, message);
+          submitEmail();
         }}
       >
         Submit
