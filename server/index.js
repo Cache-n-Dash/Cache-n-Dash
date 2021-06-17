@@ -4,6 +4,7 @@ const express = require('express'),
 const massive = require('massive');
 const session = require('express-session');
 require('dotenv').config();
+const nodemailer = require('nodemailer')
 
 const locCtrl = require('./controllers/locationController')
 const crseCtrl = require('./controllers/courseController')
