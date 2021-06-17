@@ -4,7 +4,7 @@ module.exports ={
     const {email, name, message} = req.body
     const mailOptions = {
       from: email,
-      to: "cacheanddashDEV@gmail.com",
+      to: process.env.EMAIL,
       subject: `Contact from: ${name}`,
       text: message
     }
