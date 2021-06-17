@@ -1,5 +1,6 @@
 const express = require('express'),
-      userCtrl = require('./controllers/auth');
+      userCtrl = require('./controllers/auth'),
+      contCtrl = require('./controllers/contact')
 const massive = require('massive');
 const session = require('express-session');
 require('dotenv').config();
@@ -11,6 +12,17 @@ const actCtrl = require('./controllers/activityController')
 const {CONNECTION_STRING, SESSION_SECRET, SERVER_PORT} = process.env;
 
 const app = express();
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+ auth: {
+    user:process.env.EMAIL,
+    pass:process.env.PASSWORD
+}
+});
+app.set('transporter', transporter)
+
+
 
 app.use(express.json())
 app.use(session ({
@@ -32,7 +44,7 @@ massive({
 }).catch(err => console.log(err));
 
 
-///// AUTH ENDPOINTS
+// AUTH ENDPOINTS
 
 app.post('/auth/register', userCtrl.register);
 app.post('/auth/login', userCtrl.login);
@@ -57,3 +69,7 @@ app.get('/leaderboard/:course_id',actCtrl.getCourseLeaderboard)
 app.get('/leaderboard/:seg1/:seg2',actCtrl.getSegmentLeaderboard)
 app.post('/activity/start/:course_id/:user_id',actCtrl.startActivity)
 app.put('/activity/update/:activity_id',actCtrl.editActivity)
+
+// Contact Endpoints
+
+app.post('/contact', contCtrl.submitEmail);
