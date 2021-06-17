@@ -10,15 +10,15 @@ const locCtrl = require('./controllers/locationController')
 const crseCtrl = require('./controllers/courseController')
 const actCtrl = require('./controllers/activityController')
 
-const {CONNECTION_STRING, SESSION_SECRET, SERVER_PORT} = process.env;
+const {CONNECTION_STRING, SESSION_SECRET, SERVER_PORT, EMAIL, PASSWORD} = process.env;
 
 const app = express();
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
  auth: {
-    user:process.env.EMAIL,
-    pass:process.env.PASSWORD
+    user: EMAIL,
+    pass: PASSWORD
 }
 });
 app.set('transporter', transporter)
