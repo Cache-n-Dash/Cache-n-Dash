@@ -13,7 +13,9 @@ module.exports = {
     },
     getSegmentLeaderboard: (req,res) => {
         const db = req.app.get('db')
-        const {seg1,seg2} = req.body;
+        let {seg1,seg2} = req.params;
+        seg1 = +seg1
+        seg2 = +seg2
         db.activities.get_segment_leaderboard(seg1,seg2)
         .then(data=>{
             res.status(200).send(data)

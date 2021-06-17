@@ -4,6 +4,10 @@ const massive = require('massive');
 const session = require('express-session');
 require('dotenv').config();
 
+const locCtrl = require('./controllers/locationController')
+const crseCtrl = require('./controllers/courseController')
+const actCtrl = require('./controllers/activityController')
+
 const {CONNECTION_STRING, SESSION_SECRET, SERVER_PORT} = process.env;
 
 const app = express();
@@ -34,3 +38,22 @@ app.post('/auth/register', userCtrl.register);
 app.post('/auth/login', userCtrl.login);
 app.get('/auth/account', userCtrl.getUser);
 app.post('/auth/logout', userCtrl.logout);
+
+// Location Endpoints
+app.get('/locations/:location_id',locCtrl.getLocation)
+app.post('/locations/add',locCtrl.addLocation)
+app.get('/locations/all',locCtrl.getLocations)
+app.get('/locations/start',locCtrl.getCourseStartLocations)
+app.get('/locations/courses/:course_id',locCtrl.getAllCourseLocations)
+
+// Course Endpoints
+app.get('/courses/:course_id',crseCtrl.getCourse)
+app.get('/courses/all',crseCtrl.getCourses)
+app.post('/courses/add',crseCtrl.createCourse)
+app.put('/courses/update/:course_id',crseCtrl.updateCompTime)
+
+// Activity Endpoints
+app.get('/leaderboard/:course_id',actCtrl.getCourseLeaderboard)
+app.get('/leaderboard/:seg1/:seg2',actCtrl.getSegmentLeaderboard)
+app.post('/activity/start/:course_id/:user_id',actCtrl.startActivity)
+app.put('/activity/update/:activity_id',actCtrl.editActivity)
