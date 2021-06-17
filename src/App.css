@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Cabin&family=Raleway:wght@100&display=swap");
 
+* {
+   margin: 0px;
+}
+
 :root {
    --light-green: #97d18d;
    --medium-green: #6fb164;
