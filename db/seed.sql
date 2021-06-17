@@ -32,7 +32,7 @@ CREATE TABLE geo_courses (
     distance_23 DECIMAL(7,3),
     distance_34 DECIMAL(7,3),
     distance_45 DECIMAL(7,3),
-    distance_final DECIMAL(7,3),
+    distance_final DECIMAL(7,3)
 );
 
 CREATE TABLE geo_activities (
