@@ -53,5 +53,16 @@ module.exports = {
             console.log(err)
             res.status(500).send(err)
         })
+    },
+    getSegmentLocations: (req,res)=>{
+        const db = req.app.get('db')
+        const {seg1,seg2} = req.body;
+        db.geolocations.get_segment(seg1,seg2)
+        .then(data=>{
+            res.status(200).send(data)
+        }).catch(err=>{
+            console.log(err)
+            res.status(500).send(err)
+        })
     }
 }
