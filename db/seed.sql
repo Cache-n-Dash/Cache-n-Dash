@@ -48,3 +48,6 @@ CREATE TABLE geo_activities (
     time_5 BIGINT,
     end_time BIGINT
 );
+
+ALTER TABLE geo_users
+ADD verified BOOLEAN;
