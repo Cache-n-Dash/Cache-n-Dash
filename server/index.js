@@ -58,6 +58,7 @@ app.post('/locations/add',locCtrl.addLocation)
 app.get('/locations/all',locCtrl.getLocations)
 app.get('/locations/start',locCtrl.getCourseStartLocations)
 app.get('/locations/courses/:course_id',locCtrl.getAllCourseLocations)
+app.get('/locations/segments/:seg1/:seg2',locCtrl.getSegmentLocations)
 
 // Course Endpoints
 app.get('/courses/:course_id',crseCtrl.getCourse)
