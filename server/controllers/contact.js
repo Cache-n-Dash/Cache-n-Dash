@@ -4,8 +4,8 @@ module.exports ={
     const {email, name, message} = req.body
     const mailOptions = {
       from: email,
-      to: "cacheanddashDEV@gmail.com",
-      subject: "contact us",
+      to: process.env.EMAIL,
+      subject: `Contact from: ${name}`,
       text: message
     }
     transporter.sendMail(mailOptions, (error, data) => {
