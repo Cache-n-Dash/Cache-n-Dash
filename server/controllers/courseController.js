@@ -31,5 +31,23 @@ module.exports = {
             console.log(err)
             res.status(500).send(err)
         })
+    },
+    updateCompTime: (req,res) => {
+        const db = req.app.get('db')
+        const {course_id} = req.params;
+        const id = +course_id;
+        db.courses.avg_comp_time(id)
+        .then(avg=>{
+            db.courses.update_avg_time(id,avg)
+            .then(()=>{
+                res.sendStatus(200)
+            }).catch(err=>{
+                console.log(err)
+                res.status(500).send(err)
+            })
+        }).catch(err=>{
+            console.log(err)
+            res.status(500).send(err)
+        })
     }
 }
