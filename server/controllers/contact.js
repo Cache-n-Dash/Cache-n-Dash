@@ -5,7 +5,7 @@ module.exports ={
     const mailOptions = {
       from: email,
       to: "cacheanddashDEV@gmail.com",
-      subject: "contact us",
+      subject: `Contact from: ${name}`,
       text: message
     }
     transporter.sendMail(mailOptions, (error, data) => {
