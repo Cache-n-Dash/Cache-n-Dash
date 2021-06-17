@@ -56,7 +56,9 @@ module.exports = {
     },
     getSegmentLocations: (req,res)=>{
         const db = req.app.get('db')
-        const {seg1,seg2} = req.body;
+        let {seg1,seg2} = req.params;
+        seg1 = +seg1;
+        seg2 = +seg2;
         db.geolocations.get_segment(seg1,seg2)
         .then(data=>{
             res.status(200).send(data)
