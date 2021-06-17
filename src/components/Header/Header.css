@@ -32,10 +32,6 @@
    background-color: var(--dark-green);
 }
 
-.menu {
-   margin-top: 10px;
-}
-
 .menu > * {
    text-decoration: none;
    padding: 10px;
@@ -54,10 +50,12 @@
 
 .menu > *:hover {
    background-color: var(--light-green);
-   /* transform: scale(1.05); */
+}
+.menu {
+   margin-top: 10px;
 }
 
-@media (width < 750px) {
+@media (max-width: 750px) {
    .menu {
       display: flex;
       flex-direction: column;
