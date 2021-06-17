@@ -13,11 +13,11 @@ export default (
   <Switch>
     <Route exact path="/admin" component={Admin} />
     <Route path="/auth" component={Auth} />
-    <Route path="/" component={Home} />
+    <Route exact path="/" component={Home} />
     <Route path="/leaderboard" component={LeaderBoard} />
     <Route path="/map" component={Map} />
     <Route path="/search" component={Search} />
-    <Route path="/userdash" component={UserDash} />
+    <Route path="/profile" component={UserDash} />
     <Route path='/contact' component={Contact} />
   </Switch>
 );

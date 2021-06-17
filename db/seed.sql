@@ -32,14 +32,14 @@ CREATE TABLE geo_courses (
     distance_23 DECIMAL(7,3),
     distance_34 DECIMAL(7,3),
     distance_45 DECIMAL(7,3),
-    distance_final DECIMAL(7,3),
+    distance_final DECIMAL(7,3)
 );
 
 CREATE TABLE geo_activities (
     activity_id SERIAL PRIMARY KEY,
     course_id INT REFERENCES geo_courses(course_id),
     user_id INT REFERENCES geo_users(user_id),
-    date VARCHAR(30),
+    activity_date VARCHAR(30),
     completed BOOLEAN,
     start_time BIGINT,
     time_2 BIGINT,
