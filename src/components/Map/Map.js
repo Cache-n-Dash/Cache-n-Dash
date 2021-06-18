@@ -8,28 +8,26 @@ import {
 import { UserContext } from "../../context/UserContext";
 import "./Map.css";
 import axios from "axios";
-// import mapStyles from "./mapStyles";
 
 const libraries = ["places"];
 
 const mapContainerStyle = {
   width: "100vw",
-  height: "90vh",
+  height: "92vh",
 };
 
 const center = {
-  lat: 37,
-  lng: -100,
+  lat: 37.10828,
+  lng: -113.583282,
 };
 
 const options = {
-  zoomControl: true,
   disableDefaultUI: true,
-  //   styles: mapStyles
+  zoomControl: true,
 };
 
 function Map() {
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -37,7 +35,17 @@ function Map() {
     libraries,
   });
 
-  const [map, setMap] = useState(null);
+  const success = (pos) => {
+    const crd = pos.coords;
+    console.log(`lat: ${crd.latitude}`)
+    console.log(`lng: ${crd.longitude}`)
+  }
+
+  const getPos = () => {
+    navigator.geolocation.getCurrentPosition(success)
+  }
+
+  const [map, setMap] = React.useState(null);
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
 
@@ -47,9 +55,7 @@ function Map() {
       .then((res) => {
         setMarkers(res.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
@@ -57,55 +63,73 @@ function Map() {
   }, [getMarkers]);
 
   console.log(markers);
-  console.log(user);
 
-  const onLoad = useCallback(function callback(map) {
+  const onLoad = React.useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds();
     map.fitBounds(bounds);
+    setMap(map);
   }, []);
 
-  // const onMapClick = useCallback((e) => {
-  //   axios
-  //     .post("/locations/add", {
-  //       lat: e.latLng.lat(),
-  //       lng: e.latLng.lng(),
-  //     })
-  //     .then(() => {
-  //       getMarkers();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  const onMapClick = React.useCallback((e) => {
+    axios
+      .post("/locations/add", {
+        latitude: e.latLng.lat(),
+        longitude: e.latLng.lng(),
+      })
+      .then(() => {
+        getMarkers();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={mapContainerStyle}
-      center={center}
-      options={options}
-      zoom={8}
-      onLoad={onLoad}
-      // onClick={onMapClick}
-    >
-      {markers.map((marker) => {
-        <Marker
-          position={{
-            lat: Number(marker.latitude),
-            lng: Number(marker.longitude),
-          }}
-          key={marker.location_id}
-          onClick={setSelected(marker)}
-        />;
-      })}
-      <></>
-    </GoogleMap>
+    <div id="lowerIt">
+      <button className="getPos" onClick={getPos}>+</button>
+      <GoogleMap
+        mapContainerStyle={mapContainerStyle}
+        zoom={8}
+        center={center}
+        options={options}
+        onClick={onMapClick}
+        onLoad={onLoad}
+      >
+        {markers.map((marker) => (
+          <Marker
+            position={{
+              lat: Number(marker.latitude),
+              lng: Number(marker.longitude),
+            }}
+            key={marker.location_id}
+            onClick={() => {
+              setSelected(marker);
+            }}
+          />
+        ))}
+        {selected ? (
+          <InfoWindow
+            position={{
+              lat: Number(selected.latitude),
+              lng: Number(selected.longitude),
+            }}
+            onCloseClick={() => {
+              setSelected(null);
+            }}
+          >
+            <div className="infoWindow">
+              <h4>{selected.location_name}</h4>
+            </div>
+          </InfoWindow>
+        ) : null}
+      </GoogleMap>
+    </div>
   ) : (
     <></>
   );
 }
 
 export default Map;
-
 
 // const success = (pos) => {
 //   const crd = pos.coords;
@@ -117,4 +141,4 @@ export default Map;
 //   navigator.geolocation.getCurrentPosition(success)
 // }
 
-//<button onClick={getPos}>Determine Position</button>
+// <button onClick={getPos}>Determine Position</button>
