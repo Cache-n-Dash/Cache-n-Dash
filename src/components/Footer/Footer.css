@@ -1,0 +1,26 @@
+.footer {
+   background-color: var(--purple);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.footer * {
+   margin: 5px;
+   font-size: small;
+   text-decoration: none;
+   color: var(--dark-green);
+}
+
+.footer > h3 {
+   font-family: var(--title-font);
+   font-size: large;
+}
+
+@media (max-width: 750px) {
+   .footer > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+   }
+}
