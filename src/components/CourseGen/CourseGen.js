@@ -9,6 +9,9 @@ import axios from 'axios'
 const CourseGen = () => {
     const [name,setName] = useState('')
     const [locations,setLocations] = useState(0)
+    const [lat,setLat] = useState([])
+    const [lon,setLon] = useState([])
+    // console.log(lat)
 
     const testCourse = [3,4,5];
 
@@ -40,27 +43,28 @@ const CourseGen = () => {
         return [latitudeArr,longitudeArr]
     }
 
+    const handleLocs = () => {
+        const latLon = getLatLong();
+        setLat(latLon[0]);
+        setLon(latLon[1]);
+        setLocations(testCourse.length)
+    }
+
     const handleCreate = () => {
         let distArr = [];
-        const latLon = getLatLong();
-        const lat = latLon[0];
-        const lon = latLon[1];
-        // console.log(lat)
-        for (let i = 0; i<testCourse.length; i++){
-            // console.log(latLon[0][i])
-            if(i === testCourse.length-1){
-                // distArr[i] = distCalc(latitudeArr[i],longitudeArr[i],latitudeArr[0],longitudeArr[0])
-                distArr[i] = distCalc(latLon[0][i],latLon[1][i],latLon[0][0],latLon[1][0])
+        for (let i = 0; i<locations; i++){
+            if(i === locations-1){
+                distArr[i] = distCalc(lat[i],lon[i],lat[0],lon[0])
             }else{
-                // distArr[i] = distCalc(latitudeArr[i],longitudeArr[i],latitudeArr[i+1],longitudeArr[i+1])
-                distArr[i] = distCalc(latLon[0][i],latLon[1][i],latLon[0][i+1],latLon[1][i+1])
+                distArr[i] = distCalc(lat[i],lon[i],lat[i+1],lon[i+1])
             }
         }
-        // console.log(latitudeArr)
-        // console.log(longitudeArr)
+        const distance_final = distArr.pop()
+        const [distance_12,distance_23,distance_34,distance_45] = distArr;
+        const [location_id_1,location_id_2,location_id_3,location_id_4,location_id_5] = testCourse;
         // console.log(distArr)
-        setLocations(testCourse.length)
-        // console.log(name,locations)
+        // console.log(location_id_2,location_id_3,location_id_4)
+        // axios needed here to add data to the database.  I may want to update the database tables to make things more efficient
     }
 
     return (
@@ -68,6 +72,7 @@ const CourseGen = () => {
             <p>Create a new course</p>
             <div>select up to 5 locations and click the button to create a new course</div>
             <input placeholder="Enter Course Name Here" type="text" onChange={e=>setName(e.target.value)}/>
+            <button onClick={handleLocs}>Confirm Locations</button>
             <button onClick={handleCreate}>Create Course</button>
         </div>
     )
