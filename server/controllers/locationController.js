@@ -5,7 +5,7 @@ module.exports = {
         const id = +location_id;
         db.geolocations.get_location(id)
         .then(data=>{
-            res.status(200).send(data)
+            res.status(200).send(data[0])
         }).catch(err=>{
             console.log(err)
             res.status(500).send(err)
