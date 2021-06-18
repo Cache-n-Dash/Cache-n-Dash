@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 
 export const UserContext = createContext();
 
-export const UserProvider = (props) => {
+export const UserProvider = ({children}) => {
    const [user, setUser] = useState(null);
 
    useEffect(() => {
@@ -22,7 +22,7 @@ export const UserProvider = (props) => {
             setUser(res.data);
          })
          .catch((err) => {
-            alert(err, "email or password is not recongnized");
+            alert(err, "email or password is not recognized");
             console.log(err);
          });
    };
@@ -41,8 +41,8 @@ export const UserProvider = (props) => {
    };
 
    return (
-      <UserContext.Provider value={{ user, handleLogin, handleRegister }}>
-         {props.children}
+      <UserContext.Provider value={{ user, setUser, handleLogin, handleRegister }}>
+         {children}
       </UserContext.Provider>
    );
 };
