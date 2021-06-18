@@ -30,7 +30,7 @@ module.exports = {
       }
       return res.status(200).send(
          `Thank you, ${username}! 
-          Your Chache-N-Dash account has been verified! 
+          Your Cache-N-Dash account has been verified! 
           You can now log in.`
       );
    },
