@@ -47,8 +47,7 @@ module.exports = {
             res.status(500).send(err)
         })
     },
-    editActivity: async (req,res) => {
-    // performActivity: (req,res) => {
+    performActivity: async (req,res) => {
         const db = req.app.get('db')
         let {activity_id,cloc_id} = req.params;
         activity_id = +activity_id;
