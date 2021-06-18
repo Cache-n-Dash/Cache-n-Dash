@@ -59,11 +59,10 @@ const CourseGen = () => {
                 distArr[i] = distCalc(lat[i],lon[i],lat[i+1],lon[i+1])
             }
         }
-        const distance_final = distArr.pop()
-        const [distance_12,distance_23,distance_34,distance_45] = distArr;
-        const [location_id_1,location_id_2,location_id_3,location_id_4,location_id_5] = testCourse;
+        // const distance_final = distArr.pop()
+        // const [distance_12,distance_23,distance_34,distance_45] = distArr;
+        // const [location_id_1,location_id_2,location_id_3,location_id_4,location_id_5] = testCourse;
         // console.log(distArr)
-        // console.log(location_id_2,location_id_3,location_id_4)
         // axios needed here to add data to the database.  I may want to update the database tables to make things more efficient
     }
 

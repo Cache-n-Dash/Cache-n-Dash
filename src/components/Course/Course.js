@@ -9,7 +9,7 @@ function Course() {
 
     return (
         <div>
-            <div>mini map of the course will be at the top of the screen</div>
+            <div>mini map of the course may be here, at the top of the screen</div>
 
             {/* we can map over the geolocations for the course to produce the list and then allow the user to click on a list item to show the latitude and longitude coordinates for the location */}
             <ul>
