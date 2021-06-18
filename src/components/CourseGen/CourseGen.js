@@ -27,21 +27,38 @@ const CourseGen = () => {
         return d
     }
 
-    const handleCreate = () => {
+    const getLatLong = () => {
         let latitudeArr = [];
         let longitudeArr = [];
         for (let i = 0; i<testCourse.length; i++){
             axios.get(`/locations/${testCourse[i]}`)
             .then(res=>{
-                // console.log(i)
-                // console.log(testCourse[i])
-                // console.log(res.data)
                 latitudeArr[i] = +res.data.latitude;
                 longitudeArr[i] = +res.data.longitude;
             }).catch(err=>console.log(err))
         }
-        console.log(latitudeArr)
-        console.log(longitudeArr)
+        return [latitudeArr,longitudeArr]
+    }
+
+    const handleCreate = () => {
+        let distArr = [];
+        const latLon = getLatLong();
+        const lat = latLon[0];
+        const lon = latLon[1];
+        // console.log(lat)
+        for (let i = 0; i<testCourse.length; i++){
+            // console.log(latLon[0][i])
+            if(i === testCourse.length-1){
+                // distArr[i] = distCalc(latitudeArr[i],longitudeArr[i],latitudeArr[0],longitudeArr[0])
+                distArr[i] = distCalc(latLon[0][i],latLon[1][i],latLon[0][0],latLon[1][0])
+            }else{
+                // distArr[i] = distCalc(latitudeArr[i],longitudeArr[i],latitudeArr[i+1],longitudeArr[i+1])
+                distArr[i] = distCalc(latLon[0][i],latLon[1][i],latLon[0][i+1],latLon[1][i+1])
+            }
+        }
+        // console.log(latitudeArr)
+        // console.log(longitudeArr)
+        // console.log(distArr)
         setLocations(testCourse.length)
         // console.log(name,locations)
     }
