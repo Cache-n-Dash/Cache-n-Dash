@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 
 export const UserContext = createContext();
 
-export const UserProvider = ({children}) => {
+export const UserProvider = ({ children }) => {
    const [user, setUser] = useState(null);
 
    useEffect(() => {
@@ -35,13 +35,16 @@ export const UserProvider = ({children}) => {
             .post("/auth/register", { email, username, password })
             .then((res) => {
                setUser(res.data);
+               axios.post("/api/sendMail", { email, username });
             })
             .catch((err) => console.log(err));
       }
    };
 
    return (
-      <UserContext.Provider value={{ user, setUser, handleLogin, handleRegister }}>
+      <UserContext.Provider
+         value={{ user, setUser, handleLogin, handleRegister }}
+      >
          {children}
       </UserContext.Provider>
    );

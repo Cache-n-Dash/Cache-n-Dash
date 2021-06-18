@@ -60,7 +60,7 @@ app.get("/auth/verify/:email/:username", userCtrl.verify);
 app.post("/api/sendMail", (req, res) => {
    console.log(req.body);
 
-   sendEmail(req.body.email, "hello");
+   sendEmail(req, "hello");
 });
 
 // Location Endpoints
