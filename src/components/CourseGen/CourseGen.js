@@ -74,11 +74,11 @@ const CourseGen = () => {
             // console.log(distArr)
             const seg_dist = distArr
             axios.post(`/courses/${course_id}/locations/${testCourse[i]}/${i+1}`,{seg_dist})
-            .then(res=>{
-                console.log(res.data)
-            }).catch(err=>{
-                console.log(err)
-            })
+            // .then(res=>{
+            //     console.log(res.data)
+            // }).catch(err=>{
+            //     console.log(err)
+            // })
         }
         // console.log(distArr)
     }
