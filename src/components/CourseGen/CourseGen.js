@@ -51,19 +51,31 @@ const CourseGen = () => {
     }
 
     const handleCreate = () => {
+        const courseName = name;
+        const numlocs = locations;
+        let course_id = null;
+        axios.post('/courses/add',{courseName,numlocs})
+        .then(res=>{
+            console.log(res.data)
+            course_id = res.data[0];
+        }).catch(err=>{
+            console.log(err)
+        })
         let distArr = [];
         for (let i = 0; i<locations; i++){
             if(i === locations-1){
-                distArr[i] = distCalc(lat[i],lon[i],lat[0],lon[0])
+                distArr = distCalc(lat[i],lon[i],lat[0],lon[0])
             }else{
-                distArr[i] = distCalc(lat[i],lon[i],lat[i+1],lon[i+1])
+                distArr = distCalc(lat[i],lon[i],lat[i+1],lon[i+1])
             }
+            axios.post(`/courses/${course_id}/locations/${testCourse[i]}/${i+1}`,{distArr})
+            .then(res=>{
+                console.log(res.data)
+            }).catch(err=>{
+                console.log(err)
+            })
         }
-        // const distance_final = distArr.pop()
-        // const [distance_12,distance_23,distance_34,distance_45] = distArr;
-        // const [location_id_1,location_id_2,location_id_3,location_id_4,location_id_5] = testCourse;
         // console.log(distArr)
-        // axios needed here to add data to the database.  I may want to update the database tables to make things more efficient
     }
 
     return (
