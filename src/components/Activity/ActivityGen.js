@@ -4,27 +4,55 @@ import axios from 'axios'
 const ActivityGen = () => {
     const [selected,setSelected] = useState(false)
     const [courses,setCourses] = useState([])
+    // console.log(selected)
 
     useEffect(()=>{
-        axios.get("/courses/all")
+        axios.get("/courses")
         .then(res=>{
-            // setCourses(res.data)
+            setCourses(res.data)
             console.log(res.data)
         }).catch(err=>{
             console.log(err)
         })
     }, []);
 
+    const renderCourses = () => {
+        return(
+            courses.map((crse,idx)=>{
+                let avg = crse.mean_completion_time;
+                if(avg===null){
+                    avg = '--';
+                }
+
+                const handleCourseClick = () => {
+                    axios.get(`/locations/courses/${crse.course_id}`)
+                    .then(res=>{
+                        console.log(res.data)
+                    }).catch(err=>console.log(err))
+                    setSelected(!selected)
+                }
+
+                return(
+                    <div key={idx}>
+                        <button onClick={handleCourseClick}>{crse.course_name} | {crse.locations} | {avg}</button>
+                    </div>
+                )
+            })
+        )
+    }
+
     const renderData = () => {
         if(!selected){
             return(
                 <div>
-                    all course data to be rendered here
+                    <p>Course Name | # of Geolocations | Average Completion Time</p>
+                    {renderCourses()}
                 </div>
             )
         }else{
             return(
                 <div>
+                    <button onClick={()=>setSelected(!selected)}>Go Back</button>
                     detailed course data to be rendered here for a single course
                 </div>
             )

@@ -66,14 +66,14 @@ app.post("/api/sendMail", (req, res) => {
 // Location Endpoints
 app.get("/locations/:location_id", locCtrl.getLocation);
 app.post("/locations/add", locCtrl.addLocation);
-app.get("/locations/all", locCtrl.getLocations);
-app.get("/locations/start", locCtrl.getCourseStartLocations);
+app.get("/locations", locCtrl.getLocations);
+app.get("/locations/start/find", locCtrl.getCourseStartLocations);
 app.get("/locations/courses/:course_id", locCtrl.getAllCourseLocations);
 app.get("/locations/segments/:seg1/:seg2", locCtrl.getSegmentLocations);
 
 // Course Endpoints
 app.get("/courses/:course_id", crseCtrl.getCourse);
-app.get("/courses/all", crseCtrl.getCourses);
+app.get("/courses", crseCtrl.getCourses);
 app.post("/courses/add", crseCtrl.createCourse);
 app.post("/courses/:course_id/locations/:location_id/:location_num",crseCtrl.createCourseLoc)
 app.put("/courses/update/:course_id", crseCtrl.updateCompTime);
