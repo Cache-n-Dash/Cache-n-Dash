@@ -15,10 +15,7 @@ const mapContainerStyle = {
   height: "92vh",
 };
 
-const center = {
-  lat: 37.10828,
-  lng: -113.583282,
-};
+// let center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
 
 const options = {
   disableDefaultUI: true,
@@ -36,7 +33,9 @@ function Map() {
   const [map, setMap] = React.useState(null);
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
-  const [toggler, setToggler] = useState(false)
+  const [toggler, setToggler] = useState(false);
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
 
   const getMarkers = useCallback(() => {
     axios
@@ -45,6 +44,11 @@ function Map() {
         setMarkers(res.data);
       })
       .catch((err) => console.log(err));
+
+      navigator.geolocation.getCurrentPosition(function (position) {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+    });
   }, []);
 
   useEffect(() => {
@@ -52,10 +56,15 @@ function Map() {
   }, [getMarkers]);
 
   const showIt = () => {
-    setToggler(!toggler)
-  }
+    setToggler(!toggler);
+  };
 
   console.log(markers);
+
+  const center = {
+    lat: latitude,
+    lng: longitude
+  }
 
   const onLoad = React.useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds();
@@ -65,11 +74,19 @@ function Map() {
 
   return isLoaded ? (
     <div id="lowerIt">
-      {!toggler && <button className="getPos" onClick={showIt}>+</button>}
-      {toggler && <button className="getPos notToggler" onClick={showIt}>x</button>}
+      {!toggler && (
+        <button className="getPos" onClick={showIt}>
+          +
+        </button>
+      )}
+      {toggler && (
+        <button className="getPos notToggler" onClick={showIt}>
+          x
+        </button>
+      )}
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={8}
+        zoom={13}
         center={center}
         options={options}
         onLoad={onLoad}
@@ -102,7 +119,7 @@ function Map() {
           </InfoWindow>
         ) : null}
       </GoogleMap>
-      {toggler && <LocationGen/>}
+      {toggler && <LocationGen />}
     </div>
   ) : (
     <></>
