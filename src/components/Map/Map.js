@@ -39,7 +39,7 @@ function Map() {
 
   const getMarkers = useCallback(() => {
     axios
-      .get("/locations/all")
+      .get("/locations")
       .then((res) => {
         setMarkers(res.data);
       })
