@@ -1,4 +1,5 @@
-import {useState,useEffect} from 'react'
+import {useState,useEffect,useContext} from 'react'
+import { UserContext } from "../../context/UserContext";
 import axios from 'axios'
 import './ActivityGen.css'
 
@@ -6,13 +7,15 @@ const ActivityGen = () => {
     const [selected,setSelected] = useState(false)
     const [courses,setCourses] = useState([])
     const [crseLocs,setCrseLocs] = useState([])
+    const [oneCourse,setOneCourse] = useState({})
+    const {user} = useContext(UserContext)
     // console.log(selected)
 
     useEffect(()=>{
         axios.get("/courses")
         .then(res=>{
             setCourses(res.data)
-            console.log(res.data)
+            // console.log(res.data)
         }).catch(err=>{
             console.log(err)
         })
@@ -31,6 +34,7 @@ const ActivityGen = () => {
                     .then(res=>{
                         // console.log(res.data)
                         setCrseLocs(res.data)
+                        setOneCourse(crse)
                     }).catch(err=>console.log(err))
                     setSelected(!selected)
                 }
@@ -56,6 +60,20 @@ const ActivityGen = () => {
         )
     }
 
+    const selectCourse = () => {
+        if(user){
+            const date = new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate());
+            axios.post(`/activity/start/${oneCourse.course_id}/${user.user_id}`,{date})
+            .then(res=>{
+                console.log(res.data)
+            }).catch(err=>{
+                console.log(err)
+            })
+        }else{
+            alert("You must be logged in to continue")
+        }
+    }
+
     const renderData = () => {
         if(!selected){
             return(
@@ -68,8 +86,10 @@ const ActivityGen = () => {
             return(
                 <div className="containerDiv">
                     <div className="flexBtn"><button onClick={()=>setSelected(!selected)}>Go Back</button></div>
-                    <div className="tableHeaderDiv"><p className="tableHeader locLayout numDiv">Location</p><p className="tableHeader locLayout">Name</p><p className="tableHeader locLayout">Latitude</p><p className="tableHeader locLayout">Longitude</p><p className="tableHeader locLayout">Distance to Next</p></div>
+                    <h4>{oneCourse.course_name}</h4>
+                    <div className="tableHeaderDiv"><p className="tableHeader locLayout numDiv">Location</p><p className="tableHeader locLayout">Name</p><p className="tableHeader locLayout">Latitude</p><p className="tableHeader locLayout">Longitude</p><p className="tableHeader locLayout">Distance to Next (km)</p></div>
                     {renderCourseLocs()}
+                    <button onClick={selectCourse}>Select Course</button>
                 </div>
             )
         }

@@ -2,4 +2,4 @@
 -- VALUES ($1,$2,$3,$4);
 
 INSERT INTO geo_activities (course_id,user_id,activity_date)
-VALUES ($1,$2,$3);
+VALUES ($1,$2,$3) RETURNING activity_id;
