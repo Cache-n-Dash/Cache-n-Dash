@@ -28,7 +28,9 @@ module.exports = {
         // db.courses.create_course(courseName,numlocs,loc1,loc2,loc3,loc4,loc5,dist12,dist23,dist34,dist45,distEnd)
         db.courses.create_course(courseName,numlocs)
         .then(data=>{
-            res.status(200).send(data)
+            // const {course_id} = data[0]
+            // console.log(data[0])
+            res.status(200).send(data[0])
         }).catch(err=>{
             console.log(err)
             res.status(500).send(err)

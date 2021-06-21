@@ -25,13 +25,13 @@ CREATE TABLE geo_courses (
     course_id SERIAL PRIMARY KEY,
     course_name VARCHAR(100),
     locations INT,
-    mean_completion_time INT,
+    mean_completion_time INT
 );
 
 CREATE TABLE geo_course_locs (
     cloc_id SERIAL PRIMARY KEY,
     course_id INT REFERENCES geo_courses(course_id),
-    location_id INT REFERNCES geo_locations(location_id),
+    location_id INT REFERENCES geo_locations(location_id),
     location_num INT,
     seg_dist DECIMAL(7,3)
 );

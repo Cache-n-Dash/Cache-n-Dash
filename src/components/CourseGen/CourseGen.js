@@ -50,30 +50,35 @@ const CourseGen = () => {
         setLocations(testCourse.length)
     }
 
-    const handleCreate = () => {
+    const handleCreate = async () => {
         const courseName = name;
         const numlocs = locations;
-        let course_id = null;
-        axios.post('/courses/add',{courseName,numlocs})
-        .then(res=>{
-            console.log(res.data)
-            course_id = res.data[0];
-        }).catch(err=>{
-            console.log(err)
-        })
-        let distArr = [];
+        let c_id = null;
+        c_id = await axios.post('/courses/add',{courseName,numlocs})
+        // .then(res=>{
+            // console.log(res.data)
+            // console.log(res.data.course_id)
+            // return res.data.course_id;
+        // }).catch(err=>{
+        //     console.log(err)
+        // })
+        // console.log(c_id.data.course_id)
+        const course_id = c_id.data.course_id;
+        let distArr;
         for (let i = 0; i<locations; i++){
             if(i === locations-1){
                 distArr = distCalc(lat[i],lon[i],lat[0],lon[0])
             }else{
                 distArr = distCalc(lat[i],lon[i],lat[i+1],lon[i+1])
             }
-            axios.post(`/courses/${course_id}/locations/${testCourse[i]}/${i+1}`,{distArr})
-            .then(res=>{
-                console.log(res.data)
-            }).catch(err=>{
-                console.log(err)
-            })
+            // console.log(distArr)
+            const seg_dist = distArr
+            axios.post(`/courses/${course_id}/locations/${testCourse[i]}/${i+1}`,{seg_dist})
+            // .then(res=>{
+            //     console.log(res.data)
+            // }).catch(err=>{
+            //     console.log(err)
+            // })
         }
         // console.log(distArr)
     }
