@@ -62,7 +62,11 @@ const ActivityGen = () => {
 
     const selectCourse = () => {
         if(user){
-            const date = new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate());
+            const year = new Date().getFullYear();
+            const month = new Date().getMonth();
+            const day = new Date().getDate();
+            const date = `${year}-${month}-${day}`;
+            // console.log(date)
             axios.post(`/activity/start/${oneCourse.course_id}/${user.user_id}`,{date})
             .then(res=>{
                 console.log(res.data)
