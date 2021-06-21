@@ -22,7 +22,7 @@ const options = {
   zoomControl: true,
 };
 
-function Map() {
+function Map(props) {
   const { user } = useContext(UserContext);
 
   const { isLoaded } = useJsApiLoader({
@@ -45,14 +45,18 @@ function Map() {
       })
       .catch((err) => console.log(err));
 
-      navigator.geolocation.getCurrentPosition(function (position) {
+    navigator.geolocation.getCurrentPosition(function (position) {
       setLatitude(position.coords.latitude);
       setLongitude(position.coords.longitude);
     });
   }, []);
 
   useEffect(() => {
-    getMarkers();
+    if (!user) {
+      props.history.push("/auth");
+    } else {
+      getMarkers();
+    }
   }, [getMarkers]);
 
   const showIt = () => {
@@ -63,8 +67,8 @@ function Map() {
 
   const center = {
     lat: latitude,
-    lng: longitude
-  }
+    lng: longitude,
+  };
 
   const onLoad = React.useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds();
@@ -74,7 +78,7 @@ function Map() {
 
   return isLoaded ? (
     <div id="lowerIt">
-      {!toggler && (
+      {!toggler && user.isadmin && (
         <button className="getPos" onClick={showIt}>
           +
         </button>
@@ -100,6 +104,8 @@ function Map() {
             key={marker.location_id}
             onClick={() => {
               setSelected(marker);
+              setLatitude(marker.latitude);
+              setLongitude(marker.longitude);
             }}
           />
         ))}
