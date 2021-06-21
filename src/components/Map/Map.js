@@ -6,10 +6,9 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import { UserContext } from "../../context/UserContext";
+import LocationGen from "../Location/LocationGen";
 import "./Map.css";
 import axios from "axios";
-
-const libraries = ["places"];
 
 const mapContainerStyle = {
   width: "100vw",
@@ -27,31 +26,21 @@ const options = {
 };
 
 function Map() {
-  // const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    libraries,
   });
-
-  const success = (pos) => {
-    const crd = pos.coords;
-    console.log(`lat: ${crd.latitude}`)
-    console.log(`lng: ${crd.longitude}`)
-  }
-
-  const getPos = () => {
-    navigator.geolocation.getCurrentPosition(success)
-  }
 
   const [map, setMap] = React.useState(null);
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [toggler, setToggler] = useState(false)
 
   const getMarkers = useCallback(() => {
     axios
-      .get("/locations/1")
+      .get("/locations/all")
       .then((res) => {
         setMarkers(res.data);
       })
@@ -62,6 +51,10 @@ function Map() {
     getMarkers();
   }, [getMarkers]);
 
+  const showIt = () => {
+    setToggler(!toggler)
+  }
+
   console.log(markers);
 
   const onLoad = React.useCallback(function callback(map) {
@@ -70,29 +63,15 @@ function Map() {
     setMap(map);
   }, []);
 
-  const onMapClick = React.useCallback((e) => {
-    axios
-      .post("/locations/add", {
-        latitude: e.latLng.lat(),
-        longitude: e.latLng.lng(),
-      })
-      .then(() => {
-        getMarkers();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   return isLoaded ? (
     <div id="lowerIt">
-      <button className="getPos" onClick={getPos}>+</button>
+      {!toggler && <button className="getPos" onClick={showIt}>+</button>}
+      {toggler && <button className="getPos notToggler" onClick={showIt}>x</button>}
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={8}
         center={center}
         options={options}
-        onClick={onMapClick}
         onLoad={onLoad}
       >
         {markers.map((marker) => (
@@ -123,6 +102,7 @@ function Map() {
           </InfoWindow>
         ) : null}
       </GoogleMap>
+      {toggler && <LocationGen/>}
     </div>
   ) : (
     <></>

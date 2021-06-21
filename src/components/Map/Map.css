@@ -4,16 +4,23 @@
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
-    background-color: green;
+    background-color: #6fb164;
     border: none;
     z-index: 3;
     font-size: 20pt;
     color: #d4f1d4;
     cursor: pointer;
     transition: 0.3s ease-in-out;
+    -webkit-box-shadow: 0px 6px 11px -1px #00000075; 
+    box-shadow: 0px 6px 11px -1px #00000075;
 }
 
 .getPos:hover{
     bottom: 3.5rem;
+    -webkit-box-shadow: 0px 10px 13px 1px #0000008e; 
+    box-shadow: 0px 10px 13px 1px #0000008e;
+}
 
+.notToggler{
+    background-color: #c894d1;
 }
