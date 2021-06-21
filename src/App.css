@@ -12,6 +12,7 @@
    --bg-color: white;
    --title-font: "Raleway", sans-serif;
    --body-font: "Cabin", sans-serif;
+   --polygon: polygon(0% 0%, 100% 0%, 100% 100%, 0% 80%);
 }
 
 .App {
@@ -20,37 +21,12 @@
    overflow-x: hidden;
 }
 
-.App-logo {
-   height: 40vmin;
-   pointer-events: none;
+.page {
+   min-height: calc(100vh - 45px);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-   .App-logo {
-      animation: App-logo-spin infinite 20s linear;
-   }
-}
-
-.App-header {
-   background-color: #282c34;
-   min-height: 100vh;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   font-size: calc(10px + 2vmin);
-   color: white;
-}
-
-.App-link {
-   color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-   from {
-      transform: rotate(0deg);
-   }
-   to {
-      transform: rotate(360deg);
+@media (max-width: 750px) {
+   .page {
+      min-height: calc(100vh - 100px);
    }
 }
