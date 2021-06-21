@@ -13,10 +13,10 @@ const getEmailData = (req, template) => {
             from: "Cache-n-Dash <cacheanddashDEV@gmail.com>",
             to: email,
             subject: "Please verify your email.",
-            html: `<h1> Hello nate<h1>
-            <p> Thank you for signing up for Cache-n-dash. There is only one thing left to do. <p>
-             <h3> Verify your account by clicking on this link <a target="" href="${DOMAIN}/auth/verify/${email}/${username}"> Verify Accout <a> <h3>
-             <p> From the Cache-N-Dash Team <p>`,
+            html: `<h1>Hello, ${username}<h1>
+            <p>Thank you for signing up for Cache-n-dash. There is only one thing left to do.<p>
+             <h3>Verify your account by clicking on this link: <a target="" href="${DOMAIN}/auth/verify/${email}/${username}">Verify Account<a><h3>
+             <p>From the Cache-N-Dash Team.<p>`,
          };
          break;
       default:

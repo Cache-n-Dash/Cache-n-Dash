@@ -1,0 +1,82 @@
+.newLoc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: #ffffff00;
+  backdrop-filter: blur(8px);
+  overflow-x: hidden;
+}
+
+.locationAdder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 15rem;
+  width: 40%;
+  padding: 1rem;
+  border-radius: 2rem;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #1b1b1b;
+}
+
+.locationAdder p {
+  margin-bottom: 2rem;
+}
+
+#locationAdderBtn {
+  background-color: #6fb164;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  height: 3rem;
+  border-radius: 2rem;
+  padding: 0 1rem;
+}
+
+#locationAdderBtn:hover {
+  background-color: #97d18d;
+  color: #1b1b1b;
+}
+
+.geoLocator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 15rem;
+  width: 40%;
+  padding: 1rem;
+  border-radius: 2rem;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #1b1b1b;
+}
+
+.geoLocator input{
+    margin: 1rem 0;
+}
+
+.geoLocator button{
+    background-color: #cecece;
+    color: #1b1b1b;
+    height: 2rem;
+    margin: 0 1rem;
+    padding: 0 1rem;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+}
+
+#submitter{
+    background-color: #c894d1;
+}
