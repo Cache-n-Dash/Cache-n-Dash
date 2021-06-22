@@ -55,11 +55,13 @@ module.exports = {
         // const {timestamp,timeloc,completeBool} = req.body;
         const {timestamp,startEnd} = req.body;
         const [locNum] = await db.courses.get_crse_loc_num(cloc_id)
+        const lNum = locNum.location_num;
+        console.log(lNum)
         let segTime = null;
-        if(locNum===1 && startEnd==='START'){
+        if(lNum===1 && startEnd==='START'){
             // const segTime = null;
         }else{
-            const [timeStart] = await db.activities.find_seg_time_start(activity_id,locNum)
+            const [timeStart] = await db.activities.find_seg_time_start(activity_id,lNum)
             if(timeStart){
                 segTime = timestamp-timeStart;
             }

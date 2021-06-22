@@ -71,13 +71,7 @@ const ActivityGen = () => {
         // let currLoc = 1;
         return(
             crseLocs.map((crse,idx)=>{
-                if(!doAct || crse.location_num !== currLoc){
-                    return(
-                        <div className="locContainer" key={idx}>
-                            <p className="courseLoc numDiv">{crse.location_num}</p><p className="courseLoc">{crse.location_name}</p><p className="courseLoc">{crse.latitude}</p><p className="courseLoc">{crse.longitude}</p><p className="courseLoc">{crse.seg_dist}</p>
-                        </div>
-                    )
-                }else if(doAct && crse.location_num === currLoc){
+                if(doAct && crse.location_num === currLoc){
                     return(
                         <div key={idx}>
                             <div className="locContainer">
@@ -86,6 +80,14 @@ const ActivityGen = () => {
                             <button onClick={()=>verifyLoc(crse)}>Verify Location</button>
                         </div>
                     )
+                }else{
+                    // if(!doAct || crse.location_num !== currLoc){
+                        return(
+                            <div className="locContainer" key={idx}>
+                                <p className="courseLoc numDiv">{crse.location_num}</p><p className="courseLoc">{crse.location_name}</p><p className="courseLoc">{crse.latitude}</p><p className="courseLoc">{crse.longitude}</p><p className="courseLoc">{crse.seg_dist}</p>
+                            </div>
+                        )
+                    // }else 
                 }
             })
         )
@@ -112,6 +114,29 @@ const ActivityGen = () => {
         }
     }
 
+    const finishCourse = async () => {
+        const cloc_id = crseLocs[0].cloc_id;
+        const timestamp = Date.now();
+        const startEnd = 'END';
+        await axios.post(`/activity/update/${actID}/${cloc_id}`,{timestamp,startEnd})
+        .then(res=>{
+            console.log(res)
+        }).catch(err=>console.log(err))
+        await axios.put(`/activity/complete/${actID}`)
+        .then(res=>{
+            console.log(res)
+        })
+        setCurrLoc(1)
+    }
+
+    const renderBtn = () => {
+        if(currLoc===oneCourse.locations+1){
+            return(
+                <button onClick={finishCourse}>Finish</button>
+            )
+        }
+    }
+
     const renderData = () => {
         if(doAct){
             return(
@@ -120,7 +145,7 @@ const ActivityGen = () => {
                     <h4>{oneCourse.course_name}</h4>
                     <div className="tableHeaderDiv"><p className="tableHeader locLayout numDiv">Location</p><p className="tableHeader locLayout">Name</p><p className="tableHeader locLayout">Latitude</p><p className="tableHeader locLayout">Longitude</p><p className="tableHeader locLayout">Distance to Next (km)</p></div>
                     {renderCourseLocs()}
-                    {/* <button onClick={}></button> */}
+                    {renderBtn()}
                 </div>
             )
         }else{
