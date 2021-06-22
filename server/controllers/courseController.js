@@ -56,8 +56,11 @@ module.exports = {
         const {course_id} = req.params;
         const id = +course_id;
         const [startAvg] = await db.courses.avg_start_time(id);
+        console.log(startAvg)
+        const sAvg = startAvg.avg
         const [endAvg] = await db.courses.avg_end_time(id);
-        const avgTime = endAvg-startAvg;
+        const eAvg = endAvg.avg
+        const avgTime = eAvg-sAvg;
         // db.courses.avg_comp_time(id)
         // .then(avg=>{
         const [data] = await db.courses.update_avg_time(id,avgTime)

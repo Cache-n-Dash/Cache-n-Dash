@@ -56,16 +56,19 @@ module.exports = {
         const {timestamp,startEnd} = req.body;
         const [locNum] = await db.courses.get_crse_loc_num(cloc_id)
         const lNum = locNum.location_num;
-        console.log(lNum)
+        // console.log(lNum)
         let segTime = null;
         if(lNum===1 && startEnd==='START'){
             // const segTime = null;
         }else{
             const [timeStart] = await db.activities.find_seg_time_start(activity_id,lNum)
+            // console.log(timeStart)
+            const time = timeStart.time_stamp
             if(timeStart){
-                segTime = timestamp-timeStart;
+                segTime = timestamp-time;
             }
         }
+        // console.log(segTime)
         const [data] = await db.activities.perform_activity(activity_id,cloc_id,timestamp,segTime,startEnd)
         return res.status(200).send(data)
         // .then(data=>{
@@ -80,8 +83,10 @@ module.exports = {
         const {activity_id} = req.params;
         const id = +activity_id;
         const [start] = await db.activities.find_time_start(id)
+        const s = start.time_stamp;
         const [end] = await db.activities.find_time_end(id)
-        const compTime = end-start;
+        const e = end.time_stamp;
+        const compTime = e-s;
         const [data] = await db.activities.update_comp_time(id,compTime)
         return res.status(200).send(data)
     }
