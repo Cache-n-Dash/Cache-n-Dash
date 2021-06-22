@@ -3,12 +3,14 @@ import {UserContext} from '../../context/UserContext';
 import './Admin.css';
 import axios from 'axios';
 
+
 // Hello
 
 
 function Admin() {
 
     const [users,setUsers] = useState([])
+    const [search, setSearch] = useState('')
 
     useEffect(() => {
         getUsers()
@@ -27,9 +29,20 @@ function Admin() {
         }).catch(err=>console.log(err))
     }
 
+    const queryUsers = (search) => {
+        const lowerSearch = search.toLowerCase()
+        axios.get(`/admin/query?query=${lowerSearch}`) 
+        .then(res => { 
+            setUsers(res.data)
+        }).catch(err=>console.log(err))  
+    }
+
+    
+
     const renderUsers = () => {
         if (users){
             return(
+            
                 users.map((usr,idx)=>{
                     console.log(usr)
                     return(
@@ -51,12 +64,22 @@ function Admin() {
     
     return (
         <div className="adminContainer">
-            {user.isadmin ? <div>You are an admin..
+            {user.isadmin ? <div>Welcome , {user.username}! <br></br>You can ... <br></br>
                 -create geocache locations and courses
                 -make other users admin?
                 -edit/delete courses and geocache locations
 
                 **You can add geolocations on the Map page**
+                <br></br>
+                <input 
+                id="search-input"
+                placeholder="Search"
+                type="text"
+                onChange={(e) => setSearch(e.target.value)}
+                />
+                <button
+                onClick={() => {queryUsers(search)}}
+                >Search</button>
                 <div className="headerDiv">
                     <p className="columnTitle">Username</p>
                     <p className="columnTitle">email</p>
