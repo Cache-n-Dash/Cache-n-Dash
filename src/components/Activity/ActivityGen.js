@@ -46,7 +46,7 @@ const ActivityGen = () => {
 
                 return(
                     <div key={idx}>
-                        <button className="courseBtn" onClick={handleCourseClick}><div className="btnDiv numDiv">{idx+1}</div><div className="btnDiv">{crse.course_name}</div><div className="btnDiv">{crse.locations}</div><div className="btnDiv">{avg}</div></button>
+                        <button className="courseBtn" onClick={handleCourseClick}><div className="btnDiv numDiv">{idx+1}</div><div className="btnDiv">{crse.course_name}</div><div className="btnDiv">{crse.locations}</div><div className="btnDiv">{avg/1000}</div></button>
                     </div>
                 )
             })
@@ -122,9 +122,10 @@ const ActivityGen = () => {
         const startEnd = 'END';
         await axios.post(`/activity/update/${actID}/${cloc_id}`,{timestamp,startEnd})
         const upAct = await axios.put(`/activity/complete/${actID}`)
-        setAct(upAct)
+        setAct(upAct.data)
         const crses = await axios.put(`/courses/update/${oneCourse.course_id}`)
-        setCourses(crses)
+        console.log(crses)
+        setCourses(crses.data)
         // .then(res=>{
         //     console.log(res.data)
         // }).catch(err=>console.log(err))
@@ -140,13 +141,26 @@ const ActivityGen = () => {
         }
     }
 
+    const resetView = () => {
+        setSelected(!selected)
+        setDoAct(!doAct)
+        setActBool(!actBool)
+        setCrseLocs([])
+        setOneCourse({})
+        setActID(null)
+        setAct({})
+    }
+
     const renderData = () => {
         if(actBool){
+            // console.log(act)
             return(
                 <div>
                     <h4>Activity Completed!</h4>
                     <p>You completed {oneCourse.course_name} in:</p>
                     <p>{act.comp_time/1000} seconds</p>
+                    <button onClick={resetView}>View Courses</button>
+                    <button>View Leaderboard</button>
                 </div>
             )
         }else{
