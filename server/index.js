@@ -10,6 +10,7 @@ const { sendEmail } = require("./verifyMailer");
 const locCtrl = require("./controllers/locationController");
 const crseCtrl = require("./controllers/courseController");
 const actCtrl = require("./controllers/activityController");
+const adminCtrl = require("./controllers/admin")
 
 const { CONNECTION_STRING, SESSION_SECRET, SERVER_PORT, EMAIL, PASSWORD } =
    process.env;
@@ -90,4 +91,5 @@ app.put("/activity/complete/:activity_id", actCtrl.completeActivity);
 app.post("/contact", contCtrl.submitEmail);
 
 // Admin Endpoints
-app.delete("/admin/")
+app.delete("/admin/delete/user/:user_id",adminCtrl.deleteUser)
+app.get("/admin/query",adminCtrl.queryUsers)

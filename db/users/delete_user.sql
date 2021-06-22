@@ -8,3 +8,6 @@ WHERE user_id = $1;
 
 DELETE FROM geo_users
 WHERE user_id = $1;
+
+SELECT * FROM geo_users
+ORDER BY username;
