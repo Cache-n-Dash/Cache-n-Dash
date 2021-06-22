@@ -1,0 +1,21 @@
+.adminContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.headerDiv,.containerDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 90vw;
+}
+
+.columnTitle,.columnData{
+    font-size: 12px;
+    width: 18vw;
+    text-align: center;
+}
+
+.containerDiv{
+    justify-content: space-between;
+}
