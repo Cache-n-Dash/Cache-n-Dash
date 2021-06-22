@@ -10,6 +10,8 @@ const ActivityGen = () => {
     const [crseLocs,setCrseLocs] = useState([])
     const [oneCourse,setOneCourse] = useState({})
     const [actID,setActID] = useState(null)
+    const [act,setAct] = useState({})
+    const [actBool,setActBool] = useState(false)
     const {user} = useContext(UserContext)
     const [currLoc,setCurrLoc] = useState(1)
     // console.log(selected)
@@ -62,9 +64,9 @@ const ActivityGen = () => {
         }
         axios.post(`/activity/update/${actID}/${cloc_id}`,{timestamp,startEnd})
         .then(res=>{
-            console.log(res)
+            // console.log(res)
+            setCurrLoc(currLoc+1)
         }).catch(err=>console.log(err))
-        setCurrLoc(currLoc+1)
     }
 
     const renderCourseLocs = () => {
@@ -119,13 +121,14 @@ const ActivityGen = () => {
         const timestamp = Date.now();
         const startEnd = 'END';
         await axios.post(`/activity/update/${actID}/${cloc_id}`,{timestamp,startEnd})
-        .then(res=>{
-            console.log(res)
-        }).catch(err=>console.log(err))
-        await axios.put(`/activity/complete/${actID}`)
-        .then(res=>{
-            console.log(res)
-        })
+        const upAct = await axios.put(`/activity/complete/${actID}`)
+        setAct(upAct)
+        const crses = await axios.put(`/courses/update/${oneCourse.course_id}`)
+        setCourses(crses)
+        // .then(res=>{
+        //     console.log(res.data)
+        // }).catch(err=>console.log(err))
+        setActBool(!actBool)
         setCurrLoc(1)
     }
 
@@ -138,34 +141,44 @@ const ActivityGen = () => {
     }
 
     const renderData = () => {
-        if(doAct){
+        if(actBool){
             return(
-                <div className="containerDiv">
-                    <div className="flexBtn"><button onClick={()=>setDoAct(!doAct)}>Go Back</button></div>
-                    <h4>{oneCourse.course_name}</h4>
-                    <div className="tableHeaderDiv"><p className="tableHeader locLayout numDiv">Location</p><p className="tableHeader locLayout">Name</p><p className="tableHeader locLayout">Latitude</p><p className="tableHeader locLayout">Longitude</p><p className="tableHeader locLayout">Distance to Next (km)</p></div>
-                    {renderCourseLocs()}
-                    {renderBtn()}
+                <div>
+                    <h4>Activity Completed!</h4>
+                    <p>You completed {oneCourse.course_name} in:</p>
+                    <p>{act.comp_time/1000} seconds</p>
                 </div>
             )
         }else{
-            if(!selected){
+            if(doAct){
                 return(
                     <div className="containerDiv">
-                        <div className="tableHeaderDiv"><p className="tableHeader crseLayout numDiv">Number</p><p className="tableHeader crseLayout">Course Name</p><p className="tableHeader crseLayout"># of Geolocations</p><p className="tableHeader crseLayout">Avg Completion Time</p></div>
-                        {renderCourses()}
-                    </div>
-                )
-            }else{
-                return(
-                    <div className="containerDiv">
-                        <div className="flexBtn"><button onClick={()=>setSelected(!selected)}>Go Back</button></div>
+                        <div className="flexBtn"><button onClick={()=>setDoAct(!doAct)}>Go Back</button></div>
                         <h4>{oneCourse.course_name}</h4>
                         <div className="tableHeaderDiv"><p className="tableHeader locLayout numDiv">Location</p><p className="tableHeader locLayout">Name</p><p className="tableHeader locLayout">Latitude</p><p className="tableHeader locLayout">Longitude</p><p className="tableHeader locLayout">Distance to Next (km)</p></div>
                         {renderCourseLocs()}
-                        <button onClick={selectCourse}>Select Course</button>
+                        {renderBtn()}
                     </div>
                 )
+            }else{
+                if(!selected){
+                    return(
+                        <div className="containerDiv">
+                            <div className="tableHeaderDiv"><p className="tableHeader crseLayout numDiv">Number</p><p className="tableHeader crseLayout">Course Name</p><p className="tableHeader crseLayout"># of Geolocations</p><p className="tableHeader crseLayout">Avg Completion Time</p></div>
+                            {renderCourses()}
+                        </div>
+                    )
+                }else{
+                    return(
+                        <div className="containerDiv">
+                            <div className="flexBtn"><button onClick={()=>setSelected(!selected)}>Go Back</button></div>
+                            <h4>{oneCourse.course_name}</h4>
+                            <div className="tableHeaderDiv"><p className="tableHeader locLayout numDiv">Location</p><p className="tableHeader locLayout">Name</p><p className="tableHeader locLayout">Latitude</p><p className="tableHeader locLayout">Longitude</p><p className="tableHeader locLayout">Distance to Next (km)</p></div>
+                            {renderCourseLocs()}
+                            <button onClick={selectCourse}>Select Course</button>
+                        </div>
+                    )
+                }
             }
         }
     }
