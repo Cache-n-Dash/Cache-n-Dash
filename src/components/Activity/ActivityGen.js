@@ -5,10 +5,13 @@ import './ActivityGen.css'
 
 const ActivityGen = () => {
     const [selected,setSelected] = useState(false)
+    const [doAct,setDoAct] = useState(false)
     const [courses,setCourses] = useState([])
     const [crseLocs,setCrseLocs] = useState([])
     const [oneCourse,setOneCourse] = useState({})
+    const [actID,setActID] = useState(null)
     const {user} = useContext(UserContext)
+    const [currLoc,setCurrLoc] = useState(1)
     // console.log(selected)
 
     useEffect(()=>{
@@ -48,14 +51,42 @@ const ActivityGen = () => {
         )
     }
 
+    const verifyLoc = (crse) => {
+        const cloc_id = crse.cloc_id;
+        const timestamp = Date.now();
+        let startEnd = '';
+        if(currLoc === 1){
+            startEnd = 'START';
+        }else if(currLoc <= oneCourse.locations){
+            startEnd = 'MIDDLE';
+        }
+        axios.post(`/activity/update/${actID}/${cloc_id}`,{timestamp,startEnd})
+        .then(res=>{
+            console.log(res)
+        }).catch(err=>console.log(err))
+        setCurrLoc(currLoc+1)
+    }
+
     const renderCourseLocs = () => {
+        // let currLoc = 1;
         return(
             crseLocs.map((crse,idx)=>{
-                return(
-                    <div className="locContainer" key={idx}>
-                        <p className="courseLoc numDiv">{crse.location_num}</p><p className="courseLoc">{crse.location_name}</p><p className="courseLoc">{crse.latitude}</p><p className="courseLoc">{crse.longitude}</p><p className="courseLoc">{crse.seg_dist}</p>
-                    </div>
-                )
+                if(!doAct || crse.location_num !== currLoc){
+                    return(
+                        <div className="locContainer" key={idx}>
+                            <p className="courseLoc numDiv">{crse.location_num}</p><p className="courseLoc">{crse.location_name}</p><p className="courseLoc">{crse.latitude}</p><p className="courseLoc">{crse.longitude}</p><p className="courseLoc">{crse.seg_dist}</p>
+                        </div>
+                    )
+                }else if(doAct && crse.location_num === currLoc){
+                    return(
+                        <div key={idx}>
+                            <div className="locContainer">
+                                <p className="courseLoc numDiv">{crse.location_num}</p><p className="courseLoc">{crse.location_name}</p><p className="courseLoc">{crse.latitude}</p><p className="courseLoc">{crse.longitude}</p><p className="courseLoc">{crse.seg_dist}</p>
+                            </div>
+                            <button onClick={()=>verifyLoc(crse)}>Verify Location</button>
+                        </div>
+                    )
+                }
             })
         )
     }
@@ -69,7 +100,10 @@ const ActivityGen = () => {
             // console.log(date)
             axios.post(`/activity/start/${oneCourse.course_id}/${user.user_id}`,{date})
             .then(res=>{
-                console.log(res.data)
+                // console.log(res.data)
+                const activity_id = res.data[0]
+                setActID(activity_id.activity_id)
+                setDoAct(!doAct)
             }).catch(err=>{
                 console.log(err)
             })
@@ -79,23 +113,35 @@ const ActivityGen = () => {
     }
 
     const renderData = () => {
-        if(!selected){
+        if(doAct){
             return(
                 <div className="containerDiv">
-                    <div className="tableHeaderDiv"><p className="tableHeader crseLayout numDiv">Number</p><p className="tableHeader crseLayout">Course Name</p><p className="tableHeader crseLayout"># of Geolocations</p><p className="tableHeader crseLayout">Avg Completion Time</p></div>
-                    {renderCourses()}
-                </div>
-            )
-        }else{
-            return(
-                <div className="containerDiv">
-                    <div className="flexBtn"><button onClick={()=>setSelected(!selected)}>Go Back</button></div>
+                    <div className="flexBtn"><button onClick={()=>setDoAct(!doAct)}>Go Back</button></div>
                     <h4>{oneCourse.course_name}</h4>
                     <div className="tableHeaderDiv"><p className="tableHeader locLayout numDiv">Location</p><p className="tableHeader locLayout">Name</p><p className="tableHeader locLayout">Latitude</p><p className="tableHeader locLayout">Longitude</p><p className="tableHeader locLayout">Distance to Next (km)</p></div>
                     {renderCourseLocs()}
-                    <button onClick={selectCourse}>Select Course</button>
+                    {/* <button onClick={}></button> */}
                 </div>
             )
+        }else{
+            if(!selected){
+                return(
+                    <div className="containerDiv">
+                        <div className="tableHeaderDiv"><p className="tableHeader crseLayout numDiv">Number</p><p className="tableHeader crseLayout">Course Name</p><p className="tableHeader crseLayout"># of Geolocations</p><p className="tableHeader crseLayout">Avg Completion Time</p></div>
+                        {renderCourses()}
+                    </div>
+                )
+            }else{
+                return(
+                    <div className="containerDiv">
+                        <div className="flexBtn"><button onClick={()=>setSelected(!selected)}>Go Back</button></div>
+                        <h4>{oneCourse.course_name}</h4>
+                        <div className="tableHeaderDiv"><p className="tableHeader locLayout numDiv">Location</p><p className="tableHeader locLayout">Name</p><p className="tableHeader locLayout">Latitude</p><p className="tableHeader locLayout">Longitude</p><p className="tableHeader locLayout">Distance to Next (km)</p></div>
+                        {renderCourseLocs()}
+                        <button onClick={selectCourse}>Select Course</button>
+                    </div>
+                )
+            }
         }
     }
 
