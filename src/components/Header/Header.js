@@ -24,23 +24,20 @@ export default function Header() {
                </div>
             </button>
          </div>
-         <div>
-            {menu && (
-               <div className="menu">
-                  <Link to="/">Home</Link>
-                  <Link to="/search">Search</Link>
-                  <Link to="/map">Race</Link>
-                  <Link to="/leaderboard">Leaderboard</Link>
-                  <Link to="/admin">Admin</Link>
-                  {user === null ? (
-                     <Link to="/auth">Login | Register</Link>
-                  ) : (
-                     <Link to={"/profile"}>{user.username}'s Profile</Link>
-                  )}
-                  {/* 'test profile' link is to be deleted in final build, it's here for testing purposes */}
-                  <Link to={"/profile"}>Test Profile</Link>
-               </div>
+
+         <div className={`menu ${menu ? "drop" : ""}`}>
+            <Link to="/">Home</Link>
+            <Link to="/search">Search</Link>
+            <Link to="/map">Race</Link>
+            <Link to="/leaderboard">Leaderboard</Link>
+            <Link to="/admin">Admin</Link>
+            {user === null ? (
+               <Link to="/auth">Login | Register</Link>
+            ) : (
+               <Link to={"/profile"}>{user.username}'s Profile</Link>
             )}
+            {/* 'test profile' link is to be deleted in final build, it's here for testing purposes */}
+            <Link to={"/profile"}>Test Profile</Link>
          </div>
       </div>
    );

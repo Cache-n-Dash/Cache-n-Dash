@@ -1,12 +1,13 @@
-textarea{
-    font-family: "Cabin", sans-serif;
-    height: 5rem;
-    width: 30%;
-    padding: 0.5rem;
+textarea {
+   font-family: "Cabin", sans-serif;
+   height: 5rem;
+   width: 30%;
+   min-width: 200px;
+   padding: 0.5rem;
 }
 
-.contactInput{
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    width: 30%;
+.contactInput {
+   padding: 0.5rem;
+   margin-bottom: 1rem;
+   width: 30%;
 }
