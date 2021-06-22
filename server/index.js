@@ -88,3 +88,6 @@ app.put("/activity/complete/:activity_id", actCtrl.completeActivity);
 // Contact Endpoints
 
 app.post("/contact", contCtrl.submitEmail);
+
+// Admin Endpoints
+app.delete("/admin/")
