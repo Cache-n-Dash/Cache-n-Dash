@@ -1,8 +1,13 @@
 .parent {
    box-shadow: 0px 0px 10px lightgrey;
-   height: fit-content;
-   padding: 10px 0px;
+   padding: 10px 0px 0px 0px;
+   background-color: var(--bg-color);
    width: 100vw;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   z-index: 2;
 }
 
 .header {
@@ -36,8 +41,9 @@
    text-decoration: none;
    padding: 10px;
    padding-bottom: 10px;
-   color: var(--dark-green);
+   color: rgba(0, 0, 0, 0);
    justify-content: space-between;
+   transition: all 0.5s ease-in-out;
 }
 
 .patty {
@@ -53,6 +59,20 @@
 }
 .menu {
    margin-top: 10px;
+   height: 0px;
+   transition: all 0.5s ease-in-out;
+   overflow: hidden;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 0px 10px;
+}
+
+.drop {
+   height: 50px;
+}
+.drop > * {
+   color: var(--dark-green);
 }
 
 @media (max-width: 750px) {
@@ -63,7 +83,9 @@
       justify-content: flex-start;
       align-items: stretch;
       align-content: stretch;
-      padding: 5px;
+   }
+   .drop {
+      height: 275px;
    }
    .header > h1 {
       font-size: x-large;

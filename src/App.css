@@ -19,14 +19,15 @@
    text-align: center;
    font-family: var(--body-font);
    overflow-x: hidden;
+   padding-top: 60px;
 }
 
 .page {
-   min-height: calc(100vh - 45px);
+   min-height: calc(100vh - 105px);
 }
 
 @media (max-width: 750px) {
    .page {
-      min-height: calc(100vh - 100px);
+      min-height: calc(100vh - 160px);
    }
 }
