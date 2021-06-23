@@ -83,7 +83,7 @@ app.put("/courses/update/:course_id", crseCtrl.updateCompTime);
 app.get("/leaderboard/:course_id", actCtrl.getCourseLeaderboard);
 app.get("/leaderboard/:location_id/:course_id", actCtrl.getSegmentLeaderboard);
 app.post("/activity/start/:course_id/:user_id", actCtrl.startActivity);
-app.put("/activity/update/:activity_id/:cloc_id", actCtrl.performActivity);
+app.post("/activity/update/:activity_id/:cloc_id", actCtrl.performActivity);
 app.put("/activity/complete/:activity_id", actCtrl.completeActivity);
 
 // Contact Endpoints
