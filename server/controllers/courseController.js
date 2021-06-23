@@ -71,5 +71,17 @@ module.exports = {
         
         const data = await db.courses.update_avg_time(id,avgTime)
         return res.status(200).send(data)
+    },
+    getCourseLoc: (req,res) => {
+        const db = req.app.get('db')
+        const {cloc_id} = req.params;
+        const id = +cloc_id;
+        db.courses.get_course_loc(id)
+        .then(data=>{
+            res.status(200).send(data)
+        }).catch(err=>{
+            console.log(err)
+            res.status(500).send(err)
+        })
     }
 }

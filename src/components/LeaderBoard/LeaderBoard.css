@@ -1,0 +1,28 @@
+h3{
+    /* margin-top: 20px; */
+    padding-top: 20px;
+}
+
+.ldrItem{
+    display: flex;
+    justify-content: center;
+}
+
+.title{
+    border-bottom: 1px solid black;
+}
+
+.ldrList{
+    width: 25vw;
+}
+
+.removeDefaults{
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.empty{
+    width: 13.33px;
+}

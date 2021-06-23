@@ -75,8 +75,9 @@ app.get("/locations/segments/:seg1/:seg2", locCtrl.getSegmentLocations);
 // Course Endpoints
 app.get("/courses/:course_id", crseCtrl.getCourse);
 app.get("/courses", crseCtrl.getCourses);
+app.get("/courses/locations/:cloc_id", crseCtrl.getCourseLoc);
 app.post("/courses/add", crseCtrl.createCourse);
-app.post("/courses/:course_id/locations/:location_id/:location_num",crseCtrl.createCourseLoc)
+app.post("/courses/:course_id/locations/:location_id/:location_num",crseCtrl.createCourseLoc);
 app.put("/courses/update/:course_id", crseCtrl.updateCompTime);
 
 // Activity Endpoints
@@ -85,6 +86,7 @@ app.get("/leaderboard/:location_id/:course_id", actCtrl.getSegmentLeaderboard);
 app.post("/activity/start/:course_id/:user_id", actCtrl.startActivity);
 app.post("/activity/update/:activity_id/:cloc_id", actCtrl.performActivity);
 app.put("/activity/complete/:activity_id", actCtrl.completeActivity);
+app.get("/activity/locations/:activity_id", actCtrl.getActivityLocs);
 
 // Contact Endpoints
 

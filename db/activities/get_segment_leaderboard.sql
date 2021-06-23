@@ -28,9 +28,9 @@
 --                 ORDER BY (a.end_time - a.time_2) ASC
 --     END;
 
-SELECT * FROM geo_activities a
+SELECT a.activity_id, a.course_id, a.activity_date, al.seg_time, u.username, l.location_id, cl.seg_dist, l.location_name, l.latitude, l.longitude FROM geo_activities a
 INNER JOIN geo_activity_locs al ON a.activity_id = al.activity_id
-INNER JOIN geo_users u ON a.user_id = user_id
+INNER JOIN geo_users u ON a.user_id = u.user_id
 INNER JOIN geo_course_locs cl ON al.cloc_id = cl.cloc_id
 INNER JOIN geo_locations l ON cl.location_id = l.location_id
 WHERE l.location_id = $1 AND cl.course_id = $2 AND al.seg_time IS NOT NULL
