@@ -1,6 +1,5 @@
 import React from "react";
 import "./Home.css";
-// import ActivityGen from '../Activity/ActivityGen'
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../../context/UserContext";
@@ -9,7 +8,6 @@ function Home() {
    const { user } = useContext(UserContext);
    return (
       <div>
-         <div>{/* <ActivityGen /> */}</div>
          <div>
             <div className="first background-img"></div>
             <div className="contain race">
