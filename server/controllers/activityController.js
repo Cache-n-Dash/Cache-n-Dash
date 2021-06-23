@@ -89,5 +89,17 @@ module.exports = {
         const compTime = e-s;
         const [data] = await db.activities.update_comp_time(id,compTime)
         return res.status(200).send(data)
+    },
+    getActivityLocs: (req,res)=>{
+        const db = req.app.get('db')
+        const {activity_id} = req.params;
+        const id = +activity_id;
+        db.activities.get_activity_locs(id)
+        .then(data=>{
+            res.status(200).send(data)
+        }).catch(err=>{
+            console.log(err)
+            res.status(500).send(err)
+        })
     }
 }

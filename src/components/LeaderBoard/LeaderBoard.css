@@ -1,0 +1,48 @@
+h3{
+    /* margin-top: 20px; */
+    padding-top: 20px;
+}
+
+.ldrItem{
+    display: flex;
+    justify-content: center;
+}
+
+.btnFlex{
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 15vw;
+    /* padding-top: 1vh; */
+}
+
+.title{
+    border-bottom: 1px solid black;
+}
+
+.ldrList{
+    width: 25vw;
+}
+
+.segList,.geoList{
+    width: 20vw;
+}
+
+.removeDefaults{
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.empty{
+    width: 13.33px;
+}
+
+.boldText{
+    font-weight: bold;
+}
+
+.backToCourse{
+    width: 30px;
+    height: 30px;
+}
