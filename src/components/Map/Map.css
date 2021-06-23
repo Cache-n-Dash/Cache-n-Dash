@@ -45,8 +45,3 @@
   outline: none;
   border-color: #c894d1;
 }
-
-@media (min-width: 750px) {
-  .getPos {
-  }
-}
