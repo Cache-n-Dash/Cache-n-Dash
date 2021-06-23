@@ -1,33 +1,33 @@
-import React, { useCallback, useContext, useState, useEffect } from 'react'
+import React, { useCallback, useContext, useState, useEffect } from "react";
 import {
-  GoogleMap,
-  Marker,
-  useJsApiLoader,
-  InfoWindow,
-} from '@react-google-maps/api'
+   GoogleMap,
+   Marker,
+   useJsApiLoader,
+   InfoWindow,
+} from "@react-google-maps/api";
 import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from 'use-places-autocomplete'
+   getGeocode,
+   getLatLng,
+} from "use-places-autocomplete";
 import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from '@reach/combobox'
-import '@reach/combobox/styles.css'
-import { UserContext } from '../../context/UserContext'
-import LocationGen from '../Location/LocationGen'
-import './Map.css'
-import axios from 'axios'
+   Combobox,
+   ComboboxInput,
+   ComboboxPopover,
+   ComboboxList,
+   ComboboxOption,
+} from "@reach/combobox";
+import "@reach/combobox/styles.css";
+import { UserContext } from "../../context/UserContext";
+import LocationGen from "../Location/LocationGen";
+import "./Map.css";
+import axios from "axios";
 
-const libraries = ['places']
+const libraries = ["places"];
 
 const mapContainerStyle = {
-  width: '100vw',
-  height: '92vh',
-}
+   width: "100vw",
+   height: "92vh",
+};
 
 // let center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
 

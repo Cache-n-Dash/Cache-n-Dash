@@ -1,0 +1,107 @@
+.first {
+   background-image: url(https://static6.depositphotos.com/1003098/571/i/600/depositphotos_5710780-stock-photo-geocache-detail.jpg);
+}
+.second {
+   background-image: url(https://images.unsplash.com/photo-1505778276668-26b3ff7af103?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1043&q=80);
+}
+
+.background-img {
+   filter: brightness(0.7) blur(2px);
+   min-height: 500px;
+   min-width: 100vw;
+   clip-path: var(--polygon);
+   background-size: cover;
+   background-position: center;
+   z-index: 0;
+}
+
+.contain {
+   /* max-height: 400px; */
+   transform: translateY(-500px);
+   margin-top: 50px;
+   z-index: 1;
+   width: 100%;
+   position: absolute;
+}
+
+.race {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: flex-end;
+   align-content: flex-end;
+   /* width: 90%; */
+}
+.race-title {
+   color: white;
+   text-shadow: 0px 0px 4px black;
+   padding: 0px 5% 0px 5%;
+}
+.tern {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   align-content: flex-end;
+   padding: 0px 5% 0px 5%;
+}
+
+h1 {
+   font-size: xxx-large;
+}
+
+.first-subtitle {
+   color: white;
+   font-weight: normal;
+   font-size: x-large;
+   text-shadow: 0px 0px 4px black;
+}
+.second-subtitle {
+   color: white;
+   font-weight: normal;
+   font-size: x-large;
+   text-shadow: 0px 0px 4px black;
+}
+
+.contain > * {
+   margin: 20px;
+}
+
+.tern > * {
+   margin: 20px;
+}
+
+.line {
+   margin: 10px;
+   background-color: var(--medium-green);
+   height: 3px;
+   width: 60%;
+   border-radius: 50%;
+   margin-left: 20%;
+}
+.contain > .btn {
+   margin: 10px;
+}
+
+@media (max-width: 750px) {
+   .tern {
+      padding: 0px;
+      align-items: center;
+   }
+   .race-title {
+      padding: 0px;
+   }
+   .contain > * {
+      margin: 5px;
+   }
+   .race {
+      align-items: center;
+   }
+
+   .first-subtitle {
+      margin: 10px;
+   }
+   .second-subtitle {
+      margin: 10px;
+   }
+}

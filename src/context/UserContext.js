@@ -1,10 +1,12 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import {useHistory} from "react-router-dom";
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
    const [user, setUser] = useState(null);
+   const history = useHistory();
 
    useEffect(() => {
       axios
@@ -20,6 +22,7 @@ export const UserProvider = ({ children }) => {
          .post("/auth/login", { email, password })
          .then((res) => {
             setUser(res.data);
+            history.push('/profile');
          })
          .catch((err) => {
             alert(err, "email or password is not recognized");
@@ -35,6 +38,7 @@ export const UserProvider = ({ children }) => {
             .post("/auth/register", { email, username, password })
             .then((res) => {
                setUser(res.data);
+               history.push('/map')
                axios.post("/api/sendMail", { email, username });
             })
             .catch((err) => console.log(err));
