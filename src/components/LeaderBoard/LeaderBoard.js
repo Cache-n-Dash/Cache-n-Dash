@@ -6,6 +6,8 @@ import {IoCaretForwardSharp} from 'react-icons/io5'
 import {IoCaretDownSharp} from 'react-icons/io5'
 // import {IoArrowForwardCircleSharp} from 'react-icons/io5'
 import {IoArrowForwardSharp} from 'react-icons/io5'
+// import {IoArrowBackSharp} from 'react-icons/io5'
+import {IoArrowUndoSharp} from 'react-icons/io5'
 
 function LeaderBoard() {
     const [course,setCourse] = useState({})
@@ -26,7 +28,7 @@ function LeaderBoard() {
         axios.get(`/leaderboard/${courseID}`)
         .then(res=>{
             setCourseLeaders(res.data)
-            console.log(res.data)
+            // console.log(res.data)
         }).catch(err=>console.log(err))
     },[courseID])
 
@@ -38,7 +40,7 @@ function LeaderBoard() {
             setOpenID(id)
             axios.get(`/activity/locations/${id}`)
             .then(res=>{
-                console.log(res.data)
+                // console.log(res.data)
                 setActLocs(res.data)
             }).catch(err=>console.log(err))
         }
@@ -56,9 +58,21 @@ function LeaderBoard() {
         }
     }
 
-    const handleSwitch = (id) => {
-        
-        setViewSegLdrs(!viewSegLdrs)
+    const handleSwitch = async (id) => { // async
+        try{
+            const cLoc = await axios.get(`/courses/locations/${id}`)
+            const cl = cLoc.data[0]
+            // console.log(cl)
+
+            const segLdrs = await axios.get(`/leaderboard/${cl.location_id}/${cl.course_id}`)
+            const sl = segLdrs.data
+            // console.log(sl)
+
+            setSegLeaders(sl)
+            setViewSegLdrs(!viewSegLdrs)
+        }catch (error) {
+            console.log(error)
+        }
     }
 
     const handleActivityLocs = (ldr) => {
@@ -103,7 +117,7 @@ function LeaderBoard() {
                     }
 
                     return(
-                        <div className="ldrItem">
+                        <div className="ldrItem" key={idx}>
                             {/* <p className="ldrList">Location Number: {idx+1}</p> */}
                             {renderLocNum()}
                             {/* <p className="ldrList">Segment Time: {seg.seg_time}</p> */}
@@ -134,11 +148,50 @@ function LeaderBoard() {
         )
     }
 
+    const renderSegLeaderBoard = () => {
+        return(
+            segLeaders.map((ldr,idx)=>{
+                return(
+                    <div className="ldrItem" key={idx}>
+                        <p className="segList">{ldr.username}</p>
+                        <p className="segList">{ldr.activity_date}</p>
+                        <p className="segList">{ldr.seg_dist}</p>
+                        <p className="segList">{ldr.seg_time/1000}</p>
+                    </div>
+                )
+            })
+        )
+    }
+
     const renderCrseOrSeg = () => {
         if(viewSegLdrs){
             return(
                 <div>
-                    <h3>test</h3>
+                    <div className="btnFlex">
+                        <button className="removeDefaults" onClick={()=>setViewSegLdrs(!viewSegLdrs)}><IoArrowUndoSharp className="backToCourse"/></button>
+                    </div>
+                    <div>
+                        <div className="ldrItem">
+                            <p>Leaderboard for the segment ending at geolocation&nbsp;</p>
+                            <p className="boldText">{segLeaders[0].location_name}</p>
+                        </div>
+                        <div className="ldrItem">
+                            <p>within course&nbsp;</p>
+                            <p className="boldText">{course.course_name}</p>
+                        </div>
+                        <p>End segment location at:</p>
+                        <div className="ldrItem">
+                            <p className="geoList">Latitude: {segLeaders[0].latitude}</p>
+                            <p className="geoList">Longitude: {segLeaders[0].longitude}</p>
+                        </div>
+                    </div>
+                    <div className="ldrItem">
+                        <p className="segList title">Username</p>
+                        <p className="segList title">Date</p>
+                        <p className="segList title">Distance (km)</p>
+                        <p className="segList title">Completion Time (s)</p>
+                    </div>
+                    {renderSegLeaderBoard()}
                 </div>
             )
         }else{

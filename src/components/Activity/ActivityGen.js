@@ -124,7 +124,7 @@ const ActivityGen = () => {
         const upAct = await axios.put(`/activity/complete/${actID}`)
         setAct(upAct.data)
         const crses = await axios.put(`/courses/update/${oneCourse.course_id}`)
-        console.log(crses)
+        // console.log(crses)
         setCourses(crses.data)
         // .then(res=>{
         //     console.log(res.data)

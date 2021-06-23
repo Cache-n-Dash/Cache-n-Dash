@@ -8,12 +8,23 @@ h3{
     justify-content: center;
 }
 
+.btnFlex{
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 15vw;
+    /* padding-top: 1vh; */
+}
+
 .title{
     border-bottom: 1px solid black;
 }
 
 .ldrList{
     width: 25vw;
+}
+
+.segList,.geoList{
+    width: 20vw;
 }
 
 .removeDefaults{
@@ -25,4 +36,13 @@ h3{
 
 .empty{
     width: 13.33px;
+}
+
+.boldText{
+    font-weight: bold;
+}
+
+.backToCourse{
+    width: 30px;
+    height: 30px;
 }
