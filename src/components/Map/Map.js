@@ -33,7 +33,7 @@ const mapContainerStyle = {
 
 const options = {
   disableDefaultUI: true,
-  zoomControl: true,
+  zoomControl: false,
 }
 
 function Map(props) {
@@ -77,8 +77,6 @@ function Map(props) {
   const showIt = () => {
     setToggler(!toggler)
   }
-
-  console.log(markers)
 
   const center = {
     lat: latitude,
@@ -162,11 +160,13 @@ function Map(props) {
       <Search panTo={panTo} />
 
       <GoogleMap
+        // ref={mapRef}
         mapContainerStyle={mapContainerStyle}
         zoom={13}
         center={center}
         options={options}
         onLoad={onMapLoad}
+        // onBoundsChanged={console.log('HOW DO I GET THE BOUNDS?')}
       >
         {markers.map((marker) => (
           <Marker
@@ -206,15 +206,3 @@ function Map(props) {
 }
 
 export default Map
-
-// const success = (pos) => {
-//   const crd = pos.coords;
-//   console.log(`Lat: ${crd.latitude}`)
-//   console.log(`long: ${crd.longitude}`)
-// }
-
-// const getPos = () => {
-//   navigator.geolocation.getCurrentPosition(success)
-// }
-
-// <button onClick={getPos}>Determine Position</button>
