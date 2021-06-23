@@ -14,7 +14,9 @@ export default function Header() {
    return (
       <div className="parent">
          <div className="header">
-            <h1>Cache-N-Dash</h1>
+            <Link className="logo" onClick={() => setMenu(false)} to="/">
+               Cache-N-Dash
+            </Link>
             <button className="menu-button" onClick={menuClick}>
                Menu
                <div>
@@ -26,18 +28,30 @@ export default function Header() {
          </div>
 
          <div className={`menu ${menu ? "drop" : ""}`}>
-            <Link to="/">Home</Link>
-            <Link to="/search">Search</Link>
-            <Link to="/map">Race</Link>
-            <Link to="/leaderboard">Leaderboard</Link>
-            <Link to="/admin">Admin</Link>
+            <Link onClick={() => setMenu(false)} to="/">
+               Home
+            </Link>
+            <Link onClick={() => setMenu(false)} to="/search">
+               Search
+            </Link>
+            <Link onClick={() => setMenu(false)} to="/map">
+               Map
+            </Link>
+            <Link onClick={() => setMenu(false)} to="/leaderboard">
+               Leaderboard
+            </Link>
+            <Link onClick={() => setMenu(false)} to="/admin">
+               Admin
+            </Link>
             {user === null ? (
-               <Link to="/auth">Login | Register</Link>
+               <Link onClick={() => setMenu(false)} to="/auth">
+                  Login | Register
+               </Link>
             ) : (
-               <Link to={"/profile"}>{user.username}'s Profile</Link>
+               <Link onClick={() => setMenu(false)} to={"/profile"}>
+                  {user.username}'s Profile
+               </Link>
             )}
-            {/* 'test profile' link is to be deleted in final build, it's here for testing purposes */}
-            <Link to={"/profile"}>Test Profile</Link>
          </div>
       </div>
    );

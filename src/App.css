@@ -13,6 +13,8 @@
    --title-font: "Raleway", sans-serif;
    --body-font: "Cabin", sans-serif;
    --polygon: polygon(0% 0%, 100% 0%, 100% 100%, 0% 80%);
+   --btn-tran: all 0.25s ease-in-out;
+   --img-blur: blur(3px);
 }
 
 .App {

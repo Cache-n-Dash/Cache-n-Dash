@@ -44,6 +44,7 @@ h1 {
    background-color: var(--light-green);
    margin: 5px;
    border-radius: 20px;
+   transition: var(--btn-tran);
 }
 .btn:hover {
    background-color: var(--dark-green);
