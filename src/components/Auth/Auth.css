@@ -42,6 +42,7 @@ h1 {
    font-size: medium;
    padding: 7px 15px 7px 15px;
    background-color: var(--light-green);
+   color: black;
    margin: 5px;
    border-radius: 20px;
    transition: var(--btn-tran);
@@ -58,4 +59,7 @@ p {
 
 .purple {
    background-color: var(--purple);
+}
+.purple:hover {
+   background-color: var(--light-green);
 }

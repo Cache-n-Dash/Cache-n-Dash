@@ -33,36 +33,50 @@ function Contact() {
    //   console.log(message)
 
    return (
-      <div>
+      <div className="center">
+         <div className="bg-img" />
          <div className="box">
+            <div>
+               <h1>Contact Us</h1>
+               <div className="line" />
+            </div>
             <form className="contact-form">
-               <input
-                  placeholder="Name"
-                  id="name"
-                  type="text"
-                  className="contactInput"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-               />
+               <div className="form-title">
+                  <p>Name</p>
+                  <input
+                     placeholder="Name"
+                     id="name"
+                     type="text"
+                     className="contactInput"
+                     required
+                     value={name}
+                     onChange={(e) => setName(e.target.value)}
+                  />
+               </div>
 
                <br></br>
-
-               <input
-                  placeholder="Email"
-                  id="email"
-                  type="email"
-                  className="contactInput"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-               />
+               <div className="form-title">
+                  <p>Email</p>
+                  <input
+                     placeholder="Email"
+                     id="email"
+                     type="email"
+                     className="contactInput"
+                     required
+                     value={email}
+                     onChange={(e) => setEmail(e.target.value)}
+                  />
+               </div>
 
                <br></br>
+               <p>Message</p>
 
                <textarea
                   placeholder="Message"
                   id="message"
                   type="text"
                   className="message-field"
+                  required
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                />
@@ -71,7 +85,7 @@ function Contact() {
                <br></br>
 
                <button
-                  className="submit-button"
+                  className="btn"
                   onClick={() => {
                      submitEmail();
                   }}

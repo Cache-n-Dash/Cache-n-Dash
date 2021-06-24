@@ -4,6 +4,11 @@
    justify-content: center;
    align-items: center;
    height: 45px;
+   transition: none;
+   z-index: 10;
+}
+.footer > footer {
+   transition: none;
 }
 
 .footer * {
@@ -11,11 +16,17 @@
    font-size: small;
    text-decoration: none;
    color: var(--dark-green);
+   transition: var(--btn-tran);
 }
 
-.footer > h3 {
+.footer > .logo {
    font-family: var(--title-font);
    font-size: large;
+   padding: 0px;
+}
+
+.footer *:hover {
+   color: var(--light-green);
 }
 
 @media (max-width: 750px) {
@@ -24,6 +35,7 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
+      transition: none;
    }
    .footer {
       height: 100px;

@@ -5,13 +5,15 @@ import "./Footer.css";
 function Footer() {
    return (
       <footer className="footer">
-         <h3>Cache-N-Dash</h3>
+         <Link className="logo" to="/">
+            Cache-N-Dash
+         </Link>
          <div>
             <Link to="/contact">Contact Us!</Link>
             <Link to="/">Home</Link>
          </div>
          <div>
-            <Link to={"/profile"}>Test Profile</Link>
+            <Link to={"/profile"}>User Profile</Link>
             <Link to="/admin"> Admin</Link>
          </div>
          <div>
