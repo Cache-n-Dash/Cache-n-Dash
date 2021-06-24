@@ -19,6 +19,7 @@ function Auth() {
                <div className="auth-box">
                   <div>
                      <h1>Login</h1>
+                     <div className="line" />
                      <div className="center auth">
                         <input
                            value={email}
@@ -52,6 +53,7 @@ function Auth() {
             ) : (
                <div className="auth-box">
                   <h1>Register</h1>
+                  <div className="line" />
                   <div className="center auth">
                      <input
                         value={email}

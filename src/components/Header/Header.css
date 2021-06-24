@@ -7,7 +7,7 @@
    top: 0;
    left: 0;
    width: 100vw;
-   z-index: 2;
+   z-index: 10;
 }
 
 .header {
@@ -47,7 +47,7 @@
    transition: var(--btn-tran);
 }
 .menu-button:hover {
-   background-color: var(--dark-green);
+   background-color: var(--light-green);
 }
 
 .menu > * {
@@ -76,8 +76,8 @@
    overflow: hidden;
    display: flex;
    align-items: center;
-   justify-content: space-around;
-   padding: 0px 50px;
+   justify-content: center;
+   padding: 0px 5%;
 }
 
 .drop {

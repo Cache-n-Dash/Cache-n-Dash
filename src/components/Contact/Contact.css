@@ -1,13 +1,56 @@
 textarea {
-   font-family: "Cabin", sans-serif;
+   font-family: var(--body-font);
    height: 5rem;
-   width: 30%;
-   min-width: 200px;
+   width: 60%;
+   min-width: 250px;
    padding: 0.5rem;
+}
+
+.contact-form {
+   margin-top: 20px;
+}
+
+.bg-img {
+   background-color: black;
+   padding: 50px;
+   height: 600px;
+   width: 100%;
+   background-image: url(https://images.pexels.com/photos/5302814/pexels-photo-5302814.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);
+   filter: var(--img-blur);
+   z-index: -1;
+   min-height: 500px;
+   min-width: 100vw;
+   clip-path: polygon(0% 0%, 100% 0%, 100% 99%, 0% 99%);
+   background-size: cover;
+   background-position: center;
+}
+
+.box {
+   background-color: var(--bg-color);
+
+   padding: 20px;
+   width: fit-content;
+   height: 500px;
+   margin: 10%;
+   min-width: 70%;
+   border-radius: 20px;
+   position: absolute;
+}
+.form-title {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 1rem;
+}
+.form-title > p {
+   width: 10%;
+   min-width: 50px;
+   margin: 0px;
+   padding: 0px;
 }
 
 .contactInput {
    padding: 0.5rem;
-   margin-bottom: 1rem;
-   width: 30%;
+   width: 50%;
+   min-width: 200px;
 }

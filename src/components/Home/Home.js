@@ -23,7 +23,9 @@ function Home() {
                   </div>
                ) : (
                   <div className="tern">
-                     <h3>Get started with a Race!</h3>
+                     <h3 className="first-subtitle">
+                        Get started with a Race!
+                     </h3>
                      <Link className="btn" to="/map">
                         Find a Race
                      </Link>
