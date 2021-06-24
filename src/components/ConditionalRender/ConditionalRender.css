@@ -17,6 +17,12 @@
 .location-info {
   z-index: 4;
   line-height: 150%;
+  cursor: pointer;
+}
+
+.location-info:hover {
+  background-color: #c894d1;
+  color: white;
 }
 
 .clicker {
@@ -26,4 +32,6 @@
   z-index: 5;
   margin: 0.75rem auto;
   border-radius: 1rem;
+  cursor: pointer;
+  padding: 0.1rem;
 }
