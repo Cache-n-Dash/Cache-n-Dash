@@ -21,6 +21,7 @@ import { UserContext } from '../../context/UserContext'
 import LocationGen from '../Location/LocationGen'
 import './Map.css'
 import axios from 'axios'
+import ConditionalRender from '../ConditionalRender/ConditionalRender'
 
 const libraries = ['places']
 
@@ -32,7 +33,7 @@ const mapContainerStyle = {
 // let center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
 
 const options = {
-  disableDefaultUI: true,
+  disableDefaultUI: false,
   zoomControl: false,
 }
 
@@ -51,6 +52,10 @@ function Map(props) {
   const [toggler, setToggler] = useState(false)
   const [latitude, setLatitude] = useState('')
   const [longitude, setLongitude] = useState('')
+  // const [northEast, setNorthEast] = useState('')
+  // const [northWest, setNorthWest] = useState('')
+  // const [southWest, setSouthWest] = useState('')
+  // const [southEast, setSouthEast] = useState('')
 
   const getMarkers = useCallback(() => {
     axios
@@ -146,6 +151,36 @@ function Map(props) {
     )
   }
 
+  const bounds = async () => {
+    let ne = mapRef.current.getBounds().getNorthEast()
+    let sw = mapRef.current.getBounds().getSouthWest()
+    console.log('================================')
+    console.log('Northeast: ' + ne.lat() + ';' + ne.lng())
+    console.log('SouthWest: ' + sw.lat() + ';' + sw.lng())
+    console.log('NorthWest: ' + ne.lat() + ';' + sw.lng())
+    console.log('SouthEast: ' + sw.lat() + ';' + ne.lng())
+    //   setNorthEast({
+    //     lat: ne.lat(),
+    //     lng: ne.lng(),
+    //   })
+    //   setSouthWest({
+    //     lat: sw.lat(),
+    //     lng: sw.lng(),
+    //   })
+    //   setNorthWest({
+    //     lat: ne.lat(),
+    //     lng: sw.lng(),
+    //   })
+    //   setSouthEast({
+    //     lat: sw.lat(),
+    //     lng: ne.lng(),
+    //   })
+    //   console.log(`NorthEast: ${northEast}`)
+    //   console.log(`NorthWest: ${northWest}`)
+    //   console.log(`SouthWest: ${southWest}`)
+    //   console.log(`SouthEast: ${southEast}`)
+  }
+
   return isLoaded ? (
     <div id="lowerIt">
       {!toggler && user.isadmin && (
@@ -159,9 +194,12 @@ function Map(props) {
         </button>
       )}
 
+      <ConditionalRender bounds={bounds} panTo={panTo} />
+
       <Search panTo={panTo} />
 
       <GoogleMap
+        onIdle={bounds}
         mapContainerStyle={mapContainerStyle}
         zoom={13}
         center={center}
