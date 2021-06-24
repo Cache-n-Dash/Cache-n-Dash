@@ -87,6 +87,8 @@ app.post("/activity/start/:course_id/:user_id", actCtrl.startActivity);
 app.post("/activity/update/:activity_id/:cloc_id", actCtrl.performActivity);
 app.put("/activity/complete/:activity_id", actCtrl.completeActivity);
 app.get("/activity/locations/:activity_id", actCtrl.getActivityLocs);
+app.get("/user/activities/courses/:user_id", actCtrl.getUserActivityCourseNums);
+app.get("/user/activities/:user_id/:course_id", actCtrl.getUserActivities);
 
 // Contact Endpoints
 
