@@ -86,7 +86,7 @@ const CourseGen = () => {
     return (
         <div>
             <p>Create a new course</p>
-            <div>select up to 5 locations and click the button to create a new course</div>
+            <div>select locations and click the button to create a new course</div>
             <input placeholder="Enter Course Name Here" type="text" onChange={e=>setName(e.target.value)}/>
             <button onClick={handleLocs}>Confirm Locations</button>
             <button onClick={handleCreate}>Create Course</button>
