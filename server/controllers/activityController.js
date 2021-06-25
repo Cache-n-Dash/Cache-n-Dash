@@ -121,6 +121,7 @@ module.exports = {
         const db = req.app.get('db')
         const {user_id} = req.params;
         const id = +user_id;
+        // console.log(id)
         db.activities.get_uniq_usr_act_crses(id)
         .then(data=>{
             res.status(200).send(data)
