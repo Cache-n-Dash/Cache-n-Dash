@@ -3,7 +3,7 @@ import { UserContext } from "../../context/UserContext";
 import {DataContext} from '../../context/DataContext'
 import axios from 'axios'
 import './ActivityGen.css'
-// import 
+import Courses from '../Courses/Courses'
 
 const ActivityGen = () => {
     // const [selected,setSelected] = useState(false)
@@ -180,9 +180,7 @@ const ActivityGen = () => {
             }else{
                 if(!selected){
                     return(
-                        <div>
-                            test
-                        </div>
+                        <Courses />
                         // <div className="containerDiv">
                         //     <div className="tableHeaderDiv"><p className="tableHeader crseLayout numDiv">Number</p><p className="tableHeader crseLayout">Course Name</p><p className="tableHeader crseLayout"># of Geolocations</p><p className="tableHeader crseLayout">Avg Completion Time</p></div>
                         //     {renderCourses()}
