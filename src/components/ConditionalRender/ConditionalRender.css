@@ -8,21 +8,23 @@
   z-index: 3;
   transition: 0.3s;
   background-color: #6fb164;
+  width: 90%;
+  border-radius: 2rem 2rem 0 0;
 }
 
 .transitioner {
-  transform: translate(0%, -85%);
+  transform: translate(0%, -89%);
 }
 
 .location-info {
   z-index: 4;
-  line-height: 150%;
+  line-height: 175%;
   cursor: pointer;
 }
 
 .location-info:hover {
-  background-color: #c894d1;
-  color: white;
+  background-color: #97d18d;
+  color: black;
 }
 
 .clicker {
@@ -34,4 +36,10 @@
   border-radius: 1rem;
   cursor: pointer;
   padding: 0.1rem;
+}
+
+@media (min-width: 750px) {
+  .render {
+    width: 50%;
+  }
 }
