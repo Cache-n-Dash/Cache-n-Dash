@@ -110,6 +110,7 @@ module.exports = {
         // const c_id = await db.activities.get_uniq_usr_act_crses(u_id)
         db.activities.get_user_activities(u_id,c_id)
         .then(data=>{
+            // console.log('testing get user activities')
             res.status(200).send(data)
         }).catch(err=>{
             console.log(err)
