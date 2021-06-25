@@ -20,6 +20,11 @@ function UserDash() {
             username: {user.username}<br></br>
             email: {user.email}
         </div>
+        <br></br>
+        <div className = "completed-courses">
+            Your Completed Courses: 
+
+        </div>
         </div>
     )
 }
