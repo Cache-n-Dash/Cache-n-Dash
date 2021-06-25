@@ -1,57 +1,60 @@
 import {useState,useEffect,useContext} from 'react'
 import { UserContext } from "../../context/UserContext";
+import {DataContext} from '../../context/DataContext'
 import axios from 'axios'
 import './ActivityGen.css'
+// import 
 
 const ActivityGen = () => {
-    const [selected,setSelected] = useState(false)
+    // const [selected,setSelected] = useState(false)
     const [doAct,setDoAct] = useState(false)
-    const [courses,setCourses] = useState([])
-    const [crseLocs,setCrseLocs] = useState([])
-    const [oneCourse,setOneCourse] = useState({})
+    // const [courses,setCourses] = useState([])
+    // const [crseLocs,setCrseLocs] = useState([])
+    // const [oneCourse,setOneCourse] = useState({})
     const [actID,setActID] = useState(null)
     const [act,setAct] = useState({})
     const [actBool,setActBool] = useState(false)
     const {user} = useContext(UserContext)
+    const [selected,setSelected,setCourses,crseLocs,setCrseLocs,oneCourse,setOneCourse] = useContext(DataContext)
     const [currLoc,setCurrLoc] = useState(1)
     // console.log(selected)
 
-    useEffect(()=>{
-        axios.get("/courses")
-        .then(res=>{
-            setCourses(res.data)
-            // console.log(res.data)
-        }).catch(err=>{
-            console.log(err)
-        })
-    }, []);
+    // useEffect(()=>{
+    //     axios.get("/courses")
+    //     .then(res=>{
+    //         setCourses(res.data)
+    //         // console.log(res.data)
+    //     }).catch(err=>{
+    //         console.log(err)
+    //     })
+    // }, []);
 
-    const renderCourses = () => {
-        return(
-            courses.map((crse,idx)=>{
-                let avg = crse.mean_completion_time;
-                if(avg===null){
-                    avg = '--';
-                }
+    // const renderCourses = () => {
+    //     return(
+    //         courses.map((crse,idx)=>{
+    //             let avg = crse.mean_completion_time;
+    //             if(avg===null){
+    //                 avg = '--';
+    //             }
 
-                const handleCourseClick = () => {
-                    axios.get(`/locations/courses/${crse.course_id}`)
-                    .then(res=>{
-                        // console.log(res.data)
-                        setCrseLocs(res.data)
-                        setOneCourse(crse)
-                    }).catch(err=>console.log(err))
-                    setSelected(!selected)
-                }
+    //             const handleCourseClick = () => {
+    //                 axios.get(`/locations/courses/${crse.course_id}`)
+    //                 .then(res=>{
+    //                     // console.log(res.data)
+    //                     setCrseLocs(res.data)
+    //                     setOneCourse(crse)
+    //                 }).catch(err=>console.log(err))
+    //                 setSelected(!selected)
+    //             }
 
-                return(
-                    <div key={idx}>
-                        <button className="courseBtn" onClick={handleCourseClick}><div className="btnDiv numDiv">{idx+1}</div><div className="btnDiv">{crse.course_name}</div><div className="btnDiv">{crse.locations}</div><div className="btnDiv">{avg/1000}</div></button>
-                    </div>
-                )
-            })
-        )
-    }
+    //             return(
+    //                 <div key={idx}>
+    //                     <button className="courseBtn" onClick={handleCourseClick}><div className="btnDiv numDiv">{idx+1}</div><div className="btnDiv">{crse.course_name}</div><div className="btnDiv">{crse.locations}</div><div className="btnDiv">{avg/1000}</div></button>
+    //                 </div>
+    //             )
+    //         })
+    //     )
+    // }
 
     const verifyLoc = (crse) => {
         const cloc_id = crse.cloc_id;
@@ -177,10 +180,13 @@ const ActivityGen = () => {
             }else{
                 if(!selected){
                     return(
-                        <div className="containerDiv">
-                            <div className="tableHeaderDiv"><p className="tableHeader crseLayout numDiv">Number</p><p className="tableHeader crseLayout">Course Name</p><p className="tableHeader crseLayout"># of Geolocations</p><p className="tableHeader crseLayout">Avg Completion Time</p></div>
-                            {renderCourses()}
+                        <div>
+                            test
                         </div>
+                        // <div className="containerDiv">
+                        //     <div className="tableHeaderDiv"><p className="tableHeader crseLayout numDiv">Number</p><p className="tableHeader crseLayout">Course Name</p><p className="tableHeader crseLayout"># of Geolocations</p><p className="tableHeader crseLayout">Avg Completion Time</p></div>
+                        //     {renderCourses()}
+                        // </div>
                     )
                 }else{
                     return(
