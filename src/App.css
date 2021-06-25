@@ -32,7 +32,10 @@
 }
 
 @media (max-width: 750px) {
-  .page {
-    min-height: calc(100vh - 160px);
-  }
+   :root {
+      --polygon: polygon(0% 0%, 100% 0%, 100% 100%, 0% 85%);
+   }
+   .page {
+      min-height: calc(100vh - 160px);
+   }
 }
