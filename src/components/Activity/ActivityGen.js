@@ -1,4 +1,4 @@
-import {useState,useEffect,useContext} from 'react'
+import {useState,useContext} from 'react' //useEffect,
 import { UserContext } from "../../context/UserContext";
 import {DataContext} from '../../context/DataContext'
 import axios from 'axios'
@@ -15,7 +15,7 @@ const ActivityGen = () => {
     const [act,setAct] = useState({})
     const [actBool,setActBool] = useState(false)
     const {user} = useContext(UserContext)
-    const [selected,setSelected,setCourses,crseLocs,setCrseLocs,oneCourse,setOneCourse] = useContext(DataContext)
+    const {selected,setSelected,setCourses,crseLocs,setCrseLocs,oneCourse,setOneCourse} = useContext(DataContext)
     const [currLoc,setCurrLoc] = useState(1)
     // console.log(selected)
 
@@ -169,7 +169,7 @@ const ActivityGen = () => {
         }else{
             if(doAct){
                 return(
-                    <div className="containerDiv">
+                    <div className="flexContainer">
                         <div className="flexBtn"><button onClick={()=>setDoAct(!doAct)}>Go Back</button></div>
                         <h4>{oneCourse.course_name}</h4>
                         <div className="tableHeaderDiv"><p className="tableHeader locLayout numDiv">Location</p><p className="tableHeader locLayout">Name</p><p className="tableHeader locLayout">Latitude</p><p className="tableHeader locLayout">Longitude</p><p className="tableHeader locLayout">Distance to Next (km)</p></div>
@@ -188,7 +188,7 @@ const ActivityGen = () => {
                     )
                 }else{
                     return(
-                        <div className="containerDiv">
+                        <div className="flexContainer">
                             <div className="flexBtn"><button onClick={()=>setSelected(!selected)}>Go Back</button></div>
                             <h4>{oneCourse.course_name}</h4>
                             <div className="tableHeaderDiv"><p className="tableHeader locLayout numDiv">Location</p><p className="tableHeader locLayout">Name</p><p className="tableHeader locLayout">Latitude</p><p className="tableHeader locLayout">Longitude</p><p className="tableHeader locLayout">Distance to Next (km)</p></div>

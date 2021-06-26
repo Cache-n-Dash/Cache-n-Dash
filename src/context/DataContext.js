@@ -1,10 +1,10 @@
-// import axios from "axios";
+import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 // import {useHistory} from "react-router-dom";
 
 export const DataContext = createContext();
 
-export const UserProvider = ({ children }) => {
+export const DataProvider = ({ children }) => {
     const [selected,setSelected] = useState(false)
     const [courses,setCourses] = useState([])
     const [crseLocs,setCrseLocs] = useState([])
@@ -23,7 +23,6 @@ export const UserProvider = ({ children }) => {
 
    return (
       <DataContext.Provider
-        //  value={{ user, setUser, handleLogin, handleRegister }}
         value={{selected,setSelected,courses,setCourses,crseLocs,setCrseLocs,oneCourse,setOneCourse}}
       >
          {children}

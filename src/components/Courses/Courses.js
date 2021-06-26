@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
 import { DataContext } from '../../context/DataContext'
-import './Course.css'
+import './Courses.css'
+import axios from 'axios'
 
 function Courses() {
-    const [selected,setSelected,courses,setCrseLocs,setOneCourse] = useContext(DataContext)
+    const {selected,setSelected,courses,setCrseLocs,setOneCourse} = useContext(DataContext)
 
     const renderCourses = () => {
         return(
@@ -33,8 +34,8 @@ function Courses() {
     }
 
     return (
-        <div className="containerDiv">
-            <div className="tableHeaderDiv"><p className="tableHeader crseLayout numDiv">Number</p><p className="tableHeader crseLayout">Course Name</p><p className="tableHeader crseLayout"># of Geolocations</p><p className="tableHeader crseLayout">Avg Completion Time</p></div>
+        <div className="flexContainer">
+            <div className="tableHeaderDiv"><p className="tableHeader crseLayout numDiv">Number</p><p className="tableHeader crseLayout">Course Name</p><p className="tableHeader crseLayout"># of Geolocations</p><p className="tableHeader crseLayout">Avg Completion Time (s)</p></div>
             {renderCourses()}
         </div>
     )

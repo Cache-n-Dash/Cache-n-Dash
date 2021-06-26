@@ -1,0 +1,62 @@
+.tableHeaderDiv{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    width: 90vw;
+}
+
+.tableHeader{
+    /* width: 90vw; */
+    font-size: 12px;
+    margin: 0;
+}
+
+.flexContainer{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+    align-items: center;
+}
+
+.courseBtn{
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    width: 90vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* .flexBtn{
+    width: 95vw;
+    display: flex;
+    justify-content: flex-start;
+} */
+
+.btnDiv,.crseLayout{
+    /* font-size: 12px; */
+    width: 27vw;
+    text-align: center;
+}
+
+/* .locLayout,.courseLoc{
+    width: 20.25vw;
+    text-align: center;
+} */
+
+.numDiv{
+    text-align: left;
+    width: 9vw;
+}
+
+/* .locContainer{
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+} */
+
+/* .courseLoc{
+    font-size: 12px;
+    margin: 0;
+} */
