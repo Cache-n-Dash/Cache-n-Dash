@@ -4,6 +4,8 @@ import { UserContext } from "../../context/UserContext";
 import { useContext,useEffect,useState } from 'react';
 // import { getUserActivities } from '../../../server/controllers/activityController';
 import axios from 'axios';
+import {BsChevronCompactDown} from 'react-icons/bs'
+import {BsChevronCompactUp} from 'react-icons/bs'
 
 function UserDash() {
     const [courseNums,setCourseNums] = useState([])
@@ -33,35 +35,16 @@ function UserDash() {
             //  getUserActivities()
             // setInitialLoad(1)
         }
-        // if(user && initialLoad === 1){
-        //     // let allData = [];
-        //     const mappedData = courseNums.map((crse,idx)=>{
-        //         let data = [];
-        //         axios.get(`/user/activities/${user.user_id}/${crse.course_id}`)
-        //         .then(res=>{
-        //             console.log(res.data)
-        //             // setUsrCrseData(...usrCrseData,res.data)
-        //             data = res.data;
-        //             allData = data;
-        //         }).catch(err=>{
-        //             console.log(err)
-        //         })
-        //         // console.log(data)
-        //         return(data)
-        //     })
-        //     // allData = [...mappedData]
-        //     console.log(mappedData)
-        // }
     }, [user]) //initialLoad,courseNums
 
     const mapActivitiesOnCourse = () => {
         return(
             usrCrseData.map((act,idx)=>{
                 return(
-                    <div key={idx}>
-                        <p>{idx+1}</p>
-                        <p>{act.activity_date}</p>
-                        <p>{act.comp_time/1000}</p>
+                    <div className="coursesDiv" key={idx}>
+                        <p className="titles data">{idx+1}</p>
+                        <p className="titles data">{act.activity_date}</p>
+                        <p className="titles data">{act.comp_time/1000}</p>
                     </div>
                 )
             })
@@ -72,18 +55,18 @@ function UserDash() {
         if(view){
             return(
                 <div>
-                    <button onClick={()=>setView(!view)}>Back</button>
-                    <div>
-                        <p>Count</p>
-                        <p>Date</p>
-                        <p>Completion Time (s)</p>  
+                    <button className="resetDefaults" onClick={()=>setView(!view)}><BsChevronCompactUp className="chevron"/></button>
+                    <div className="coursesDiv">
+                        <p className="titles">Count</p>
+                        <p className="titles">Date</p>
+                        <p className="titles">Time (s)</p>  
                     </div>
                     {mapActivitiesOnCourse()}
                 </div>   
             )
         }else{
             return(
-                <button onClick={()=>changeBool(crse.course_id)}>See All</button>
+                <button className="resetDefaults" onClick={()=>changeBool(crse.course_id)}><BsChevronCompactDown className="chevron"/></button>
             )
         }
     }
@@ -104,10 +87,11 @@ function UserDash() {
             courseNums.map((crse,idx)=>{
                 return(
                     <div key={idx}>
-                        {/* <p>{crse.course_id}</p> */}
-                        <p>Course Name: {crse.course_name}</p>
-                        <p># of Geolocations: {crse.locations}</p>
-                        {/* <button onClick={()=>changeBool(crse.course_id)}>See All</button> */}
+                        <div className="coursesDiv">
+                            {/* <p>{crse.course_id}</p> */}
+                            <p className="courses">Course Name: {crse.course_name}</p>
+                            <p className="courses"># of Geolocations: {crse.locations}</p>
+                        </div>
                         {renderUserActivities(crse)}
                     </div>
                 )

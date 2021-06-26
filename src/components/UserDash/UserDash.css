@@ -1,0 +1,30 @@
+h2{
+    padding-top: 20px;
+}
+
+.coursesDiv{
+    display: flex;
+    justify-content: center;
+}
+
+.courses,.titles{
+    width: 28vw;
+    font-size: 14px;
+    border-bottom: 1px solid black;
+}
+
+.data{
+    border-bottom: none;
+}
+
+.resetDefaults{
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+}
+
+.chevron{
+    width: 50px;
+    height: 20px;
+}
