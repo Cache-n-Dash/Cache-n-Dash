@@ -20,16 +20,18 @@ function LeaderBoard() {
     // const [segmentLocs,setSegmentLocs] = useState([])
 
     useEffect(()=>{
-        axios.get(`/courses/${courseID}`)
-        .then(res=>{
-            setCourse(res.data[0])
-            // console.log(res.data[0])
-        }).catch(err=>console.log(err))
-        axios.get(`/leaderboard/${courseID}`)
-        .then(res=>{
-            setCourseLeaders(res.data)
-            // console.log(res.data)
-        }).catch(err=>console.log(err))
+        if(courseID){
+            axios.get(`/courses/${courseID}`)
+            .then(res=>{
+                setCourse(res.data[0])
+                // console.log(res.data[0])
+            }).catch(err=>console.log(err))
+            axios.get(`/leaderboard/${courseID}`)
+            .then(res=>{
+                setCourseLeaders(res.data)
+                // console.log(res.data)
+            }).catch(err=>console.log(err))
+        }
     },[courseID])
 
     const handleClick = (id) => {
