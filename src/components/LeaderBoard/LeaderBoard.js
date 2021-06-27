@@ -2,6 +2,7 @@ import React from 'react'
 import { useState,useEffect } from 'react'
 import './LeaderBoard.css'
 import axios from 'axios'
+import Courses from '../Courses/Courses'
 import {IoCaretForwardSharp} from 'react-icons/io5'
 import {IoCaretDownSharp} from 'react-icons/io5'
 // import {IoArrowForwardCircleSharp} from 'react-icons/io5'
@@ -11,12 +12,13 @@ import {IoArrowUndoSharp} from 'react-icons/io5'
 
 function LeaderBoard() {
     const [course,setCourse] = useState({})
-    const [courseID,setCourseID] = useState(14)
+    const [courseID,setCourseID] = useState(null)
     const [courseLeaders,setCourseLeaders] = useState([])
     const [openID,setOpenID] = useState(null)
     const [actLocs,setActLocs] = useState([])
     const [viewSegLdrs,setViewSegLdrs] = useState(false)
     const [segLeaders,setSegLeaders] = useState([])
+    const ldrBool = 'TRUE';
     // const [segmentLocs,setSegmentLocs] = useState([])
 
     useEffect(()=>{
@@ -199,6 +201,9 @@ function LeaderBoard() {
         }else{
             return(
                 <div>
+                    <div className="btnFlex">
+                        <button className="removeDefaults" onClick={()=>setCourseID(null)}><IoArrowUndoSharp className="backToCourse"/></button>
+                    </div>
                     <h3>{course.course_name} Leaderboard</h3>
                     <p># of Geolocations: {course.locations}</p>
                     <p>Average Completion Time: {course.mean_completion_time/1000} seconds</p>
@@ -215,9 +220,14 @@ function LeaderBoard() {
 
     return (
         <div>
-            {renderCrseOrSeg()}
+            {courseID ? renderCrseOrSeg() : <Courses leader={ldrBool} setCourseID={setCourseID}/>}
         </div>
-        // <div>
+    )
+}
+
+export default LeaderBoard
+
+// <div>
         //     <h3>{course.course_name} Leaderboard</h3>
         //     <p># of Geolocations: {course.locations}</p>
         //     <p>Average Completion Time: {course.mean_completion_time/1000} seconds</p>
@@ -228,7 +238,3 @@ function LeaderBoard() {
         //     </div>
         //     {renderLeaderBoard()}
         // </div>
-    )
-}
-
-export default LeaderBoard

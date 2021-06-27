@@ -3,7 +3,7 @@ import { DataContext } from '../../context/DataContext'
 import './Courses.css'
 import axios from 'axios'
 
-function Courses() {
+function Courses(props) {
     const {selected,setSelected,courses,setCrseLocs,setOneCourse} = useContext(DataContext)
 
     const renderCourses = () => {
@@ -15,13 +15,17 @@ function Courses() {
                 }
 
                 const handleCourseClick = () => {
-                    axios.get(`/locations/courses/${crse.course_id}`)
-                    .then(res=>{
-                        // console.log(res.data)
-                        setCrseLocs(res.data)
-                        setOneCourse(crse)
-                    }).catch(err=>console.log(err))
-                    setSelected(!selected)
+                    if(!props.leader){
+                        axios.get(`/locations/courses/${crse.course_id}`)
+                        .then(res=>{
+                            // console.log(res.data)
+                            setCrseLocs(res.data)
+                            setOneCourse(crse)
+                        }).catch(err=>console.log(err))
+                        setSelected(!selected)
+                    }else{
+                        props.setCourseID(crse.course_id)
+                    }
                 }
 
                 return(
