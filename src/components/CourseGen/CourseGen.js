@@ -3,17 +3,25 @@
 // 40.459141, -111.775734
 // 40.460947, -111.774051
 
-import {useState} from 'react'
+import {useState} from 'react' //,useEffect
 import axios from 'axios'
 
-const CourseGen = () => {
-    const [name,setName] = useState('')
+const CourseGen = (props) => {
+    const [name,setName] = useState('Enter Course Name Here')
     const [locations,setLocations] = useState(0)
     const [lat,setLat] = useState([])
     const [lon,setLon] = useState([])
-    // console.log(lat)
+    // const [names,setNames] = useState([])
+    // console.log(props.locs)
 
-    const testCourse = [3,4,5];
+    // const testCourse = [3,4,5];
+    const locArr = props.locs;
+
+    // useEffect(()=>{
+    //     if(props.locs){
+    //         // axios.get()
+    //     }
+    // },[])
 
     const deg2rad = (deg) => {
         return deg * (Math.PI/180)
@@ -33,8 +41,8 @@ const CourseGen = () => {
     const getLatLong = () => {
         let latitudeArr = [];
         let longitudeArr = [];
-        for (let i = 0; i<testCourse.length; i++){
-            axios.get(`/locations/${testCourse[i]}`)
+        for (let i = 0; i<locArr.length; i++){
+            axios.get(`/locations/${locArr[i]}`)
             .then(res=>{
                 latitudeArr[i] = +res.data.latitude;
                 longitudeArr[i] = +res.data.longitude;
@@ -47,7 +55,7 @@ const CourseGen = () => {
         const latLon = getLatLong();
         setLat(latLon[0]);
         setLon(latLon[1]);
-        setLocations(testCourse.length)
+        setLocations(locArr.length)
     }
 
     const handleCreate = async () => {
@@ -55,14 +63,6 @@ const CourseGen = () => {
         const numlocs = locations;
         let c_id = null;
         c_id = await axios.post('/courses/add',{courseName,numlocs})
-        // .then(res=>{
-            // console.log(res.data)
-            // console.log(res.data.course_id)
-            // return res.data.course_id;
-        // }).catch(err=>{
-        //     console.log(err)
-        // })
-        // console.log(c_id.data.course_id)
         const course_id = c_id.data.course_id;
         let distArr;
         for (let i = 0; i<locations; i++){
@@ -71,23 +71,37 @@ const CourseGen = () => {
             }else{
                 distArr = distCalc(lat[i],lon[i],lat[i+1],lon[i+1])
             }
-            // console.log(distArr)
             const seg_dist = distArr
-            axios.post(`/courses/${course_id}/locations/${testCourse[i]}/${i+1}`,{seg_dist})
-            // .then(res=>{
-            //     console.log(res.data)
-            // }).catch(err=>{
-            //     console.log(err)
-            // })
+            axios.post(`/courses/${course_id}/locations/${locArr[i]}/${i+1}`,{seg_dist})
         }
+        props.setCrseMarkers([])
+        props.setLocNames([])
+        setName('Enter Course Name Here')
+        // setNames([])
         // console.log(distArr)
+    }
+
+    const renderLocationNames = () => {
+        const names = props.names;
+        // setNames(props.names)
+        if(names){
+            return(
+                names.map((name,idx)=>{
+                    return(
+                        <p key={idx}>{name}</p>
+                    )
+                })
+            )
+        }
     }
 
     return (
         <div>
             <p>Create a new course</p>
             <div>Select geolocations in the order they will be visited, then click the buttons to create a new course</div>
-            <input placeholder="Enter Course Name Here" type="text" onChange={e=>setName(e.target.value)}/>
+            <p>Locations Selected:</p>
+            {renderLocationNames()}
+            <input value={name} type="text" onChange={e=>setName(e.target.value)}/>
             <button onClick={handleLocs}>Confirm Locations</button>
             <button onClick={handleCreate}>Create Course</button>
         </div>
@@ -95,3 +109,5 @@ const CourseGen = () => {
 }
 
 export default CourseGen
+
+//placeholder="Enter Course Name Here"

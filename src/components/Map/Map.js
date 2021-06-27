@@ -59,7 +59,8 @@ function Map(props) {
   const [east, setEast] = useState(null)
   const [courseBool,setCourseBool] = useState(false)
   const [crseMarkers,setCrseMarkers] = useState([])
-  console.log(crseMarkers)
+  const [locNames,setLocNames] = useState([])
+  // console.log(crseMarkers)
 
   const getMarkers = useCallback(() => {
     axios
@@ -184,6 +185,7 @@ function Map(props) {
               setLongitude(marker.longitude)
               if(courseBool){
                 setCrseMarkers([...crseMarkers,marker.location_id])
+                setLocNames([...locNames,marker.location_name])
               }
               }}
             />
@@ -196,6 +198,7 @@ function Map(props) {
   const createCourse = () => {
     setCourseBool(!courseBool)
     setCrseMarkers([])
+    setLocNames([])
   }
 
   return isLoaded ? (
@@ -247,7 +250,7 @@ function Map(props) {
         ) : null}
       </GoogleMap>
       {toggler && <LocationGen />}
-      {courseBool && <CourseGen />}
+      {courseBool && <CourseGen locs={crseMarkers} names={locNames} setCrseMarkers={setCrseMarkers} setLocNames={setLocNames}/>}
     </div>
   ) : (
     <></>
