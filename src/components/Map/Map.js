@@ -52,10 +52,11 @@ function Map(props) {
   const [toggler, setToggler] = useState(false)
   const [latitude, setLatitude] = useState('')
   const [longitude, setLongitude] = useState('')
-  // const [northEast, setNorthEast] = useState('')
-  // const [northWest, setNorthWest] = useState('')
-  // const [southWest, setSouthWest] = useState('')
-  // const [southEast, setSouthEast] = useState('')
+  const [north, setNorth] = useState(null)
+  const [west, setWest] = useState(null)
+  const [south, setSouth] = useState(null)
+  const [east, setEast] = useState(null)
+  // console.log(north,south,west,east)
 
   const getMarkers = useCallback(() => {
     axios
@@ -83,7 +84,7 @@ function Map(props) {
     setToggler(!toggler)
   }
 
-  console.log(markers)
+  // console.log(markers)
 
   const center = {
     lat: latitude,
@@ -154,31 +155,36 @@ function Map(props) {
   const bounds = async () => {
     let ne = mapRef.current.getBounds().getNorthEast()
     let sw = mapRef.current.getBounds().getSouthWest()
-    console.log('================================')
-    console.log('Northeast: ' + ne.lat() + ';' + ne.lng())
-    console.log('SouthWest: ' + sw.lat() + ';' + sw.lng())
-    console.log('NorthWest: ' + ne.lat() + ';' + sw.lng())
-    console.log('SouthEast: ' + sw.lat() + ';' + ne.lng())
-    //   setNorthEast({
-    //     lat: ne.lat(),
-    //     lng: ne.lng(),
-    //   })
-    //   setSouthWest({
-    //     lat: sw.lat(),
-    //     lng: sw.lng(),
-    //   })
-    //   setNorthWest({
-    //     lat: ne.lat(),
-    //     lng: sw.lng(),
-    //   })
-    //   setSouthEast({
-    //     lat: sw.lat(),
-    //     lng: ne.lng(),
-    //   })
-    //   console.log(`NorthEast: ${northEast}`)
-    //   console.log(`NorthWest: ${northWest}`)
-    //   console.log(`SouthWest: ${southWest}`)
-    //   console.log(`SouthEast: ${southEast}`)
+    // console.log('================================')
+    // console.log('Northeast: ' + ne.lat() + ';' + ne.lng())
+    // console.log('SouthWest: ' + sw.lat() + ';' + sw.lng())
+    setNorth(ne.lat())
+    setSouth(sw.lat())
+    setWest(sw.lng())
+    setEast(ne.lng())
+  }
+
+  const renderMarkers = () => {
+    return(
+      markers.map((marker) => {
+        if((marker.latitude >= south && marker.latitude <= north) && (marker.longitude >= west && marker.longitude <= east)){
+          return(
+            <Marker
+              position={{
+                lat: Number(marker.latitude),
+                lng: Number(marker.longitude),
+              }}
+              key={marker.location_id}
+              onClick={() => {
+              setSelected(marker)
+              setLatitude(marker.latitude)
+              setLongitude(marker.longitude)
+              }}
+            />
+          )
+        }
+      })
+    )
   }
 
   return isLoaded ? (
@@ -194,7 +200,7 @@ function Map(props) {
         </button>
       )}
 
-      <ConditionalRender bounds={bounds} panTo={panTo} />
+      <ConditionalRender bounds={bounds} panTo={panTo} north={north} south={south} west={west} east={east}/>
 
       <Search panTo={panTo} />
 
@@ -206,20 +212,7 @@ function Map(props) {
         options={options}
         onLoad={onMapLoad}
       >
-        {markers.map((marker) => (
-          <Marker
-            position={{
-              lat: Number(marker.latitude),
-              lng: Number(marker.longitude),
-            }}
-            key={marker.location_id}
-            onClick={() => {
-              setSelected(marker)
-              setLatitude(marker.latitude)
-              setLongitude(marker.longitude)
-            }}
-          />
-        ))}
+        {renderMarkers()}
         {selected ? (
           <InfoWindow
             position={{

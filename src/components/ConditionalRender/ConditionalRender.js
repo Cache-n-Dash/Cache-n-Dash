@@ -37,22 +37,24 @@ function ConditionalRender(props) {
     <div className={`render ${namer}`}>
       <div className="clicker" onClick={() => combiner()}></div>
       {render.map((location) => {
-        return (
-          <div className="location-info" key={location.location_id}>
-            {location.location_name !== null && (
-              <h4
-                onClick={() =>
-                  props.panTo({
-                    lat: Number(location.latitude),
-                    lng: Number(location.longitude),
-                  })
-                }
-              >
-                {location.location_name}
-              </h4>
-            )}
-          </div>
-        )
+        if(location.latitude <= props.north && location.latitude >= props.south && location.longitude >= props.west && location.longitude <= props.east){
+          return (
+            <div className="location-info" key={location.location_id}>
+              {location.location_name !== null && (
+                <h4
+                  onClick={() =>
+                    props.panTo({
+                      lat: Number(location.latitude),
+                      lng: Number(location.longitude),
+                    })
+                  }
+                >
+                  {location.location_name}
+                </h4>
+              )}
+            </div>
+          )
+        }
       })}
     </div>
   )
