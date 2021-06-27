@@ -4,6 +4,7 @@ import {DataContext} from '../../context/DataContext'
 import axios from 'axios'
 import './ActivityGen.css'
 import Courses from '../Courses/Courses'
+import { Link } from 'react-router-dom';
 
 const ActivityGen = () => {
     // const [selected,setSelected] = useState(false)
@@ -163,7 +164,12 @@ const ActivityGen = () => {
                     <p>You completed {oneCourse.course_name} in:</p>
                     <p>{act.comp_time/1000} seconds</p>
                     <button onClick={resetView}>View Courses</button>
-                    <button>View Leaderboard</button>
+                    <Link to={{
+                        pathname: "/leaderboard",
+                        state: {
+                            finishActCrseID: oneCourse.course_id,
+                        },
+                    }}><button>View Leaderboard</button></Link>
                 </div>
             )
         }else{

@@ -12,6 +12,8 @@ function Courses(props) {
                 let avg = crse.mean_completion_time;
                 if(avg===null){
                     avg = '--';
+                }else{
+                    avg = avg/1000
                 }
 
                 const handleCourseClick = () => {
@@ -30,7 +32,7 @@ function Courses(props) {
 
                 return(
                     <div key={idx}>
-                        <button className="courseBtn" onClick={handleCourseClick}><div className="btnDiv numDiv">{idx+1}</div><div className="btnDiv">{crse.course_name}</div><div className="btnDiv">{crse.locations}</div><div className="btnDiv">{avg/1000}</div></button>
+                        <button className="courseBtn" onClick={handleCourseClick}><div className="btnDiv numDiv">{idx+1}</div><div className="btnDiv">{crse.course_name}</div><div className="btnDiv">{crse.locations}</div><div className="btnDiv">{avg}</div></button>
                     </div>
                 )
             })
