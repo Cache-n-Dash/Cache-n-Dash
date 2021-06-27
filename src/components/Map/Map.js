@@ -22,6 +22,7 @@ import LocationGen from '../Location/LocationGen'
 import './Map.css'
 import axios from 'axios'
 import ConditionalRender from '../ConditionalRender/ConditionalRender'
+import CourseGen from '../CourseGen/CourseGen'
 
 const libraries = ['places']
 
@@ -57,7 +58,8 @@ function Map(props) {
   const [south, setSouth] = useState(null)
   const [east, setEast] = useState(null)
   const [courseBool,setCourseBool] = useState(false)
-  // console.log(north,south,west,east)
+  const [crseMarkers,setCrseMarkers] = useState([])
+  console.log(crseMarkers)
 
   const getMarkers = useCallback(() => {
     axios
@@ -180,6 +182,9 @@ function Map(props) {
               setSelected(marker)
               setLatitude(marker.latitude)
               setLongitude(marker.longitude)
+              if(courseBool){
+                setCrseMarkers([...crseMarkers,marker.location_id])
+              }
               }}
             />
           )
@@ -190,6 +195,7 @@ function Map(props) {
 
   const createCourse = () => {
     setCourseBool(!courseBool)
+    setCrseMarkers([])
   }
 
   return isLoaded ? (
@@ -199,16 +205,16 @@ function Map(props) {
           <button className="getPos" onClick={showIt}>
             +
           </button>
-          <button className="getPos" onClick={createCourse}>CC</button>
+          <button className="getPos newCrse" onClick={createCourse}>CC</button>
         </div>
       )}
-      {toggler || courseBool && (
-        <div>
+      {toggler && (
           <button className="getPos notToggler" onClick={showIt}>
             x
           </button>
-          <button className="getPos notToggler" onClick={createCourse}>Cancel CC</button>
-        </div>
+      )}
+      {courseBool && (
+          <button className="getPos notToggler" onClick={createCourse}>x</button>
       )}
 
       <ConditionalRender bounds={bounds} panTo={panTo} north={north} south={south} west={west} east={east}/>
@@ -241,6 +247,7 @@ function Map(props) {
         ) : null}
       </GoogleMap>
       {toggler && <LocationGen />}
+      {courseBool && <CourseGen />}
     </div>
   ) : (
     <></>
