@@ -56,6 +56,7 @@ function Map(props) {
   const [west, setWest] = useState(null)
   const [south, setSouth] = useState(null)
   const [east, setEast] = useState(null)
+  const [courseBool,setCourseBool] = useState(false)
   // console.log(north,south,west,east)
 
   const getMarkers = useCallback(() => {
@@ -187,17 +188,27 @@ function Map(props) {
     )
   }
 
+  const createCourse = () => {
+    setCourseBool(!courseBool)
+  }
+
   return isLoaded ? (
     <div id="lowerIt">
-      {!toggler && user.isadmin && (
-        <button className="getPos" onClick={showIt}>
-          +
-        </button>
+      {!toggler && user.isadmin && !courseBool && (
+        <div>
+          <button className="getPos" onClick={showIt}>
+            +
+          </button>
+          <button className="getPos" onClick={createCourse}>CC</button>
+        </div>
       )}
-      {toggler && (
-        <button className="getPos notToggler" onClick={showIt}>
-          x
-        </button>
+      {toggler || courseBool && (
+        <div>
+          <button className="getPos notToggler" onClick={showIt}>
+            x
+          </button>
+          <button className="getPos notToggler" onClick={createCourse}>Cancel CC</button>
+        </div>
       )}
 
       <ConditionalRender bounds={bounds} panTo={panTo} north={north} south={south} west={west} east={east}/>
