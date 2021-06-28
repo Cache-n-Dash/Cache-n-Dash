@@ -71,6 +71,7 @@ function Map(props) {
       .catch((err) => console.log(err))
 
     navigator.geolocation.getCurrentPosition(function (position) {
+      console.log(position)
       setLatitude(position.coords.latitude)
       setLongitude(position.coords.longitude)
     })
@@ -157,15 +158,18 @@ function Map(props) {
   }
 
   const bounds = async () => {
-    let ne = mapRef.current.getBounds().getNorthEast()
-    let sw = mapRef.current.getBounds().getSouthWest()
+    console.log(mapRef.current)
+    let ne = mapRef.current.getBounds()?.getNorthEast()
+    let sw = mapRef.current.getBounds()?.getSouthWest()
     // console.log('================================')
     // console.log('Northeast: ' + ne.lat() + ';' + ne.lng())
     // console.log('SouthWest: ' + sw.lat() + ';' + sw.lng())
-    setNorth(ne.lat())
-    setSouth(sw.lat())
-    setWest(sw.lng())
-    setEast(ne.lng())
+    if(ne && sw){
+      setNorth(ne.lat())
+      setSouth(sw.lat())
+      setWest(sw.lng())
+      setEast(ne.lng())
+    }
   }
 
   const renderMarkers = () => {
