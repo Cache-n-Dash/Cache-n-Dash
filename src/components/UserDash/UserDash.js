@@ -22,7 +22,7 @@ function UserDash() {
             // const axiosFunc = async () => {
                 axios.get(`/user/activities/courses/${user.user_id}`)
                 .then(res=>{
-                    console.log(res.data)
+                    // console.log(res.data)
                     setCourseNums(res.data)
                 }).catch(err=>console.log(err))
             // }
@@ -52,10 +52,10 @@ function UserDash() {
     }
 
     const renderUserActivities = (crse) =>{
-        if(view){
+        if(view && crse.course_id === usrCrseData[0].course_id){
             return(
                 <div>
-                    <button className="resetDefaults" onClick={()=>setView(!view)}><BsChevronCompactUp className="chevron"/></button>
+                    <button className="resetDefaults" onClick={()=>setView(false)}><BsChevronCompactUp className="chevron"/></button>
                     <div className="coursesDiv">
                         <p className="titles">Count</p>
                         <p className="titles">Date</p>
@@ -74,9 +74,9 @@ function UserDash() {
     const changeBool = (id) => {
         axios.get(`/user/activities/${user.user_id}/${id}`)
         .then(res=>{
-            console.log(res.data)
+            // console.log(res.data)
             setUsrCrseData(res.data)
-            setView(!view)
+            setView(true)
         }).catch(err=>{
             console.log(err)
         })
