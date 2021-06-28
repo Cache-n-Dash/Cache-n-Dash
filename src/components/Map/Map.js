@@ -57,9 +57,9 @@ function Map(props) {
   const [west, setWest] = useState(null)
   const [south, setSouth] = useState(null)
   const [east, setEast] = useState(null)
-  const [courseBool,setCourseBool] = useState(false)
-  const [crseMarkers,setCrseMarkers] = useState([])
-  const [locNames,setLocNames] = useState([])
+  const [courseBool, setCourseBool] = useState(false)
+  const [crseMarkers, setCrseMarkers] = useState([])
+  const [locNames, setLocNames] = useState([])
   // console.log(crseMarkers)
 
   const getMarkers = useCallback(() => {
@@ -169,30 +169,33 @@ function Map(props) {
   }
 
   const renderMarkers = () => {
-    return(
-      markers.map((marker) => {
-        if((marker.latitude >= south && marker.latitude <= north) && (marker.longitude >= west && marker.longitude <= east)){
-          return(
-            <Marker
-              position={{
-                lat: Number(marker.latitude),
-                lng: Number(marker.longitude),
-              }}
-              key={marker.location_id}
-              onClick={() => {
+    return markers.map((marker) => {
+      if (
+        marker.latitude >= south &&
+        marker.latitude <= north &&
+        marker.longitude >= west &&
+        marker.longitude <= east
+      ) {
+        return (
+          <Marker
+            position={{
+              lat: Number(marker.latitude),
+              lng: Number(marker.longitude),
+            }}
+            key={marker.location_id}
+            onClick={() => {
               setSelected(marker)
               setLatitude(marker.latitude)
               setLongitude(marker.longitude)
-              if(courseBool){
-                setCrseMarkers([...crseMarkers,marker.location_id])
-                setLocNames([...locNames,marker.location_name])
+              if (courseBool) {
+                setCrseMarkers([...crseMarkers, marker.location_id])
+                setLocNames([...locNames, marker.location_name])
               }
-              }}
-            />
-          )
-        }
-      })
-    )
+            }}
+          />
+        )
+      }
+    })
   }
 
   const createCourse = () => {
@@ -208,19 +211,30 @@ function Map(props) {
           <button className="getPos" onClick={showIt}>
             +
           </button>
-          <button className="getPos newCrse" onClick={createCourse}>CC</button>
+          <button className="getPos newCrse" onClick={createCourse}>
+            CC
+          </button>
         </div>
       )}
       {toggler && (
-          <button className="getPos notToggler" onClick={showIt}>
-            x
-          </button>
+        <button className="getPos notToggler" onClick={showIt}>
+          x
+        </button>
       )}
       {courseBool && (
-          <button className="getPos notToggler" onClick={createCourse}>x</button>
+        <button className="getPos notToggler courseBool" onClick={createCourse}>
+          x
+        </button>
       )}
 
-      <ConditionalRender bounds={bounds} panTo={panTo} north={north} south={south} west={west} east={east}/>
+      <ConditionalRender
+        bounds={bounds}
+        panTo={panTo}
+        north={north}
+        south={south}
+        west={west}
+        east={east}
+      />
 
       <Search panTo={panTo} />
 
@@ -250,7 +264,14 @@ function Map(props) {
         ) : null}
       </GoogleMap>
       {toggler && <LocationGen />}
-      {courseBool && <CourseGen locs={crseMarkers} names={locNames} setCrseMarkers={setCrseMarkers} setLocNames={setLocNames}/>}
+      {courseBool && (
+        <CourseGen
+          locs={crseMarkers}
+          names={locNames}
+          setCrseMarkers={setCrseMarkers}
+          setLocNames={setLocNames}
+        />
+      )}
     </div>
   ) : (
     <></>
