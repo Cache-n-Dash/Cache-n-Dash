@@ -28,7 +28,7 @@ const ActivityGen = (props) => {
         }).catch(err=>console.log(err))
         axios.get(`/courses/${props.course}`)
         .then(res=>{
-            setOneCourse(res.data)
+            setOneCourse(res.data[0])
         }).catch(err=>console.log(err))
     }, [props.course,setCrseLocs,setOneCourse]);
 
@@ -107,7 +107,7 @@ const ActivityGen = (props) => {
             const month = new Date().getMonth();
             const day = new Date().getDate();
             const date = `${year}-${month}-${day}`;
-            // console.log(date)
+            // console.log(oneCourse)
             axios.post(`/activity/start/${oneCourse.course_id}/${user.user_id}`,{date})
             .then(res=>{
                 // console.log(res.data)
