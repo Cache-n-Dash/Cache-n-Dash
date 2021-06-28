@@ -31,6 +31,12 @@
   top: 75vh;
 }
 
+.startAct{
+  top: 15vh;
+  width: 5rem;
+  border-radius: 25%;
+}
+
 .notToggler {
   background-color: #c894d1;
 }
@@ -53,4 +59,16 @@
 .indexfour input:focus {
   outline: none;
   border-color: #c894d1;
+}
+
+@media (max-width: 750px) {
+  .getPos{
+    top: 70vh;
+  }
+  .startAct{
+    top: 18vh;
+  }
+  .newCrse{
+    top: 60vh;
+  }
 }
