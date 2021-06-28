@@ -5,4 +5,5 @@
 
 SELECT * FROM geo_locations l
 RIGHT OUTER JOIN geo_course_locs c ON l.location_id = c.location_id
-WHERE c.course_id = $1;
+WHERE c.course_id = $1
+ORDER BY c.location_num;

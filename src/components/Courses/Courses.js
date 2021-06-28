@@ -3,7 +3,7 @@ import { DataContext } from '../../context/DataContext'
 import './Courses.css'
 import axios from 'axios'
 
-function Courses() {
+function Courses(props) {
     const {selected,setSelected,courses,setCrseLocs,setOneCourse} = useContext(DataContext)
 
     const renderCourses = () => {
@@ -12,21 +12,27 @@ function Courses() {
                 let avg = crse.mean_completion_time;
                 if(avg===null){
                     avg = '--';
+                }else{
+                    avg = avg/1000
                 }
 
                 const handleCourseClick = () => {
-                    axios.get(`/locations/courses/${crse.course_id}`)
-                    .then(res=>{
-                        // console.log(res.data)
-                        setCrseLocs(res.data)
-                        setOneCourse(crse)
-                    }).catch(err=>console.log(err))
-                    setSelected(!selected)
+                    if(!props.leader){
+                        axios.get(`/locations/courses/${crse.course_id}`)
+                        .then(res=>{
+                            // console.log(res.data)
+                            setCrseLocs(res.data)
+                            setOneCourse(crse)
+                        }).catch(err=>console.log(err))
+                        setSelected(!selected)
+                    }else{
+                        props.setCourseID(crse.course_id)
+                    }
                 }
 
                 return(
                     <div key={idx}>
-                        <button className="courseBtn" onClick={handleCourseClick}><div className="btnDiv numDiv">{idx+1}</div><div className="btnDiv">{crse.course_name}</div><div className="btnDiv">{crse.locations}</div><div className="btnDiv">{avg/1000}</div></button>
+                        <button className="courseBtn" onClick={handleCourseClick}><div className="btnDiv numDiv">{idx+1}</div><div className="btnDiv">{crse.course_name}</div><div className="btnDiv">{crse.locations}</div><div className="btnDiv">{avg}</div></button>
                     </div>
                 )
             })
