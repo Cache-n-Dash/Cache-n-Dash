@@ -4,13 +4,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { UserProvider } from "./context/UserContext";
+import { DataProvider } from "./context/DataContext";
 import { HashRouter } from "react-router-dom";
 
 ReactDOM.render(
    <React.StrictMode>
       <HashRouter>
          <UserProvider>
-            <App />
+            <DataProvider>
+               <App />
+            </DataProvider>
          </UserProvider>
       </HashRouter>
    </React.StrictMode>,

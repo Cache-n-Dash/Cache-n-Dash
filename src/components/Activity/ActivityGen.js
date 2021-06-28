@@ -1,57 +1,60 @@
-import {useState,useEffect,useContext} from 'react'
+import {useState,useContext} from 'react' //useEffect,
 import { UserContext } from "../../context/UserContext";
+import {DataContext} from '../../context/DataContext'
 import axios from 'axios'
 import './ActivityGen.css'
+import Courses from '../Courses/Courses'
 
 const ActivityGen = () => {
-    const [selected,setSelected] = useState(false)
+    // const [selected,setSelected] = useState(false)
     const [doAct,setDoAct] = useState(false)
-    const [courses,setCourses] = useState([])
-    const [crseLocs,setCrseLocs] = useState([])
-    const [oneCourse,setOneCourse] = useState({})
+    // const [courses,setCourses] = useState([])
+    // const [crseLocs,setCrseLocs] = useState([])
+    // const [oneCourse,setOneCourse] = useState({})
     const [actID,setActID] = useState(null)
     const [act,setAct] = useState({})
     const [actBool,setActBool] = useState(false)
     const {user} = useContext(UserContext)
+    const {selected,setSelected,setCourses,crseLocs,setCrseLocs,oneCourse,setOneCourse} = useContext(DataContext)
     const [currLoc,setCurrLoc] = useState(1)
     // console.log(selected)
 
-    useEffect(()=>{
-        axios.get("/courses")
-        .then(res=>{
-            setCourses(res.data)
-            // console.log(res.data)
-        }).catch(err=>{
-            console.log(err)
-        })
-    }, []);
+    // useEffect(()=>{
+    //     axios.get("/courses")
+    //     .then(res=>{
+    //         setCourses(res.data)
+    //         // console.log(res.data)
+    //     }).catch(err=>{
+    //         console.log(err)
+    //     })
+    // }, []);
 
-    const renderCourses = () => {
-        return(
-            courses.map((crse,idx)=>{
-                let avg = crse.mean_completion_time;
-                if(avg===null){
-                    avg = '--';
-                }
+    // const renderCourses = () => {
+    //     return(
+    //         courses.map((crse,idx)=>{
+    //             let avg = crse.mean_completion_time;
+    //             if(avg===null){
+    //                 avg = '--';
+    //             }
 
-                const handleCourseClick = () => {
-                    axios.get(`/locations/courses/${crse.course_id}`)
-                    .then(res=>{
-                        // console.log(res.data)
-                        setCrseLocs(res.data)
-                        setOneCourse(crse)
-                    }).catch(err=>console.log(err))
-                    setSelected(!selected)
-                }
+    //             const handleCourseClick = () => {
+    //                 axios.get(`/locations/courses/${crse.course_id}`)
+    //                 .then(res=>{
+    //                     // console.log(res.data)
+    //                     setCrseLocs(res.data)
+    //                     setOneCourse(crse)
+    //                 }).catch(err=>console.log(err))
+    //                 setSelected(!selected)
+    //             }
 
-                return(
-                    <div key={idx}>
-                        <button className="courseBtn" onClick={handleCourseClick}><div className="btnDiv numDiv">{idx+1}</div><div className="btnDiv">{crse.course_name}</div><div className="btnDiv">{crse.locations}</div><div className="btnDiv">{avg/1000}</div></button>
-                    </div>
-                )
-            })
-        )
-    }
+    //             return(
+    //                 <div key={idx}>
+    //                     <button className="courseBtn" onClick={handleCourseClick}><div className="btnDiv numDiv">{idx+1}</div><div className="btnDiv">{crse.course_name}</div><div className="btnDiv">{crse.locations}</div><div className="btnDiv">{avg/1000}</div></button>
+    //                 </div>
+    //             )
+    //         })
+    //     )
+    // }
 
     const verifyLoc = (crse) => {
         const cloc_id = crse.cloc_id;
@@ -166,7 +169,7 @@ const ActivityGen = () => {
         }else{
             if(doAct){
                 return(
-                    <div className="containerDiv">
+                    <div className="flexContainer">
                         <div className="flexBtn"><button onClick={()=>setDoAct(!doAct)}>Go Back</button></div>
                         <h4>{oneCourse.course_name}</h4>
                         <div className="tableHeaderDiv"><p className="tableHeader locLayout numDiv">Location</p><p className="tableHeader locLayout">Name</p><p className="tableHeader locLayout">Latitude</p><p className="tableHeader locLayout">Longitude</p><p className="tableHeader locLayout">Distance to Next (km)</p></div>
@@ -177,14 +180,15 @@ const ActivityGen = () => {
             }else{
                 if(!selected){
                     return(
-                        <div className="containerDiv">
-                            <div className="tableHeaderDiv"><p className="tableHeader crseLayout numDiv">Number</p><p className="tableHeader crseLayout">Course Name</p><p className="tableHeader crseLayout"># of Geolocations</p><p className="tableHeader crseLayout">Avg Completion Time</p></div>
-                            {renderCourses()}
-                        </div>
+                        <Courses />
+                        // <div className="containerDiv">
+                        //     <div className="tableHeaderDiv"><p className="tableHeader crseLayout numDiv">Number</p><p className="tableHeader crseLayout">Course Name</p><p className="tableHeader crseLayout"># of Geolocations</p><p className="tableHeader crseLayout">Avg Completion Time</p></div>
+                        //     {renderCourses()}
+                        // </div>
                     )
                 }else{
                     return(
-                        <div className="containerDiv">
+                        <div className="flexContainer">
                             <div className="flexBtn"><button onClick={()=>setSelected(!selected)}>Go Back</button></div>
                             <h4>{oneCourse.course_name}</h4>
                             <div className="tableHeaderDiv"><p className="tableHeader locLayout numDiv">Location</p><p className="tableHeader locLayout">Name</p><p className="tableHeader locLayout">Latitude</p><p className="tableHeader locLayout">Longitude</p><p className="tableHeader locLayout">Distance to Next (km)</p></div>
