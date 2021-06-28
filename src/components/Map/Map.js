@@ -26,10 +26,17 @@ import CourseGen from '../CourseGen/CourseGen'
 
 const libraries = ['places']
 
-const mapContainerStyle = {
-  width: '100vw',
-  height: '92vh',
-}
+// let footHeight = '45px';
+// if(window.innerWidth <= 750){
+//   footHeight = '100px';
+// }else{
+//   footHeight = '45px';
+// }
+
+// const mapContainerStyle = {
+//   width: '100vw',
+//   height: `calc(92vh - ${footHeight})`,
+// }
 
 // let center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
 
@@ -60,7 +67,20 @@ function Map(props) {
   const [courseBool, setCourseBool] = useState(false)
   const [crseMarkers, setCrseMarkers] = useState([])
   const [locNames, setLocNames] = useState([])
+  const [actBool, setActBool] = useState(false)
   // console.log(crseMarkers)
+
+  let footHeight = '45px';
+  if(window.innerWidth <= 750){
+    footHeight = '100px';
+  }else{
+    footHeight = '45px';
+  }
+  
+  const mapContainerStyle = {
+    width: '100vw',
+    height: `calc(92vh - ${footHeight})`,
+  }
 
   const getMarkers = useCallback(() => {
     axios
@@ -230,6 +250,12 @@ function Map(props) {
           x
         </button>
       )}
+      {!actBool && (
+        <button className="getPos startAct" onClick={()=>setActBool(!actBool)}>New</button>
+      )}
+      {actBool && (
+        <button className="getPos startAct notToggler" onClick={()=>setActBool(!actBool)}>x</button>
+      )}
 
       <ConditionalRender
         bounds={bounds}
@@ -238,6 +264,7 @@ function Map(props) {
         south={south}
         west={west}
         east={east}
+        actBool={actBool}
       />
 
       <Search panTo={panTo} />
@@ -295,3 +322,6 @@ export default Map
 // }
 
 // <button onClick={getPos}>Determine Position</button>
+
+//mapContainerStyle
+//setMapHeight

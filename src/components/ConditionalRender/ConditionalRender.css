@@ -4,7 +4,7 @@
   margin-right: auto;
   left: 0;
   right: 0;
-  top: 95vh;
+  top: calc(95vh - 45px);
   z-index: 3;
   transition: 0.3s;
   background-color: #6fb164;
@@ -13,7 +13,7 @@
 }
 
 .transitioner {
-  transform: translate(0%, -100%);
+  transform: translate(0%, -85%);
 }
 
 .location-info {
@@ -41,5 +41,11 @@
 @media (min-width: 750px) {
   .render {
     width: 50%;
+  }
+}
+
+@media (max-width: 750px) {
+  .render{
+    top: calc(95vh - 100px);
   }
 }

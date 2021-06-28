@@ -1,12 +1,12 @@
-import {useState,useContext} from 'react' //useEffect,
+import {useState,useEffect,useContext} from 'react'
 import { UserContext } from "../../context/UserContext";
 import {DataContext} from '../../context/DataContext'
 import axios from 'axios'
 import './ActivityGen.css'
-import Courses from '../Courses/Courses'
+// import Courses from '../Courses/Courses'
 import { Link } from 'react-router-dom';
 
-const ActivityGen = () => {
+const ActivityGen = (props) => {
     // const [selected,setSelected] = useState(false)
     const [doAct,setDoAct] = useState(false)
     // const [courses,setCourses] = useState([])
@@ -16,19 +16,21 @@ const ActivityGen = () => {
     const [act,setAct] = useState({})
     const [actBool,setActBool] = useState(false)
     const {user} = useContext(UserContext)
-    const {selected,setSelected,setCourses,crseLocs,setCrseLocs,oneCourse,setOneCourse} = useContext(DataContext)
+    const {setCourses,crseLocs,setCrseLocs,oneCourse,setOneCourse} = useContext(DataContext) //selected,setSelected,
     const [currLoc,setCurrLoc] = useState(1)
     // console.log(selected)
 
-    // useEffect(()=>{
-    //     axios.get("/courses")
-    //     .then(res=>{
-    //         setCourses(res.data)
-    //         // console.log(res.data)
-    //     }).catch(err=>{
-    //         console.log(err)
-    //     })
-    // }, []);
+    useEffect(()=>{
+        axios.get(`/locations/courses/${props.course}`)
+        .then(res=>{
+            setCrseLocs(res.data)
+            // console.log(res.data)
+        }).catch(err=>console.log(err))
+        axios.get(`/courses/${props.course}`)
+        .then(res=>{
+            setOneCourse(res.data)
+        }).catch(err=>console.log(err))
+    }, [props.course,setCrseLocs,setOneCourse]);
 
     // const renderCourses = () => {
     //     return(
@@ -146,7 +148,8 @@ const ActivityGen = () => {
     }
 
     const resetView = () => {
-        setSelected(!selected)
+        // setSelected(!selected)
+        props.setSelected(false)
         setDoAct(!doAct)
         setActBool(!actBool)
         setCrseLocs([])
@@ -184,25 +187,25 @@ const ActivityGen = () => {
                     </div>
                 )
             }else{
-                if(!selected){
-                    return(
-                        <Courses />
-                        // <div className="containerDiv">
-                        //     <div className="tableHeaderDiv"><p className="tableHeader crseLayout numDiv">Number</p><p className="tableHeader crseLayout">Course Name</p><p className="tableHeader crseLayout"># of Geolocations</p><p className="tableHeader crseLayout">Avg Completion Time</p></div>
-                        //     {renderCourses()}
-                        // </div>
-                    )
-                }else{
+                // if(!selected){
+                //     return(
+                //         <Courses />
+                //         // <div className="containerDiv">
+                //         //     <div className="tableHeaderDiv"><p className="tableHeader crseLayout numDiv">Number</p><p className="tableHeader crseLayout">Course Name</p><p className="tableHeader crseLayout"># of Geolocations</p><p className="tableHeader crseLayout">Avg Completion Time</p></div>
+                //         //     {renderCourses()}
+                //         // </div>
+                //     )
+                // }else{
                     return(
                         <div className="flexContainer">
-                            <div className="flexBtn"><button onClick={()=>setSelected(!selected)}>Go Back</button></div>
+                            <div className="flexBtn"><button onClick={()=>props.setSelected(false)}>Go Back</button></div>
                             <h4>{oneCourse.course_name}</h4>
                             <div className="tableHeaderDiv"><p className="tableHeader locLayout numDiv">Location</p><p className="tableHeader locLayout">Name</p><p className="tableHeader locLayout">Latitude</p><p className="tableHeader locLayout">Longitude</p><p className="tableHeader locLayout">Distance to Next (km)</p></div>
                             {renderCourseLocs()}
                             <button onClick={selectCourse}>Select Course</button>
                         </div>
                     )
-                }
+                // }
             }
         }
     }
