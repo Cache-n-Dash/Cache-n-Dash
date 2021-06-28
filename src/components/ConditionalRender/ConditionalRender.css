@@ -9,11 +9,11 @@
   transition: 0.3s;
   background-color: #6fb164;
   width: 90%;
-  border-radius: 2rem 2rem 0 0;
+  border-radius: 2rem;
 }
 
 .transitioner {
-  transform: translate(0%, -89%);
+  transform: translate(0%, -100%);
 }
 
 .location-info {
