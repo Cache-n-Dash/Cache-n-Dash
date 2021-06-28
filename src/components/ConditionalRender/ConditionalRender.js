@@ -4,8 +4,9 @@ import axios from 'axios'
 
 function ConditionalRender(props) {
   const [render, setRender] = useState([])
-  const [activated, setActivated] = useState(false)
+  const [activated, setActivated] = useState(true)
   const [namer, setNamer] = useState('')
+  // console.log(activated)
 
   const getNames = useCallback(() => {
     axios
