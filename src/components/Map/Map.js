@@ -79,7 +79,7 @@ function Map(props) {
   
   const mapContainerStyle = {
     width: '100vw',
-    height: `calc(92vh - ${footHeight})`,
+    height: `calc(100vh - ${footHeight} - 60px)`,
   }
 
   const getMarkers = useCallback(() => {

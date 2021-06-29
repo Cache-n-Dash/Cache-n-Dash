@@ -5,11 +5,16 @@ import "./Header.css";
 
 export default function Header() {
    const [menu, setMenu] = useState(false);
-   const { user } = useContext(UserContext);
+   const { user,setUser } = useContext(UserContext);
 
    const menuClick = () => {
       setMenu(!menu);
    };
+
+   const handleLogout = () => {
+      setUser(null)
+      setMenu(false)
+   }
 
    return (
       <div className="parent">
@@ -18,7 +23,7 @@ export default function Header() {
                Cache-N-Dash
             </Link>
             <button className="menu-button" onClick={menuClick}>
-               Menu
+               {/* Menu */}
                <div>
                   <div className="patty" />
                   <div className="patty" />
@@ -28,29 +33,32 @@ export default function Header() {
          </div>
 
          <div className={`menu ${menu ? "drop" : ""}`}>
-            <Link onClick={() => setMenu(false)} to="/">
+            <Link className="link" onClick={() => setMenu(false)} to="/">
                Home
             </Link>
-            <Link onClick={() => setMenu(false)} to="/search">
+            {/* <Link onClick={() => setMenu(false)} to="/search">
                Search
-            </Link>
-            <Link onClick={() => setMenu(false)} to="/map">
+            </Link> */}
+            <Link className="link" onClick={() => setMenu(false)} to="/map">
                Map
             </Link>
-            <Link onClick={() => setMenu(false)} to="/leaderboard">
+            <Link className="link" onClick={() => setMenu(false)} to="/leaderboard">
                Leaderboard
             </Link>
-            <Link onClick={() => setMenu(false)} to="/admin">
-               Admin
-            </Link>
             {user === null ? (
-               <Link onClick={() => setMenu(false)} to="/auth">
+               <Link className="link" onClick={() => setMenu(false)} to="/auth">
                   Login | Register
                </Link>
             ) : (
-               <Link onClick={() => setMenu(false)} to={"/profile"}>
-                  {user.username}'s Profile
-               </Link>
+               <div className={`menu submenu ${menu ? "drop" : ""}`}>
+                  <Link className="link" onClick={() => setMenu(false)} to="/admin">
+                     Admin
+                  </Link>
+                  <Link className="link" onClick={() => setMenu(false)} to={"/profile"}>
+                     {user.username}'s Profile
+                  </Link>
+                  <Link className="link" onClick={handleLogout} to={"/"}>Logout</Link>
+               </div>
             )}
          </div>
       </div>
