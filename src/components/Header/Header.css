@@ -61,12 +61,12 @@
 .patty {
    background-color: black;
    height: 2px;
-   width: 15px;
-   margin: 2px;
+   width: 22px;
+   margin: 5px;
    margin-left: 5px;
 }
 
-.menu > *:hover {
+.menu > .link:hover {
    background-color: var(--light-green);
 }
 .menu {
@@ -78,6 +78,11 @@
    align-items: center;
    justify-content: center;
    padding: 0px 5%;
+}
+
+.submenu{
+   margin-top: 0;
+   padding: 0;
 }
 
 .drop {

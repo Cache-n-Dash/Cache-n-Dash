@@ -16,7 +16,7 @@ export default (
     <Route exact path="/" component={Home} />
     <Route path="/leaderboard" component={LeaderBoard} />
     <Route path="/map" component={Map} />
-    <Route path="/search" component={Search} />
+    {/* <Route path="/search" component={Search} /> */}
     <Route path="/profile" component={UserDash} />
     <Route path='/contact' component={Contact} />
   </Switch>
