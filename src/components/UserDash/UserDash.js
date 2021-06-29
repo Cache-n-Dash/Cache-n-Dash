@@ -6,8 +6,10 @@ import { useContext,useEffect,useState } from 'react';
 import axios from 'axios';
 import {BsChevronCompactDown} from 'react-icons/bs'
 import {BsChevronCompactUp} from 'react-icons/bs'
+import { Parallax } from "react-parallax";
 
 function UserDash() {
+    const img1 = "https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1867&q=80"
     const [courseNums,setCourseNums] = useState([])
     const [usrCrseData,setUsrCrseData] = useState([])
     const [view,setView] = useState(false)
@@ -42,6 +44,7 @@ function UserDash() {
             usrCrseData.map((act,idx)=>{
                 return(
                     <div className="coursesDiv" key={idx}>
+        
                         <p className="titles data">{idx+1}</p>
                         <p className="titles data">{act.activity_date}</p>
                         <p className="titles data">{act.comp_time/1000}</p>
@@ -66,7 +69,9 @@ function UserDash() {
             )
         }else{
             return(
-                <button className="resetDefaults" onClick={()=>changeBool(crse.course_id)}><BsChevronCompactDown className="chevron"/></button>
+                <button className="resetDefaults" onClick={()=>changeBool(crse.course_id)}>
+                    <BsChevronCompactDown className="chevron"/>
+                </button>
             )
         }
     }
@@ -89,8 +94,7 @@ function UserDash() {
                     <div key={idx}>
                         <div className="coursesDiv">
                             {/* <p>{crse.course_id}</p> */}
-                            <p className="courses">Course Name: {crse.course_name}</p>
-                            <p className="courses"># of Geolocations: {crse.locations}</p>
+                            <p className="courses">{crse.course_name}</p>                            
                         </div>
                         {renderUserActivities(crse)}
                     </div>
@@ -100,17 +104,25 @@ function UserDash() {
     }
 
     return (
-        <div>
+        <div className= "dashboard">
             <div className = "title">
-                <h2>{user.username}'s dashboard</h2>
+                 <Parallax className="para-user center" bgImage={img1} strength={400} blur={3}>
                 <div className = "info-box">
-            
-                    username: {user.username}<br></br>
+                <h1>{user.username}'s dashboard</h1>
+                <div className='line'/>
+                
+                    <div>
+                    username: {user.username}
+                    </div>
+                    <div>
                     email: {user.email}
+                    </div>
+                    {user.isAdmin ? <div/> : (<div>Admin</div>)}
                 </div>
                 <br></br>
+                 </Parallax>
                 <div className = "completed-courses">
-                Your Completed Courses: 
+                <h2>Your Completed Courses:</h2> 
 
                 </div>
                 {/* {renderUserActivities()} */}
