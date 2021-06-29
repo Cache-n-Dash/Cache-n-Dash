@@ -242,3 +242,11 @@ h3 {
       font-size: small;
    }
 }
+
+.colorPurple{
+    background-color: var(--light-purple);
+}
+
+.colorBg{
+    background-color: var(--bg-color);
+}
