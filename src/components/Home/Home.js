@@ -18,7 +18,7 @@ function Home() {
             <Parallax className="para3" bgImage={img1} strength={400} blur={3}>
                <div className="first background-img"></div>
                <div className="contain race">
-                  <h1 className="race-title">Let the Race Begin!</h1>
+                  <h1 className="race-title">Let the Geo-Race Begin!</h1>
                   {user === null ? (
                      <div className="tern">
                         <h3 className="first-subtitle">
@@ -41,14 +41,14 @@ function Home() {
                </div>
             </Parallax>
 
-            <h1>Placeholder Title</h1>
+            <h1>Can you 'Cache' up?</h1>
             <div className="line" />
             <Parallax className="para3" bgImage={img2} strength={400} blur={3}>
                <div className="second background-img"></div>
                <div className="contain">
-                  <h3 className="second-subtitle"> Placeholder text </h3>
-                  <Link className="btn" to="/">
-                     Useless Button
+                  <h3 className="second-subtitle"> See how your times compare on our LeaderBoard! </h3>
+                  <Link className="btn" to="/leaderboard">
+                     View Leaderboard
                   </Link>
                </div>
             </Parallax>

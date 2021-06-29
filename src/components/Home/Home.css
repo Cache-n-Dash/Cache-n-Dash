@@ -103,3 +103,7 @@ h1 {
       margin: 10px;
    }
 }
+
+.first-subtitle,.second-subtitle{
+   text-shadow: 0.5px 0 0 var(--dark-green), -0.5px 0 0 var(--dark-green), 0 0.5px 0 var(--dark-green), 0 -0.5px 0 var(--dark-green), 0.5px 0.5px 0 var(--dark-green), -0.5px 0.5px 0 var(--dark-green), 0.5px -0.5px 0 var(--dark-green), -0.5px -0.5px 0 var(--dark-green);
+}
