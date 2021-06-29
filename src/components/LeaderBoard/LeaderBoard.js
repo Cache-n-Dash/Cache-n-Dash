@@ -132,21 +132,26 @@ function LeaderBoard() {
                         className="removeDefaults"
                         onClick={() => handleSwitch(seg.cloc_id)}
                      >
-                        <IoArrowForwardSharp />
+                        <IoChevronForward className="forward-button" />
+                        <p className="to-seg-txt"> Segment leaderboard</p>
                      </button>
                   );
                } else {
-                  return <div className="empty"></div>;
+                  return <div className="empty-space"></div>;
                }
             };
 
             return (
-               <div className="ldrItem" key={idx}>
-                  {/* <p className="ldrList">Location Number: {idx+1}</p> */}
-                  {renderLocNum()}
-                  {/* <p className="ldrList">Segment Time: {seg.seg_time}</p> */}
-                  {renderSegTime()}
-                  {renderSegLdrBtn()}
+               <div>
+                  <div className="new-line-seg" />
+                  <div className="ldrItem" key={idx}>
+                     {/* <p className="ldrList">Location Number: {idx+1}</p> */}
+                     {renderLocNum()}
+                     <div className="brk-ln" />
+                     {/* <p className="ldrList">Segment Time: {seg.seg_time}</p> */}
+                     {renderSegTime()}
+                     {renderSegLdrBtn()}
+                  </div>
                </div>
             );
          });
@@ -180,11 +185,17 @@ function LeaderBoard() {
    const renderSegLeaderBoard = () => {
       return segLeaders.map((ldr, idx) => {
          return (
-            <div className="ldrItem" key={idx}>
-               <p className="segList">{ldr.username}</p>
-               <p className="segList">{ldr.activity_date}</p>
-               <p className="segList">{ldr.seg_dist}</p>
-               <p className="segList">{ldr.seg_time / 1000}</p>
+            <div>
+               <div className="ldrItem-seg" key={idx}>
+                  <p className="segList">{ldr.username}</p>
+                  <div className="brk-ln " />
+                  <p className="segList">{ldr.activity_date}</p>
+                  <div className="brk-ln " />
+                  <p className="segList">{ldr.seg_dist}</p>
+                  <div className="brk-ln " />
+                  <p className="segList">{ldr.seg_time / 1000}</p>
+               </div>
+               <div className="new-ln ldrItem-seg" />
             </div>
          );
       });
@@ -201,24 +212,30 @@ function LeaderBoard() {
             <div>
                <div className="btnFlex">
                   <button
-                     className="removeDefaults"
+                     className="removeDefaults "
                      onClick={() => setViewSegLdrs(!viewSegLdrs)}
                   >
-                     <IoArrowUndoSharp className="backToCourse" />
+                     <div className="back-spacing ">
+                        <IoArrowBack className="backToCourse" />
+                        <p className="back-txt">Back</p>
+                     </div>
                   </button>
                </div>
                <div>
+                  <h1 className="margin-LR">{segLeaders[0].location_name}</h1>
+                  <div className="line" />
                   <div className="ldrItem">
-                     <p>
+                     <p className="geo-title">
                         Leaderboard for the segment ending at geolocation&nbsp;
+                        {segLeaders[0].location_name}
                      </p>
-                     <p className="boldText">{segLeaders[0].location_name}</p>
                   </div>
                   <div className="ldrItem">
-                     <p>within course&nbsp;</p>
-                     <p className="boldText">{course.course_name}</p>
+                     <p className="geo-title">
+                        within course&nbsp;{course.course_name}
+                     </p>
                   </div>
-                  <p>End segment location at:</p>
+                  <p>Segment location:</p>
                   <div className="ldrItem">
                      <p className="geoList">
                         Latitude: {segLeaders[0].latitude}
@@ -228,18 +245,22 @@ function LeaderBoard() {
                      </p>
                   </div>
                </div>
-               <div className="ldrItem">
+               <div className="ldrItem-seg">
                   <p className="segList title">Username</p>
+                  <div className="brk-ln " />
                   <p className="segList title">Date</p>
+                  <div className="brk-ln " />
                   <p className="segList title">Distance (km)</p>
+                  <div className="brk-ln " />
                   <p className="segList title">Completion Time (s)</p>
                </div>
+               <div className="new-ln ldrItem-seg" />
                {renderSegLeaderBoard()}
             </div>
          );
       } else {
          return (
-            <div className="center">
+            <div className="center margin">
                <h3 className="ldr-title">
                   <div className="btnFlex">
                      <button

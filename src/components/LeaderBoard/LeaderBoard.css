@@ -15,7 +15,7 @@ h3 {
    display: flex;
    justify-content: center;
    align-items: center;
-   margin: 0px;
+   margin: 5px 10px;
 }
 
 .ldr-title {
@@ -48,6 +48,12 @@ h3 {
    background-color: var(--medium-green);
    width: 80vw;
 }
+.new-line-seg {
+   height: 2px;
+   background-color: var(--medium-green);
+   width: 60%;
+   margin: 0px 20%;
+}
 
 .new-ln {
    height: 2px;
@@ -65,9 +71,21 @@ h3 {
    margin: 10px 5px;
 }
 
-.segList,
+.ldrItem-seg {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin: 3px 20px;
+}
+
+.segList {
+   width: 20%;
+   margin: 5px;
+}
+
 .geoList {
-   width: 20vw;
+   width: fit-content;
+   margin: 5px 10px;
 }
 
 .removeDefaults {
@@ -81,13 +99,15 @@ h3 {
    width: 13.33px;
 }
 
-.boldText {
-   font-weight: bold;
-}
-
 .backToCourse {
    width: 30px;
    height: 30px;
+   color: var(--dark-green);
+}
+.back-spacing {
+   position: absolute;
+   margin: 20px;
+   color: var(--dark-green);
 }
 
 .arrow-btn {
@@ -99,6 +119,28 @@ h3 {
 
 .arrow-btn:hover {
    transform: rotate(90deg);
+   color: var(--light-green);
+}
+
+.forward-button {
+   width: 30px;
+   height: 30px;
+   transition: all 0.2s ease-in-out;
+   color: var(--dark-green);
+}
+
+.forward-button:hover {
+   color: var(--light-green);
+}
+
+.to-seg-txt {
+   font-size: x-small;
+   position: absolute;
+   margin: -25px 30px;
+   color: transparent;
+   transition: all 0.2s ease-in-out;
+}
+.forward-button:hover + .to-seg-txt {
    color: var(--light-green);
 }
 
@@ -127,6 +169,10 @@ h3 {
    color: var(--light-green);
 }
 
+.back-txt:hover + .backToCourse {
+   color: var(--light-green);
+}
+
 .close-btn {
    width: 30px;
    height: 30px;
@@ -142,7 +188,7 @@ h3 {
    position: absolute;
    margin-top: -13px;
    height: 20px;
-   transition: all 0.5s cubic-bezier(1, -0.11, 1, 0.94);
+   transition: all 0.3s cubic-bezier(1, -0.11, 1, 0.94);
    overflow: hidden;
    display: flex;
    color: rgba(0, 0, 0, 0);
@@ -163,4 +209,36 @@ h3 {
    height: 2px;
    width: 50%;
    border-radius: 50%;
+}
+
+.margin-LR {
+   margin-left: 50px;
+   margin-right: 50px;
+}
+
+.geo-title {
+   font-family: var(--body-font);
+   font-size: large;
+   color: var(--dark-green);
+   font-weight: normal;
+   margin: 5px 50px;
+}
+
+/* .ldrItem:nth-child(2n) {
+   background-color: var(--trans-green);
+} */
+
+@media (max-width: 750px) {
+   .geo-title {
+      font-size: large;
+   }
+   .back-spacing {
+      margin: 10px;
+   }
+   .margin-LR {
+      font-size: xx-large;
+   }
+   .segList {
+      font-size: small;
+   }
 }
