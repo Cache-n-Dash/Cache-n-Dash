@@ -1,34 +1,35 @@
-@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Raleway:wght@100&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cabin&family=Raleway:wght@100&display=swap");
 
 * {
-  margin: 0px;
+   margin: 0px;
 }
 
 :root {
-  --light-green: #97d18d;
-  --medium-green: #6fb164;
-  --dark-green: #426d3b;
-  --purple: #c894d1;
-  --bg-color: white;
-  --title-font: 'Raleway', sans-serif;
-  --body-font: 'Cabin', sans-serif;
-  --polygon: polygon(0% 0%, 100% 0%, 100% 100%, 0% 80%);
-  --btn-tran: all 0.25s ease-in-out;
-  --img-blur: blur(3px);
+   --trans-green: #b1dbaa77;
+   --light-green: #97d18d;
+   --medium-green: #6fb164;
+   --dark-green: #426d3b;
+   --purple: #c894d1;
+   --bg-color: white;
+   --title-font: "Raleway", sans-serif;
+   --body-font: "Cabin", sans-serif;
+   --polygon: polygon(0% 0%, 100% 0%, 100% 100%, 0% 80%);
+   --btn-tran: all 0.25s ease-in-out;
+   --img-blur: blur(3px);
 }
 
 .App {
-  text-align: center;
-  font-family: var(--body-font);
-  overflow-x: hidden;
-  padding-top: 60px;
+   text-align: center;
+   font-family: var(--body-font);
+   overflow-x: hidden;
+   padding-top: 60px;
 }
 
 .page {
-  min-height: calc(100vh - 105px);
+   min-height: calc(100vh - 105px);
 }
 .footer {
-  z-index: 8;
+   z-index: 8;
 }
 
 @media (max-width: 750px) {

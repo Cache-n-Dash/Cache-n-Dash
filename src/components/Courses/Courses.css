@@ -1,62 +1,122 @@
-.tableHeaderDiv{
-    display: flex;
-    flex-direction: row;
-    /* justify-content: space-between; */
-    width: 90vw;
+.table-header-div {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   width: 100%;
+   justify-content: space-between;
 }
 
-.tableHeader{
-    /* width: 90vw; */
-    font-size: 12px;
-    margin: 0;
+.table-header {
+   font-size: larger;
+   margin: 10px;
 }
 
-.flexContainer{
-    display: flex;
-    flex-direction: column;
-    /* justify-content: space-around; */
-    align-items: center;
+.flexContainer {
+   margin: 0px 20px;
+   width: 80vw;
 }
 
-.courseBtn{
-    border: none;
-    padding: 0;
-    background-color: transparent;
-    width: 90vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.course-parent {
+   width: 100%;
 }
 
-/* .flexBtn{
-    width: 95vw;
-    display: flex;
-    justify-content: flex-start;
-} */
-
-.btnDiv,.crseLayout{
-    /* font-size: 12px; */
-    width: 27vw;
-    text-align: center;
+.course-btn {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   width: 100%;
+   justify-content: space-between;
+   background-color: transparent;
+   border: 0px;
+   padding: 0px;
 }
 
-/* .locLayout,.courseLoc{
-    width: 20.25vw;
-    text-align: center;
-} */
-
-.numDiv{
-    text-align: left;
-    width: 9vw;
+.leader-btn {
+   text-decoration: none;
+   background-color: transparent;
+   border: none;
+   padding: 0px;
 }
 
-/* .locContainer{
-    display: flex;
-    flex-direction: row;
-    width: 90vw;
-} */
+.forward-btn {
+   width: 30px;
+   height: 30px;
+   color: var(--dark-green);
+   transition: all 0.2s ease-in-out;
+}
 
-/* .courseLoc{
-    font-size: 12px;
-    margin: 0;
-} */
+.leader-txt {
+   position: absolute;
+   margin-top: -25px;
+   margin-left: 30px;
+   font-size: smaller;
+   transition: all 0.2s ease-in-out;
+   color: transparent;
+}
+
+.forward-btn:hover {
+   color: var(--light-green);
+}
+
+.forward-btn:hover + .leader-txt {
+   color: var(--light-green);
+}
+
+.table1 {
+   width: 30px;
+}
+.table2 {
+   width: 50%;
+}
+
+.table3 {
+   width: 10%;
+}
+
+.table4 {
+   width: 15%;
+}
+
+.btn-div {
+   font-family: var(--body-font);
+   margin: 12px 10px;
+}
+
+.margin {
+   margin-top: 10px;
+}
+
+.crseLayout {
+   /* font-size: 12px; */
+   width: 27vw;
+   text-align: center;
+}
+
+.new-line-cr {
+   height: 2px;
+   background-color: var(--medium-green);
+   width: 80vw;
+}
+
+@media (max-width: 750px) {
+   .flexContainer {
+      width: 95%;
+      margin: 0px;
+   }
+   .table-header {
+      /* width: 90vw; */
+      font-size: medium;
+      margin: 10px;
+   }
+   .leader-txt {
+      position: absolute;
+      margin-top: -10px;
+      margin-left: -20px;
+   }
+   .new-line-cr {
+      width: 100%;
+   }
+   .btn-div {
+      margin: 15px 10px;
+   }
+}
