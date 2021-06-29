@@ -30,5 +30,17 @@ module.exports = {
             res.status(500).send(err)
         })
     }
-  }
+  },
+  makeAdmin: (req,res) => {
+    const db = req.app.get('db')
+    const {user_id} = req.params;
+    const id = +user_id;
+    db.users.make_admin(id)
+    .then(data=>{
+       res.status(200).send(data)
+    }).catch(err=>{
+       console.log(err)
+       res.status(500).send(err)
+    })
+ }
 }
