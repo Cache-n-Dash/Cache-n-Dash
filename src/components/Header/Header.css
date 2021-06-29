@@ -17,7 +17,7 @@
    display: flex;
    flex-direction: row;
    flex-wrap: nowrap;
-   justify-content: space-around;
+   justify-content: space-evenly;
    align-items: center;
    align-content: center;
 }
@@ -61,8 +61,8 @@
 .patty {
    background-color: black;
    height: 2px;
-   width: 22px;
-   margin: 5px;
+   width: 20px;
+   margin: 4px;
    margin-left: 5px;
 }
 
@@ -80,7 +80,7 @@
    padding: 0px 5%;
 }
 
-.submenu{
+.submenu {
    margin-top: 0;
    padding: 0;
 }
@@ -89,6 +89,13 @@
    height: 50px;
 }
 .drop > * {
+   color: var(--dark-green);
+}
+.admin-drop {
+   height: 50px;
+}
+
+.admin-drop > * {
    color: var(--dark-green);
 }
 
@@ -102,9 +109,16 @@
       align-content: stretch;
    }
    .drop {
+      height: 170px;
+   }
+   .admin-drop {
       height: 250px;
    }
    .logo {
       font-size: x-large;
+   }
+   .header {
+      margin: 0px 5%;
+      justify-content: space-between;
    }
 }

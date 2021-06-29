@@ -5,16 +5,17 @@ import "./Header.css";
 
 export default function Header() {
    const [menu, setMenu] = useState(false);
-   const { user,setUser } = useContext(UserContext);
+   const { user, setUser } = useContext(UserContext);
 
    const menuClick = () => {
       setMenu(!menu);
    };
 
    const handleLogout = () => {
-      setUser(null)
-      setMenu(false)
-   }
+      setUser(null);
+      setMenu(false);
+   };
+   console.log(user);
 
    return (
       <div className="parent">
@@ -32,7 +33,17 @@ export default function Header() {
             </button>
          </div>
 
-         <div className={`menu ${menu ? "drop" : ""}`}>
+         <div
+            className={`menu ${
+               menu
+                  ? user === null
+                     ? "drop"
+                     : user.isadmin
+                     ? "admin-drop"
+                     : "drop"
+                  : ""
+            }`}
+         >
             <Link className="link" onClick={() => setMenu(false)} to="/">
                Home
             </Link>
@@ -42,7 +53,11 @@ export default function Header() {
             <Link className="link" onClick={() => setMenu(false)} to="/map">
                Map
             </Link>
-            <Link className="link" onClick={() => setMenu(false)} to="/leaderboard">
+            <Link
+               className="link"
+               onClick={() => setMenu(false)}
+               to="/leaderboard"
+            >
                Leaderboard
             </Link>
             {user === null ? (
@@ -51,13 +66,23 @@ export default function Header() {
                </Link>
             ) : (
                <div className={`menu submenu ${menu ? "drop" : ""}`}>
-                  <Link className="link" onClick={() => setMenu(false)} to="/admin">
+                  <Link
+                     className="link"
+                     onClick={() => setMenu(false)}
+                     to="/admin"
+                  >
                      Admin
                   </Link>
-                  <Link className="link" onClick={() => setMenu(false)} to={"/profile"}>
+                  <Link
+                     className="link"
+                     onClick={() => setMenu(false)}
+                     to={"/profile"}
+                  >
                      {user.username}'s Profile
                   </Link>
-                  <Link className="link" onClick={handleLogout} to={"/"}>Logout</Link>
+                  <Link className="link" onClick={handleLogout} to={"/"}>
+                     Logout
+                  </Link>
                </div>
             )}
          </div>
