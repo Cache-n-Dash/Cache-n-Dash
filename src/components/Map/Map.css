@@ -5,16 +5,16 @@
 
 .getPos {
   position: absolute;
-  top: 85vh;
+  top: 15vh;
   right: 5vw;
-  width: 3rem;
-  height: 3rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 50%;
   background-color: #6fb164;
   border: none;
   z-index: 7;
   font-size: 20pt;
-  color: #d4f1d4;
+  color: #ffffff;
   cursor: pointer;
   transition: 0.3s ease-in-out;
   -webkit-box-shadow: 0px 6px 11px -1px #00000075;
@@ -28,13 +28,24 @@
 }
 
 .newCrse {
-  top: 75vh;
+  top: 25vh;
+  font-size: 10pt;
 }
 
-.startAct{
-  top: 15vh;
+.startAct {
+  top: 85vh;
   width: 5rem;
   border-radius: 25%;
+  font-size: 16pt;
+  background-color: #1b1b1b;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  z-index: 1;
+}
+
+.startAct:hover {
+  background-color: #426d3b;
 }
 
 .notToggler {
@@ -62,13 +73,13 @@
 }
 
 @media (max-width: 750px) {
-  .getPos{
-    top: 70vh;
-  }
-  .startAct{
+  .getPos {
     top: 18vh;
   }
-  .newCrse{
+  .startAct {
     top: 60vh;
+  }
+  .newCrse {
+    top: 28vh;
   }
 }

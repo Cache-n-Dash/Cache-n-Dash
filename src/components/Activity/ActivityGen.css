@@ -1,14 +1,46 @@
-.tableHeaderDiv{
-    display: flex;
-    flex-direction: row;
-    /* justify-content: space-between; */
-    width: 90vw;
+.tableHeaderDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100vw;
+  margin-bottom: 0.5rem;
 }
 
-.tableHeader{
-    /* width: 90vw; */
-    font-size: 12px;
-    margin: 0;
+.tableHeader {
+  /* width: 90vw; */
+  font-size: 12pt;
+  font-weight: 700;
+  margin: 0;
+}
+
+.flexContainer button {
+  padding: 0.5rem 0.75rem;
+  border-radius: 1.5rem;
+  border: none;
+  -webkit-box-shadow: 0px 6px 11px -1px #00000075;
+  box-shadow: 0px 6px 11px -1px #00000075;
+}
+
+.flexContainer h4 {
+  font-size: 14pt;
+  margin-bottom: 0.5rem;
+}
+
+.goBack {
+  margin-left: 1rem;
+}
+
+.flexContainer #selectCourse {
+  margin-top: 1rem;
+}
+
+.locContainerFlex {
+  display: flex;
+  flex-direction: column;
+}
+
+#verifyLocation {
+  margin: 0.5rem 0 2rem;
 }
 
 /* .flexContainer{
@@ -27,10 +59,9 @@
     justify-content: space-between;
 } */
 
-.flexBtn{
-    width: 95vw;
-    display: flex;
-    justify-content: flex-start;
+.flexBtn {
+  display: flex;
+  align-self: flex-start;
 }
 
 /* .btnDiv,.crseLayout{
@@ -38,24 +69,43 @@
     text-align: center;
 } */
 
-.locLayout,.courseLoc{
-    width: 20.25vw;
-    text-align: center;
+.locLayout,
+.courseLoc {
+  width: 20.25vw;
+  text-align: center;
 }
 
-.numDiv{
-    text-align: left;
-    width: 9vw;
+.numDiv {
+  text-align: left;
 }
 
-.locContainer{
-    display: flex;
-    flex-direction: row;
-    /* justify-content: space-around; */
-    width: 90vw;
+.locContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 90vw;
 }
 
-.courseLoc{
-    font-size: 12px;
-    margin: 0;
+.courseLoc {
+  font-size: 9pt;
+  margin: 0;
+}
+
+@media (min-width: 750px) {
+  .flexContainer {
+    width: 100%;
+    margin: auto;
+  }
+
+  .tableHeaderDiv {
+    width: 100%;
+    /* margin: auto; */
+    padding-left: 1rem;
+  }
+
+  .locContainer {
+    width: 100%;
+    margin: auto;
+    padding-left: 1rem;
+  }
 }
