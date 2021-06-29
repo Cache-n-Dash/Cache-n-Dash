@@ -25,7 +25,8 @@
 }
 
 .rowColor{
-    background-color: #c5e9be;
+    /* background-color: #c5e9be; */
+    background-color: var(--extra-light-green);
 }
 
 .columnTitle,.columnData{

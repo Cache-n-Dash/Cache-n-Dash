@@ -35,7 +35,7 @@ function Courses(props) {
          };
 
          return (
-            <div className="course-parent" key={idx}>
+            <div className={(idx+1) % 2 === 0 ? "course-parent" : "course-parent colorChange"} key={idx}>
                <button className="course-btn">
                   <div className="btn-div table1">{idx + 1}</div>
                   <div className="brk-ln" />

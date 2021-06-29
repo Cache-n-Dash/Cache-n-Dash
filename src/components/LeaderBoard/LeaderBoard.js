@@ -144,7 +144,7 @@ function LeaderBoard() {
             return (
                <div>
                   <div className="new-line-seg" />
-                  <div className="ldrItem" key={idx}>
+                  <div className={(idx+1) % 2 === 0 ? "ldrItem colorBg" : "ldrItem colorPurple"} key={idx}>
                      {/* <p className="ldrList">Location Number: {idx+1}</p> */}
                      {renderLocNum()}
                      <div className="brk-ln" />
@@ -161,7 +161,7 @@ function LeaderBoard() {
    const renderLeaderBoard = () => {
       return courseLeaders.map((ldr, idx) => {
          return (
-            <div className="ldr-div" key={idx}>
+            <div className={(idx+1) % 2 === 0 ? "ldr-div" : "ldr-div colorChange"} key={idx}>
                <div className="ldrItem">
                   <p className="ldrList">{ldr.username}</p>
                   <div className="brk-ln  " />
@@ -186,7 +186,7 @@ function LeaderBoard() {
       return segLeaders.map((ldr, idx) => {
          return (
             <div>
-               <div className="ldrItem-seg" key={idx}>
+               <div className={(idx+1) % 2 === 0 ? "ldrItem-seg" : "ldrItem-seg colorChange"} key={idx}>
                   <p className="segList">{ldr.username}</p>
                   <div className="brk-ln " />
                   <p className="segList">{ldr.activity_date}</p>

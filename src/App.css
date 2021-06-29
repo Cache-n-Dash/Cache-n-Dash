@@ -5,10 +5,12 @@
 }
 
 :root {
+   --extra-light-green: #c5e9be;
    --trans-green: #b1dbaa77;
    --light-green: #97d18d;
    --medium-green: #6fb164;
    --dark-green: #426d3b;
+   --light-purple: #d8bcdd;
    --purple: #c894d1;
    --bg-color: white;
    --title-font: "Raleway", sans-serif;
