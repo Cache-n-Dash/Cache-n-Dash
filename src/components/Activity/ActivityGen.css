@@ -13,7 +13,7 @@
   margin: 0;
 }
 
-.flexContainer button {
+.flexContainer > button {
   padding: 0.5rem 0.75rem;
   border-radius: 1.5rem;
   border: none;
