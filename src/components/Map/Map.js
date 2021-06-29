@@ -70,13 +70,13 @@ function Map(props) {
   const [actBool, setActBool] = useState(false)
   // console.log(crseMarkers)
 
-  let footHeight = '45px';
-  if(window.innerWidth <= 750){
-    footHeight = '100px';
-  }else{
-    footHeight = '45px';
+  let footHeight = '45px'
+  if (window.innerWidth <= 750) {
+    footHeight = '100px'
+  } else {
+    footHeight = '45px'
   }
-  
+
   const mapContainerStyle = {
     width: '100vw',
     height: `calc(92vh - ${footHeight})`,
@@ -178,18 +178,17 @@ function Map(props) {
   }
 
   const bounds = async () => {
-    // console.log(mapRef.current)
     let ne = mapRef.current.getBounds()?.getNorthEast()
     let sw = mapRef.current.getBounds()?.getSouthWest()
-    // console.log('================================')
-    // console.log('Northeast: ' + ne.lat() + ';' + ne.lng())
-    // console.log('SouthWest: ' + sw.lat() + ';' + sw.lng())
-    if(ne && sw){
+    let centerer = mapRef.current.getCenter()
+    if (ne && sw) {
       setNorth(ne.lat())
       setSouth(sw.lat())
       setWest(sw.lng())
       setEast(ne.lng())
     }
+    setLatitude(centerer.lat())
+    setLongitude(centerer.lng())
   }
 
   const renderMarkers = () => {
@@ -209,8 +208,6 @@ function Map(props) {
             key={marker.location_id}
             onClick={() => {
               setSelected(marker)
-              setLatitude(marker.latitude)
-              setLongitude(marker.longitude)
               if (courseBool) {
                 setCrseMarkers([...crseMarkers, marker.location_id])
                 setLocNames([...locNames, marker.location_name])
@@ -236,7 +233,9 @@ function Map(props) {
             +
           </button>
           <button className="getPos newCrse" onClick={createCourse}>
-            CC
+            New
+            <br />
+            Course
           </button>
         </div>
       )}
@@ -251,10 +250,20 @@ function Map(props) {
         </button>
       )}
       {!actBool && (
-        <button className="getPos startAct" onClick={()=>setActBool(!actBool)}>New</button>
+        <button
+          className="getPos startAct"
+          onClick={() => setActBool(!actBool)}
+        >
+          Start
+        </button>
       )}
       {actBool && (
-        <button className="getPos startAct notToggler" onClick={()=>setActBool(!actBool)}>x</button>
+        <button
+          className="getPos startAct notToggler"
+          onClick={() => setActBool(!actBool)}
+        >
+          x
+        </button>
       )}
 
       <ConditionalRender

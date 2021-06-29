@@ -7,8 +7,8 @@ function ConditionalRender(props) {
   const [render, setRender] = useState([])
   const [activated, setActivated] = useState(true)
   const [namer, setNamer] = useState('')
-  const [selectCourse,setSelectCourse] = useState([])
-  const [selected,setSelected] = useState(false)
+  const [selectCourse, setSelectCourse] = useState([])
+  const [selected, setSelected] = useState(false)
   // console.log(activated)
 
   const getNames = useCallback(() => {
@@ -21,21 +21,23 @@ function ConditionalRender(props) {
       .catch((err) => console.log(err))
   }, [])
 
-  const getStartLocs = useCallback(()=>{
-    axios.get(`/locations/start/find`)
-    .then(res=>{
-      // console.log("start",res.data)
-      setRender(res.data)
-    }).catch(err=>console.log(err))
-  },[])
+  const getStartLocs = useCallback(() => {
+    axios
+      .get(`/locations/start/find`)
+      .then((res) => {
+        // console.log("start",res.data)
+        setRender(res.data)
+      })
+      .catch((err) => console.log(err))
+  }, [])
 
   useEffect(() => {
-    if(props.actBool){
+    if (props.actBool) {
       getStartLocs()
-    }else{
+    } else {
       getNames()
     }
-  }, [props.actBool,getNames,getStartLocs])
+  }, [props.actBool, getNames, getStartLocs])
 
   const activator = () => {
     if (activated) {
@@ -55,42 +57,40 @@ function ConditionalRender(props) {
       lat: Number(location.latitude),
       lng: Number(location.longitude),
     })
-    if(props.actBool){
+    if (props.actBool) {
       setSelectCourse(location.course_id)
       setSelected(!selected)
     }
   }
 
   const renderList = () => {
-    if(selected){
-      if(!activated){
-        return(
-          <ActivityGen course={selectCourse} setSelected={setSelected}/>
-        )
+    if (selected) {
+      if (!activated) {
+        return <ActivityGen course={selectCourse} setSelected={setSelected} />
       }
-    }else{
-      if(!activated){
-        return(
-          render.map((location) => {
-            if(location.latitude <= props.north && location.latitude >= props.south && location.longitude >= props.west && location.longitude <= props.east){
-              return (
-                <div className="location-info" key={location.location_id}>
-                  {location.location_name !== null && (
-                    <h4
-                      onClick={()=>handleClick(location)}
-                    >
-                      {location.location_name}
-                    </h4>
-                  )}
-                </div>
-              )
-            }else{
-              return (
-                <div key={location.location_id}></div>
-              )
-            }
-          })
-        )
+    } else {
+      if (!activated) {
+        return render.map((location) => {
+          if (
+            location.latitude <= props.north &&
+            location.latitude >= props.south &&
+            location.longitude >= props.west &&
+            location.longitude <= props.east
+          ) {
+            return (
+              <div className="location-info" key={location.location_id}>
+                {location.location_name !== null && (
+                  <h4 onClick={() => handleClick(location)}>
+                    <span id="locationName">Location: </span>
+                    {location.location_name}
+                  </h4>
+                )}
+              </div>
+            )
+          } else {
+            return <div key={location.location_id}></div>
+          }
+        })
       }
     }
   }
@@ -126,7 +126,6 @@ function ConditionalRender(props) {
 }
 
 export default ConditionalRender
-
 
 //() =>
 // props.panTo({

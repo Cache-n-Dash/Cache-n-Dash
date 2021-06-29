@@ -1,220 +1,260 @@
-import {useState,useEffect,useContext} from 'react'
-import { UserContext } from "../../context/UserContext";
-import {DataContext} from '../../context/DataContext'
+import { useState, useEffect, useContext } from 'react'
+import { UserContext } from '../../context/UserContext'
+import { DataContext } from '../../context/DataContext'
 import axios from 'axios'
 import './ActivityGen.css'
 // import Courses from '../Courses/Courses'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 const ActivityGen = (props) => {
-    // const [selected,setSelected] = useState(false)
-    const [doAct,setDoAct] = useState(false)
-    // const [courses,setCourses] = useState([])
-    // const [crseLocs,setCrseLocs] = useState([])
-    // const [oneCourse,setOneCourse] = useState({})
-    const [actID,setActID] = useState(null)
-    const [act,setAct] = useState({})
-    const [actBool,setActBool] = useState(false)
-    const {user} = useContext(UserContext)
-    const {setCourses,crseLocs,setCrseLocs,oneCourse,setOneCourse} = useContext(DataContext) //selected,setSelected,
-    const [currLoc,setCurrLoc] = useState(1)
-    // console.log(selected)
+  // const [selected,setSelected] = useState(false)
+  const [doAct, setDoAct] = useState(false)
+  // const [courses,setCourses] = useState([])
+  // const [crseLocs,setCrseLocs] = useState([])
+  // const [oneCourse,setOneCourse] = useState({})
+  const [actID, setActID] = useState(null)
+  const [act, setAct] = useState({})
+  const [actBool, setActBool] = useState(false)
+  const { user } = useContext(UserContext)
+  const { setCourses, crseLocs, setCrseLocs, oneCourse, setOneCourse } =
+    useContext(DataContext) //selected,setSelected,
+  const [currLoc, setCurrLoc] = useState(1)
+  // console.log(selected)
 
-    useEffect(()=>{
-        axios.get(`/locations/courses/${props.course}`)
-        .then(res=>{
-            setCrseLocs(res.data)
-            // console.log(res.data)
-        }).catch(err=>console.log(err))
-        axios.get(`/courses/${props.course}`)
-        .then(res=>{
-            setOneCourse(res.data[0])
-        }).catch(err=>console.log(err))
-    }, [props.course,setCrseLocs,setOneCourse]);
+  useEffect(() => {
+    axios
+      .get(`/locations/courses/${props.course}`)
+      .then((res) => {
+        setCrseLocs(res.data)
+        // console.log(res.data)
+      })
+      .catch((err) => console.log(err))
+    axios
+      .get(`/courses/${props.course}`)
+      .then((res) => {
+        setOneCourse(res.data[0])
+      })
+      .catch((err) => console.log(err))
+  }, [props.course, setCrseLocs, setOneCourse])
 
-    // const renderCourses = () => {
-    //     return(
-    //         courses.map((crse,idx)=>{
-    //             let avg = crse.mean_completion_time;
-    //             if(avg===null){
-    //                 avg = '--';
-    //             }
+  // const renderCourses = () => {
+  //     return(
+  //         courses.map((crse,idx)=>{
+  //             let avg = crse.mean_completion_time;
+  //             if(avg===null){
+  //                 avg = '--';
+  //             }
 
-    //             const handleCourseClick = () => {
-    //                 axios.get(`/locations/courses/${crse.course_id}`)
-    //                 .then(res=>{
-    //                     // console.log(res.data)
-    //                     setCrseLocs(res.data)
-    //                     setOneCourse(crse)
-    //                 }).catch(err=>console.log(err))
-    //                 setSelected(!selected)
-    //             }
+  //             const handleCourseClick = () => {
+  //                 axios.get(`/locations/courses/${crse.course_id}`)
+  //                 .then(res=>{
+  //                     // console.log(res.data)
+  //                     setCrseLocs(res.data)
+  //                     setOneCourse(crse)
+  //                 }).catch(err=>console.log(err))
+  //                 setSelected(!selected)
+  //             }
 
-    //             return(
-    //                 <div key={idx}>
-    //                     <button className="courseBtn" onClick={handleCourseClick}><div className="btnDiv numDiv">{idx+1}</div><div className="btnDiv">{crse.course_name}</div><div className="btnDiv">{crse.locations}</div><div className="btnDiv">{avg/1000}</div></button>
-    //                 </div>
-    //             )
-    //         })
-    //     )
-    // }
+  //             return(
+  //                 <div key={idx}>
+  //                     <button className="courseBtn" onClick={handleCourseClick}><div className="btnDiv numDiv">{idx+1}</div><div className="btnDiv">{crse.course_name}</div><div className="btnDiv">{crse.locations}</div><div className="btnDiv">{avg/1000}</div></button>
+  //                 </div>
+  //             )
+  //         })
+  //     )
+  // }
 
-    const verifyLoc = (crse) => {
-        const cloc_id = crse.cloc_id;
-        const timestamp = Date.now();
-        let startEnd = '';
-        if(currLoc === 1){
-            startEnd = 'START';
-        }else if(currLoc <= oneCourse.locations){
-            startEnd = 'MIDDLE';
-        }
-        axios.post(`/activity/update/${actID}/${cloc_id}`,{timestamp,startEnd})
-        .then(res=>{
-            // console.log(res)
-            setCurrLoc(currLoc+1)
-        }).catch(err=>console.log(err))
+  const verifyLoc = (crse) => {
+    const cloc_id = crse.cloc_id
+    const timestamp = Date.now()
+    let startEnd = ''
+    if (currLoc === 1) {
+      startEnd = 'START'
+    } else if (currLoc <= oneCourse.locations) {
+      startEnd = 'MIDDLE'
     }
+    axios
+      .post(`/activity/update/${actID}/${cloc_id}`, { timestamp, startEnd })
+      .then((res) => {
+        // console.log(res)
+        setCurrLoc(currLoc + 1)
+      })
+      .catch((err) => console.log(err))
+  }
 
-    const renderCourseLocs = () => {
-        // let currLoc = 1;
-        return(
-            crseLocs.map((crse,idx)=>{
-                if(doAct && crse.location_num === currLoc){
-                    return(
-                        <div key={idx}>
-                            <div className="locContainer">
-                                <p className="courseLoc numDiv">{crse.location_num}</p><p className="courseLoc">{crse.location_name}</p><p className="courseLoc">{crse.latitude}</p><p className="courseLoc">{crse.longitude}</p><p className="courseLoc">{crse.seg_dist}</p>
-                            </div>
-                            <button onClick={()=>verifyLoc(crse)}>Verify Location</button>
-                        </div>
-                    )
-                }else{
-                    // if(!doAct || crse.location_num !== currLoc){
-                        return(
-                            <div className="locContainer" key={idx}>
-                                <p className="courseLoc numDiv">{crse.location_num}</p><p className="courseLoc">{crse.location_name}</p><p className="courseLoc">{crse.latitude}</p><p className="courseLoc">{crse.longitude}</p><p className="courseLoc">{crse.seg_dist}</p>
-                            </div>
-                        )
-                    // }else 
-                }
-            })
+  const renderCourseLocs = () => {
+    // let currLoc = 1;
+    return crseLocs.map((crse, idx) => {
+      if (doAct && crse.location_num === currLoc) {
+        return (
+          <div className="locContainerFlex" key={idx}>
+            <div className="locContainer">
+              <p className="courseLoc numDiv">{crse.location_num}</p>
+              <p className="courseLoc">{crse.location_name}</p>
+              {/* <p className="courseLoc">{crse.latitude}</p>
+              <p className="courseLoc">{crse.longitude}</p> */}
+              <p className="courseLoc">{crse.seg_dist}(km)</p>
+            </div>
+            <button id="verifyLocation" onClick={() => verifyLoc(crse)}>
+              Verify Location
+            </button>
+          </div>
         )
-    }
+      } else {
+        // if(!doAct || crse.location_num !== currLoc){
+        return (
+          <div className="locContainer" key={idx}>
+            <p className="courseLoc numDiv">{crse.location_num}</p>
+            <p className="courseLoc">{crse.location_name}</p>
+            {/* <p className="courseLoc">{crse.latitude}</p>
+            <p className="courseLoc">{crse.longitude}</p> */}
+            <p className="courseLoc">{crse.seg_dist}(km)</p>
+          </div>
+        )
+        // }else
+      }
+    })
+  }
 
-    const selectCourse = () => {
-        if(user){
-            const year = new Date().getFullYear();
-            const month = new Date().getMonth();
-            const day = new Date().getDate();
-            const date = `${year}-${month}-${day}`;
-            // console.log(oneCourse)
-            axios.post(`/activity/start/${oneCourse.course_id}/${user.user_id}`,{date})
-            .then(res=>{
-                // console.log(res.data)
-                const activity_id = res.data[0]
-                setActID(activity_id.activity_id)
-                setDoAct(!doAct)
-            }).catch(err=>{
-                console.log(err)
-            })
-        }else{
-            alert("You must be logged in to continue")
-        }
+  const selectCourse = () => {
+    if (user) {
+      const year = new Date().getFullYear()
+      const month = new Date().getMonth()
+      const day = new Date().getDate()
+      const date = `${year}-${month}-${day}`
+      // console.log(oneCourse)
+      axios
+        .post(`/activity/start/${oneCourse.course_id}/${user.user_id}`, {
+          date,
+        })
+        .then((res) => {
+          // console.log(res.data)
+          const activity_id = res.data[0]
+          setActID(activity_id.activity_id)
+          setDoAct(!doAct)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    } else {
+      alert('You must be logged in to continue')
     }
+  }
 
-    const finishCourse = async () => {
-        const cloc_id = crseLocs[0].cloc_id;
-        const timestamp = Date.now();
-        const startEnd = 'END';
-        await axios.post(`/activity/update/${actID}/${cloc_id}`,{timestamp,startEnd})
-        const upAct = await axios.put(`/activity/complete/${actID}`)
-        setAct(upAct.data)
-        const crses = await axios.put(`/courses/update/${oneCourse.course_id}`)
-        // console.log(crses)
-        setCourses(crses.data)
-        // .then(res=>{
-        //     console.log(res.data)
-        // }).catch(err=>console.log(err))
-        setActBool(!actBool)
-        setCurrLoc(1)
+  const finishCourse = async () => {
+    const cloc_id = crseLocs[0].cloc_id
+    const timestamp = Date.now()
+    const startEnd = 'END'
+    await axios.post(`/activity/update/${actID}/${cloc_id}`, {
+      timestamp,
+      startEnd,
+    })
+    const upAct = await axios.put(`/activity/complete/${actID}`)
+    setAct(upAct.data)
+    const crses = await axios.put(`/courses/update/${oneCourse.course_id}`)
+    // console.log(crses)
+    setCourses(crses.data)
+    // .then(res=>{
+    //     console.log(res.data)
+    // }).catch(err=>console.log(err))
+    setActBool(!actBool)
+    setCurrLoc(1)
+  }
+
+  const renderBtn = () => {
+    if (currLoc === oneCourse.locations + 1) {
+      return <button onClick={finishCourse}>Finish</button>
     }
+  }
 
-    const renderBtn = () => {
-        if(currLoc===oneCourse.locations+1){
-            return(
-                <button onClick={finishCourse}>Finish</button>
-            )
-        }
-    }
+  const resetView = () => {
+    // setSelected(!selected)
+    props.setSelected(false)
+    setDoAct(!doAct)
+    setActBool(!actBool)
+    setCrseLocs([])
+    setOneCourse({})
+    setActID(null)
+    setAct({})
+  }
 
-    const resetView = () => {
-        // setSelected(!selected)
-        props.setSelected(false)
-        setDoAct(!doAct)
-        setActBool(!actBool)
-        setCrseLocs([])
-        setOneCourse({})
-        setActID(null)
-        setAct({})
-    }
-
-    const renderData = () => {
-        if(actBool){
-            // console.log(act)
-            return(
-                <div>
-                    <h4>Activity Completed!</h4>
-                    <p>You completed {oneCourse.course_name} in:</p>
-                    <p>{act.comp_time/1000} seconds</p>
-                    <button onClick={resetView}>View Courses</button>
-                    <Link to={{
-                        pathname: "/leaderboard",
-                        state: {
-                            finishActCrseID: oneCourse.course_id,
-                        },
-                    }}><button>View Leaderboard</button></Link>
-                </div>
-            )
-        }else{
-            if(doAct){
-                return(
-                    <div className="flexContainer">
-                        <div className="flexBtn"><button onClick={()=>setDoAct(!doAct)}>Go Back</button></div>
-                        <h4>{oneCourse.course_name}</h4>
-                        <div className="tableHeaderDiv"><p className="tableHeader locLayout numDiv">Location</p><p className="tableHeader locLayout">Name</p><p className="tableHeader locLayout">Latitude</p><p className="tableHeader locLayout">Longitude</p><p className="tableHeader locLayout">Distance to Next (km)</p></div>
-                        {renderCourseLocs()}
-                        {renderBtn()}
-                    </div>
-                )
-            }else{
-                // if(!selected){
-                //     return(
-                //         <Courses />
-                //         // <div className="containerDiv">
-                //         //     <div className="tableHeaderDiv"><p className="tableHeader crseLayout numDiv">Number</p><p className="tableHeader crseLayout">Course Name</p><p className="tableHeader crseLayout"># of Geolocations</p><p className="tableHeader crseLayout">Avg Completion Time</p></div>
-                //         //     {renderCourses()}
-                //         // </div>
-                //     )
-                // }else{
-                    return(
-                        <div className="flexContainer">
-                            <div className="flexBtn"><button onClick={()=>props.setSelected(false)}>Go Back</button></div>
-                            <h4>{oneCourse.course_name}</h4>
-                            <div className="tableHeaderDiv"><p className="tableHeader locLayout numDiv">Location</p><p className="tableHeader locLayout">Name</p><p className="tableHeader locLayout">Latitude</p><p className="tableHeader locLayout">Longitude</p><p className="tableHeader locLayout">Distance to Next (km)</p></div>
-                            {renderCourseLocs()}
-                            <button onClick={selectCourse}>Select Course</button>
-                        </div>
-                    )
-                // }
-            }
-        }
-    }
-
-    return(
+  const renderData = () => {
+    if (actBool) {
+      // console.log(act)
+      return (
         <div>
-            {renderData()}
+          <h4>Activity Completed!</h4>
+          <p>You completed {oneCourse.course_name} in:</p>
+          <p>{act.comp_time / 1000} seconds</p>
+          <button onClick={resetView}>View Courses</button>
+          <Link
+            to={{
+              pathname: '/leaderboard',
+              state: {
+                finishActCrseID: oneCourse.course_id,
+              },
+            }}
+          >
+            <button>View Leaderboard</button>
+          </Link>
         </div>
-    )
+      )
+    } else {
+      if (doAct) {
+        return (
+          <div className="flexContainer">
+            <div className="flexBtn">
+              <button className="goBack" onClick={() => setDoAct(!doAct)}>
+                Go Back
+              </button>
+            </div>
+            <h4>{oneCourse.course_name}</h4>
+            <div className="tableHeaderDiv">
+              <p className="tableHeader locLayout numDiv">Location</p>
+              <p className="tableHeader locLayout">Name</p>
+              {/* <p className="tableHeader locLayout">Latitude</p>
+              <p className="tableHeader locLayout">Longitude</p> */}
+              <p className="tableHeader locLayout">Distance</p>
+            </div>
+            {renderCourseLocs()}
+            {renderBtn()}
+          </div>
+        )
+      } else {
+        // if(!selected){
+        //     return(
+        //         <Courses />
+        //         // <div className="containerDiv">
+        //         //     <div className="tableHeaderDiv"><p className="tableHeader crseLayout numDiv">Number</p><p className="tableHeader crseLayout">Course Name</p><p className="tableHeader crseLayout"># of Geolocations</p><p className="tableHeader crseLayout">Avg Completion Time</p></div>
+        //         //     {renderCourses()}
+        //         // </div>
+        //     )
+        // }else{
+        return (
+          <div className="flexContainer">
+            <div className="flexBtn">
+              <button onClick={() => props.setSelected(false)}>Go Back</button>
+            </div>
+            <h4>{oneCourse.course_name}</h4>
+            <div className="tableHeaderDiv">
+              <p className="tableHeader locLayout numDiv">Location</p>
+              <p className="tableHeader locLayout">Name</p>
+              {/* <p className="tableHeader locLayout">Latitude</p>
+              <p className="tableHeader locLayout">Longitude</p> */}
+              <p className="tableHeader locLayout">Distance</p>
+            </div>
+            {renderCourseLocs()}
+            <button id="selectCourse" onClick={selectCourse}>
+              Start This Course
+            </button>
+          </div>
+        )
+        // }
+      }
+    }
+  }
+
+  return <div>{renderData()}</div>
 }
 
 export default ActivityGen
