@@ -100,3 +100,4 @@ app.post('/contact', contCtrl.submitEmail)
 // Admin Endpoints
 app.delete('/admin/delete/user/:user_id', adminCtrl.deleteUser)
 app.get('/admin/query', adminCtrl.queryUsers)
+app.put('/admin/new/:user_id', adminCtrl.makeAdmin)

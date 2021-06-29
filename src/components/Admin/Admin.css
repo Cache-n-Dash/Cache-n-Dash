@@ -1,21 +1,138 @@
 .adminContainer{
     display: flex;
     justify-content: center;
+    padding-top: 20px;
+}
+
+.welcome{
+    margin-top: 0;
+}
+
+.rowDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
 }
 
 .headerDiv,.containerDiv{
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
     width: 90vw;
 }
 
-.columnTitle,.columnData{
-    font-size: 12px;
-    width: 18vw;
-    text-align: center;
+.rowColor{
+    background-color: #c5e9be;
 }
 
-.containerDiv{
+.columnTitle,.columnData{
+    font-size: 0.8rem;
+    width: calc(18vw - 6px);
+    margin: 10px 3px 5px;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.clBrk{
+    width: 2px;
+    height: 15px;
+    background-color: var(--dark-green);
+}
+
+.columnTitle{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--dark-green);
+}
+
+/* .containerDiv{
     justify-content: space-between;
+} */
+
+.circle{
+    width: 24px;
+    height: 24px;
+    /* margin: 6px 0 0; */
+    fill: var(--medium-green);
+}
+
+.searchDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#search-input{
+    height: 18px;
+}
+
+.defaultBtn{
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    width: 30px;
+    height: 30px;
+}
+
+.btnSize{
+    width: 45px;
+    height: 24px;
+    margin: 3px calc((18vw - 45px) / 2);
+    background-color: var(--medium-green);
+    color: white;
+}
+
+.adminBtn{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 10px calc((18vw - 20px) / 2) 5px;
+    font-size: 1rem;
+    color: white;
+    background-color: var(--purple);
+}
+
+.fake{
+    margin: 0;
+}
+
+.alignText{
+    font-size: 13px;
+    vertical-align: middle;
+    margin-top: 3px;
+}
+
+.btnSize:hover{
+    background-color: var(--light-green);
+}
+
+.btnSize:active{
+    background-color: var(--light-green);
+}
+
+.adminBtn:hover{
+    background-color: var(--light-green);
+}
+
+.adminBtn:active{
+    background-color: var(--light-green);
+}
+
+.circleSearch{
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    fill: var(--purple);
+}
+
+.circleSearch:active{
+    fill: var(--light-green);
+}
+
+.circleSearch:hover{
+    fill: var(--light-green);
 }
