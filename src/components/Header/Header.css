@@ -69,6 +69,7 @@
 .menu > .link:hover {
    background-color: var(--light-green);
 }
+
 .menu {
    margin-top: 10px;
    height: 0px;

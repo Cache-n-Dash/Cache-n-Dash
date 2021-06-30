@@ -10,9 +10,9 @@ function Footer() {
          </Link>
          <div>
             <Link to="/contact">Contact Us!</Link>
-            <Link to="/">Home</Link>
          </div>
          <div>
+            <Link to="/">Home</Link>
             <Link to={"/profile"}>User Profile</Link>
             {/* <Link to="/admin"> Admin</Link> */}
          </div>

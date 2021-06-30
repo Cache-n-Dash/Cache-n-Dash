@@ -264,17 +264,19 @@ function LeaderBoard() {
                      </p>
                   </div>
                </div>
-               <div className="ldrItem-seg">
-                  <p className="segList title">Username</p>
-                  <div className="brk-ln " />
-                  <p className="segList title">Date</p>
-                  <div className="brk-ln " />
-                  <p className="segList title">Distance (km)</p>
-                  <div className="brk-ln " />
-                  <p className="segList title">Completion Time (s)</p>
+               <div className="ldrItem-marg">
+                  <div className="ldrItem-seg">
+                     <p className="segList title">Username</p>
+                     <div className="brk-ln " />
+                     <p className="segList title">Date</p>
+                     <div className="brk-ln " />
+                     <p className="segList title">Distance (km)</p>
+                     <div className="brk-ln " />
+                     <p className="segList title">Completion Time (s)</p>
+                  </div>
+                  <div className="new-ln ldrItem-seg" />
+                  {renderSegLeaderBoard()}
                </div>
-               <div className="new-ln ldrItem-seg" />
-               {renderSegLeaderBoard()}
             </div>
          );
       } else {

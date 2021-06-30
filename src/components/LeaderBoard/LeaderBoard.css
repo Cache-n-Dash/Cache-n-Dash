@@ -70,6 +70,7 @@ h3 {
 .new-ln {
    height: 2px;
    background-color: var(--medium-green);
+   margin: 0px;
 }
 
 .brk-ln {
@@ -87,12 +88,15 @@ h3 {
    display: flex;
    justify-content: space-between;
    align-items: center;
-   margin: 3px 20px;
+}
+.ldrItem-marg {
+   margin: 0px 20px;
 }
 
 .segList {
    width: 20%;
    margin: 5px;
+   height: 30px;
 }
 
 .geoList {
