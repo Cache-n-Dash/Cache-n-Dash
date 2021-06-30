@@ -180,15 +180,19 @@ function Map(props) {
   const bounds = async () => {
     let ne = mapRef.current.getBounds()?.getNorthEast()
     let sw = mapRef.current.getBounds()?.getSouthWest()
-    let centerer = mapRef.current.getCenter()
+    let centerer = {};
+    centerer = mapRef.current.getCenter()
     if (ne && sw) {
       setNorth(ne.lat())
       setSouth(sw.lat())
       setWest(sw.lng())
       setEast(ne.lng())
     }
-    setLatitude(centerer.lat())
-    setLongitude(centerer.lng())
+    // console.log(centerer)
+    if(centerer){
+      setLatitude(centerer.lat())
+      setLongitude(centerer.lng())
+    }
   }
 
   const renderMarkers = () => {
