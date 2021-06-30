@@ -59,7 +59,7 @@ function Courses(props) {
       <div className="center margin">
          <h1>Courses</h1>
          <div className="ldr-line" />
-         <div className="flexContainer center">
+         <div className="flex-Container center">
             <div className="table-header-div">
                <p className="table-header table1">#</p>
                <div className="brk-ln" />

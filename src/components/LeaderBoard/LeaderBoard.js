@@ -144,7 +144,14 @@ function LeaderBoard() {
             return (
                <div>
                   <div className="new-line-seg" />
-                  <div className={(idx+1) % 2 === 0 ? "ldrItem colorBg" : "ldrItem colorPurple"} key={idx}>
+                  <div
+                     className={
+                        (idx + 1) % 2 === 0
+                           ? "ldrItem colorBg"
+                           : "ldrItem colorPurple"
+                     }
+                     key={idx}
+                  >
                      {/* <p className="ldrList">Location Number: {idx+1}</p> */}
                      {renderLocNum()}
                      <div className="brk-ln" />
@@ -161,7 +168,12 @@ function LeaderBoard() {
    const renderLeaderBoard = () => {
       return courseLeaders.map((ldr, idx) => {
          return (
-            <div className={(idx+1) % 2 === 0 ? "ldr-div" : "ldr-div colorChange"} key={idx}>
+            <div
+               className={
+                  (idx + 1) % 2 === 0 ? "ldr-div" : "ldr-div colorChange"
+               }
+               key={idx}
+            >
                <div className="ldrItem">
                   <p className="ldrList">{ldr.username}</p>
                   <div className="brk-ln  " />
@@ -186,7 +198,14 @@ function LeaderBoard() {
       return segLeaders.map((ldr, idx) => {
          return (
             <div>
-               <div className={(idx+1) % 2 === 0 ? "ldrItem-seg" : "ldrItem-seg colorChange"} key={idx}>
+               <div
+                  className={
+                     (idx + 1) % 2 === 0
+                        ? "ldrItem-seg"
+                        : "ldrItem-seg colorChange"
+                  }
+                  key={idx}
+               >
                   <p className="segList">{ldr.username}</p>
                   <div className="brk-ln " />
                   <p className="segList">{ldr.activity_date}</p>
@@ -280,17 +299,18 @@ function LeaderBoard() {
                   Average Completion Time: {course.mean_completion_time / 1000}{" "}
                   seconds
                </p>
-               <div className="ldrItem">
-                  <p className="ldrList title">Username</p>
-                  <div className="brk-ln " />
-                  <p className="ldrList title">Date</p>
-                  <div className="brk-ln" />
-                  <p className="ldrList title">Completion Time (s)</p>
-                  <div className="empty-space" />
+               <div className="ldr-parent-div">
+                  <div className="ldrItem">
+                     <p className="ldrList title">Username</p>
+                     <div className="brk-ln " />
+                     <p className="ldrList title">Date</p>
+                     <div className="brk-ln" />
+                     <p className="ldrList title">Completion Time (s)</p>
+                     <div className="empty-space" />
+                  </div>
+                  <div className="new-line" />
+                  {renderLeaderBoard()}
                </div>
-               <div className="new-line" />
-
-               {renderLeaderBoard()}
             </div>
          );
       }
