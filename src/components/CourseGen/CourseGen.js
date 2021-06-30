@@ -96,27 +96,40 @@ const CourseGen = (props) => {
     // setNames(props.names)
     if (names) {
       return names.map((name, idx) => {
-        return <p key={idx}>{name}</p>
+        return <p className="location-name" key={idx}>{name}</p>
       })
+    }
+  }
+
+  const isDisabled = () => {
+    if(locations !== 0 && name !== '' && name !== 'Enter Course Name Here'){
+      return false
+    }else{
+      return true
     }
   }
 
   return (
     <div>
-      <p>Create a new course</p>
-      <div>
-        Select geolocations in the order they will be visited, then click the
-        buttons to create a new course
+      <div className="text-overlay">
+        <h4 className="course-title">Create a New Course</h4>
+        <p className="explanation">
+          Select geolocations in the order they will be visited
+        </p>
+        <input className="course-name"
+          value={name}
+          type="text"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <div>
+          <button className="courseBtn" onClick={handleLocs}>Confirm Locations</button>
+          <button className="courseBtn" onClick={handleCreate} disabled={isDisabled()}>Create Course</button>
+        </div>
       </div>
-      <p>Locations Selected:</p>
-      {renderLocationNames()}
-      <input
-        value={name}
-        type="text"
-        onChange={(e) => setName(e.target.value)}
-      />
-      <button onClick={handleLocs}>Confirm Locations</button>
-      <button onClick={handleCreate}>Create Course</button>
+      <div className="locs-selected">
+        <p className="locations-title">Locations<br/>Selected:</p>
+        {renderLocationNames()}
+      </div>
     </div>
   )
 }
