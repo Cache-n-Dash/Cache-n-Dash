@@ -78,9 +78,13 @@ function Admin() {
     
     return (
         <div className="adminContainer">
-            {user.isadmin ? <div>
+            {user.isadmin ? <div className="centered">
                 <h3 className="welcome">Welcome , {user.username}!</h3>
-                <br/>You can ... <br/><br/>
+                {/* <br/> */}
+                <div className="ldr-line"/>
+                {/* <br/> */}
+                <div className="rowDiv">As an Admin you can ...</div>
+                <br/>
                 <div className="rowDiv">- Create geocache locations and courses</div>
                 {/* <br/> */}
                 <div className="rowDiv">- View all users</div>
@@ -90,8 +94,8 @@ function Admin() {
                 <div className="rowDiv">- Make a user an admin (click on the&nbsp;<div className="adminBtn fake">+</div>&nbsp;button)</div>
                 {/* -edit/delete courses and geocache locations */}
                 <br/><br/>
-                **Geolocations and Courses can be created on the Map page**
-                <br/><br/>
+                <div className="rowDiv">**Geolocations and Courses can be created on the Map page**</div>
+                <br/>
                 <div className="searchDiv">
                     <input id="search-input" placeholder="Search" type="text" onChange={(e) => setSearch(e.target.value)}/>
                     <button className="defaultBtn" onClick={() => {queryUsers(search)}}><IoSearchCircleSharp className="circleSearch"/></button>
