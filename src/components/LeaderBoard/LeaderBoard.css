@@ -4,10 +4,11 @@ h3 {
 }
 
 .ldr-div {
-   width: 80%;
+   width: 100%;
    display: column;
    justify-content: center;
    align-items: center;
+   height: auto;
 }
 
 .ldrItem {
@@ -15,7 +16,7 @@ h3 {
    display: flex;
    justify-content: center;
    align-items: center;
-   margin: 5px 10px;
+   /* margin: 5px 10px; */
 }
 
 .ldr-title {
@@ -46,8 +47,19 @@ h3 {
 .new-line {
    height: 2px;
    background-color: var(--medium-green);
+   width: 100%;
+}
+
+.new-line-ldr {
+   height: 2px;
+   background-color: var(--medium-green);
    width: 80vw;
 }
+
+.ldr-parent-div {
+   width: 80vw;
+}
+
 .new-line-seg {
    height: 2px;
    background-color: var(--medium-green);
@@ -241,12 +253,15 @@ h3 {
    .segList {
       font-size: small;
    }
+   .ldr-parent-div {
+      width: 100vw;
+   }
 }
 
-.colorPurple{
-    background-color: var(--light-purple);
+.colorPurple {
+   background-color: var(--light-purple);
 }
 
-.colorBg{
-    background-color: var(--bg-color);
+.colorBg {
+   background-color: var(--bg-color);
 }
