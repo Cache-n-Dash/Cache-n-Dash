@@ -15,7 +15,7 @@ export default function Header() {
       setUser(null);
       setMenu(false);
    };
-   console.log(user);
+   // console.log(user);
 
    return (
       <div className="parent">
