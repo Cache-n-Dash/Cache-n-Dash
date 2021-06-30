@@ -6,6 +6,7 @@
    height: 45px;
    transition: none;
    z-index: 10;
+   width: 100vw;
 }
 .footer > footer {
    transition: none;
