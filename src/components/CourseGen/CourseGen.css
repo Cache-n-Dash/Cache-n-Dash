@@ -1,5 +1,6 @@
 .text-overlay{
     width: 65vw;
+    max-width: 320px;
     position: absolute;
     top: 18vh;
     left: 10vw;
@@ -27,6 +28,7 @@
     border-radius: 1rem;
     color: var(--bg-color);
     margin: 4px 2px 0;
+    border-width: 1px;
 }
 
 .courseBtn:focus{
@@ -64,4 +66,10 @@
     margin-top: 10px;
     padding-bottom: 3px;
     border-bottom: 1px solid var(--dark-green);
+}
+
+@media (min-width: 510px){
+    .text-overlay{
+        left: calc(50vw - 160px);
+    }
 }

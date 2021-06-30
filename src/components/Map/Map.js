@@ -41,7 +41,7 @@ const libraries = ['places']
 // let center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
 
 const options = {
-  disableDefaultUI: false,
+  disableDefaultUI: true,
   zoomControl: false,
 }
 
@@ -253,7 +253,7 @@ function Map(props) {
           x
         </button>
       )}
-      {!actBool && (
+      {!actBool && !courseBool && (
         <button
           className="getPos startAct"
           onClick={() => setActBool(!actBool)}
@@ -289,6 +289,7 @@ function Map(props) {
         center={center}
         options={options}
         onLoad={onMapLoad}
+        mapTypeId={'satellite'}
       >
         {renderMarkers()}
         {selected ? (
