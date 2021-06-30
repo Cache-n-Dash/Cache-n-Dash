@@ -1,0 +1,67 @@
+.text-overlay{
+    width: 65vw;
+    position: absolute;
+    top: 18vh;
+    left: 10vw;
+    border-radius: 1rem;
+    background-color: var(--light-green);
+    padding: 5px;
+}
+
+.course-title{
+    font-family: var(--title-font);
+    font-size:large;
+}
+
+.explanation{
+    margin: 0;
+    font-size: smaller;
+}
+
+.course-name{
+    border-radius: 1rem;
+    border-width: 1px;
+}
+
+.courseBtn{
+    border-radius: 1rem;
+    color: var(--bg-color);
+    margin: 4px 2px 0;
+}
+
+.courseBtn:focus{
+    background-color: var(--purple);
+}
+
+.courseBtn:hover{
+    background-color: var(--purple);
+}
+
+.courseBtn:disabled{
+    background-color: var(--extra-light-green);
+}
+
+.courseBtn:enabled{
+    background-color: var(--dark-green);
+}
+
+.locs-selected{
+    position: absolute;
+    left: 5vw;
+    top: 35vh;
+    /* width: 80px; */
+    background-color: rgba(211,211,211,0.5);
+    /* opacity: 0.3; */
+}
+
+.locations-title{
+    margin: 0;
+    font-weight:bold;
+    font-size: large;
+}
+
+.location-name{
+    margin-top: 10px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid var(--dark-green);
+}
