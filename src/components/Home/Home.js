@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext } from "react"; //useState
 import { UserContext } from "../../context/UserContext";
 import { Parallax } from "react-parallax";
 

@@ -54,7 +54,7 @@ function Map(props) {
     libraries,
   })
 
-  const [map, setMap] = React.useState(null)
+  // const [map, setMap] = React.useState(null)
   const [markers, setMarkers] = useState([])
   const [selected, setSelected] = useState(null)
   const [toggler, setToggler] = useState(false)
@@ -103,7 +103,7 @@ function Map(props) {
     } else {
       getMarkers()
     }
-  }, [getMarkers])
+  }, [getMarkers,props.history,user])
 
   const showIt = () => {
     setToggler(!toggler)

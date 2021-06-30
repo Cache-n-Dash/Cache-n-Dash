@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import "./LeaderBoard.css";
 import axios from "axios";
 import Courses from "../Courses/Courses";
-import { IoCaretForwardSharp } from "react-icons/io5";
+// import { IoCaretForwardSharp } from "react-icons/io5";
 import { IoArrowBack } from "react-icons/io5";
 // import {IoArrowForwardCircleSharp} from 'react-icons/io5'
-import { IoArrowForwardSharp } from "react-icons/io5";
+// import { IoArrowForwardSharp } from "react-icons/io5";
 // import {IoArrowBackSharp} from 'react-icons/io5'
-import { IoArrowUndoSharp } from "react-icons/io5";
+// import { IoArrowUndoSharp } from "react-icons/io5";
 import { IoChevronForward } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
@@ -51,7 +51,7 @@ function LeaderBoard() {
       } else if (finishActCrseID && resetCourses === false) {
          setCourseID(finishActCrseID);
       }
-   }, [courseID]);
+   }, [courseID,finishActCrseID,resetCourses]);
 
    const handleClick = (id) => {
       if (openID === id) {
