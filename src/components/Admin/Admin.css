@@ -19,9 +19,9 @@
 .headerDiv,.containerDiv{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    width: 90vw;
+    width: calc(90vw + 38px);
 }
 
 .rowColor{
