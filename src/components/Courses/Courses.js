@@ -3,7 +3,7 @@ import { DataContext } from "../../context/DataContext";
 import "./Courses.css";
 import axios from "axios";
 import { IoChevronForward } from "react-icons/io5";
-import { IoClose } from "react-icons/io5";
+// import { IoClose } from "react-icons/io5";
 
 function Courses(props) {
    const { selected, setSelected, courses, setCrseLocs, setOneCourse } =

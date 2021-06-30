@@ -4,7 +4,7 @@ import Auth from './components/Auth/Auth'
 import UserDash from './components/UserDash/UserDash'
 import LeaderBoard from './components/LeaderBoard/LeaderBoard'
 import Map from './components/Map/Map'
-import Search from './components/Search/Search'
+// import Search from './components/Search/Search'
 import Admin from './components/Admin/Admin'
 import Contact from './components/Contact/Contact'
 import React from "react";
