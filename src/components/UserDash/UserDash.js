@@ -43,7 +43,7 @@ function UserDash() {
         return(
             usrCrseData.map((act,idx)=>{
                 return(
-                    <div className="coursesDiv" key={idx}>
+                    <div className={(idx+1) % 2 === 0 ? "coursesDiv" : "coursesDiv colorChange"} key={idx}>
         
                         <p className="titles data">{idx+1}</p>
                         <p className="titles data">{act.activity_date}</p>
