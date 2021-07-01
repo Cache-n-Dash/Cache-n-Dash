@@ -124,7 +124,7 @@ function Map(props) {
   }
 
   const mapRef = React.useRef()
-  const onMapLoad = useCallback((map) => {
+  const onMapLoad = useCallback( async (map) => {
     mapRef.current = map
   }, [])
 
