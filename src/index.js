@@ -5,17 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { UserProvider } from "./context/UserContext";
 import { DataProvider } from "./context/DataContext";
-import { HashRouter } from "react-router-dom";
+import { HashRouter,BrowserRouter } from "react-router-dom";
+const Router = process.env.NODE_ENV === 'development' ? HashRouter : BrowserRouter;
 
 ReactDOM.render(
    <React.StrictMode>
-      <HashRouter>
+      <Router>
          <UserProvider>
             <DataProvider>
                <App />
             </DataProvider>
          </UserProvider>
-      </HashRouter>
+      </Router>
    </React.StrictMode>,
    document.getElementById("root")
 );

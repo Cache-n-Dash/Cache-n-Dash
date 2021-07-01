@@ -7,6 +7,8 @@ require('dotenv').config()
 const nodemailer = require('nodemailer')
 const { sendEmail } = require('./verifyMailer')
 
+const path = require('path');
+
 const locCtrl = require('./controllers/locationController')
 const crseCtrl = require('./controllers/courseController')
 const actCtrl = require('./controllers/activityController')
@@ -101,3 +103,8 @@ app.post('/contact', contCtrl.submitEmail)
 app.delete('/admin/delete/user/:user_id', adminCtrl.deleteUser)
 app.get('/admin/query', adminCtrl.queryUsers)
 app.put('/admin/new/:user_id', adminCtrl.makeAdmin)
+
+app.use(express.static(__dirname + '/../build'));
+app.get('*', (req,res)=>{
+  res.sendFile(path.join(__dirname, '../build/index.html'))
+});
