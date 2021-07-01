@@ -1,46 +1,47 @@
 .tableHeaderDiv {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 100vw;
-  margin-bottom: 0.5rem;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   width: 100vw;
+   margin-bottom: 0.5rem;
 }
 
 .tableHeader {
-  /* width: 90vw; */
-  font-size: 12pt;
-  font-weight: 700;
-  margin: 0;
+   /* width: 90vw; */
+   font-size: 12pt;
+   font-weight: 700;
+   margin: 0;
 }
 
 .flexContainer > button {
-  padding: 0.5rem 0.75rem;
-  border-radius: 1.5rem;
-  border: none;
-  -webkit-box-shadow: 0px 6px 11px -1px #00000075;
-  box-shadow: 0px 6px 11px -1px #00000075;
+   padding: 0.5rem 0.75rem;
+   border-radius: 1.5rem;
+   border: none;
+   -webkit-box-shadow: 0px 6px 11px -1px #00000075;
+   box-shadow: 0px 6px 11px -1px #00000075;
 }
 
 .flexContainer h4 {
-  font-size: 14pt;
-  margin-bottom: 0.5rem;
+   font-size: 14pt;
+   margin-bottom: 0.5rem;
 }
 
 .goBack {
-  margin-left: 1rem;
+   margin-left: 1rem;
+   text-decoration: none;
 }
 
 .flexContainer #selectCourse {
-  margin-top: 1rem;
+   margin-top: 1rem;
 }
 
 .locContainerFlex {
-  display: flex;
-  flex-direction: column;
+   display: flex;
+   flex-direction: column;
 }
 
 #verifyLocation {
-  margin: 0.5rem 0 2rem;
+   margin: 0.5rem 0 2rem;
 }
 
 /* .flexContainer{
@@ -60,8 +61,18 @@
 } */
 
 .flexBtn {
-  display: flex;
-  align-self: flex-start;
+   display: flex;
+   align-self: flex-start;
+}
+
+.flexBtn > button {
+   text-decoration: none;
+   padding: 0.5rem 0.75rem;
+   border-radius: 1.5rem;
+   border: none;
+   -webkit-box-shadow: 0px 6px 11px -1px #00000075;
+   box-shadow: 0px 6px 11px -1px #00000075;
+   margin-left: 5px;
 }
 
 /* .btnDiv,.crseLayout{
@@ -71,41 +82,58 @@
 
 .locLayout,
 .courseLoc {
-  width: 20.25vw;
-  text-align: center;
+   width: 20.25vw;
+   text-align: center;
 }
 
 .numDiv {
-  text-align: left;
+   text-align: left;
 }
 
 .locContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 90vw;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   width: 90vw;
+}
+
+.finishCourse button {
+   padding: 0.5rem 0.75rem;
+   border-radius: 1.5rem;
+   border: none;
+   -webkit-box-shadow: 0px 6px 11px -1px #00000075;
+   box-shadow: 0px 6px 11px -1px #00000075;
+   margin: 5px;
+}
+
+.locContainerFlex > button {
+   padding: 0.5rem 0.75rem;
+   border-radius: 1.5rem;
+   border: none;
+   -webkit-box-shadow: 0px 6px 11px -1px #00000075;
+   box-shadow: 0px 6px 11px -1px #00000075;
 }
 
 .courseLoc {
-  font-size: 9pt;
-  margin: 0;
+   font-size: 9pt;
+   margin: 0;
 }
 
 @media (min-width: 750px) {
-  .flexContainer {
-    width: 100%;
-    margin: auto;
-  }
+   .flexContainer {
+      width: 100%;
+      margin: auto;
+   }
 
-  .tableHeaderDiv {
-    width: 100%;
-    /* margin: auto; */
-    padding-left: 1rem;
-  }
+   .tableHeaderDiv {
+      width: 100%;
+      /* margin: auto; */
+      padding-left: 1rem;
+   }
 
-  .locContainer {
-    width: 100%;
-    margin: auto;
-    padding-left: 1rem;
-  }
+   .locContainer {
+      width: 100%;
+      margin: auto;
+      padding-left: 1rem;
+   }
 }
