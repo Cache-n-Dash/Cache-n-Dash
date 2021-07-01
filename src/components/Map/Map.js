@@ -43,6 +43,13 @@ const libraries = ['places']
 const options = {
   disableDefaultUI: true,
   zoomControl: false,
+  fullscreenControl: false,
+  streetViewControl: false,
+  mapTypeControl: true,
+  // mapTypeControlOptions: {
+  //   style: 'DROPDOWN_MENU',
+  //   mapTypeIds: ['roadmap','terrain','satellite']
+  // }
 }
 
 function Map(props) {
@@ -289,7 +296,7 @@ function Map(props) {
         center={center}
         options={options}
         onLoad={onMapLoad}
-        mapTypeId={'satellite'}
+        // mapTypeId={'satellite'}
       >
         {renderMarkers()}
         {selected ? (

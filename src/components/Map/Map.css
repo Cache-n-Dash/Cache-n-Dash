@@ -5,7 +5,7 @@
 
 .getPos {
   position: absolute;
-  top: 15vh;
+  top: 17vh;
   right: 5vw;
   width: 3.5rem;
   height: 3.5rem;
@@ -28,7 +28,7 @@
 }
 
 .newCrse {
-  top: 25vh;
+  top: 27vh;
   font-size: 10pt;
 }
 
@@ -55,9 +55,10 @@
 .indexfour {
   z-index: 2;
   position: absolute;
-  left: 50%;
-  top: 100px;
-  transform: translate(-50%, -50%);
+  right: 1vw;
+  top: 70px;
+  /* transform: translate(-50%, -50%); */
+  /* width: 200px; */
 }
 
 .indexfour input {
@@ -65,6 +66,8 @@
   font-size: 14pt;
   border-radius: 2rem;
   border: solid 1px #426d3b;
+  width: 43vw;
+  max-width: 340px;
 }
 
 .indexfour input:focus {
