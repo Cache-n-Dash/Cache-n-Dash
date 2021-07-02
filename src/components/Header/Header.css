@@ -95,8 +95,14 @@
 .admin-drop {
    height: 50px;
 }
+.non-admin-drop {
+   height: 50px;
+}
 
 .admin-drop > * {
+   color: var(--dark-green);
+}
+.non-admin-drop > * {
    color: var(--dark-green);
 }
 
@@ -114,6 +120,9 @@
    }
    .admin-drop {
       height: 250px;
+   }
+   .non-admin-drop {
+      height: 210px;
    }
    .logo {
       font-size: x-large;
