@@ -40,7 +40,7 @@ export default function Header() {
                      ? "drop"
                      : user.isadmin
                      ? "admin-drop"
-                     : "drop"
+                     : "non-admin-drop"
                   : ""
             }`}
          >
@@ -64,8 +64,8 @@ export default function Header() {
                <Link className="link" onClick={() => setMenu(false)} to="/auth">
                   Login | Register
                </Link>
-            ) : (
-               <div className={`menu submenu ${menu ? "drop" : ""}`}>
+            ) : user.isadmin ? (
+               <div className={`menu submenu ${menu ? "admin-drop" : ""}`}>
                   <Link
                      className="link"
                      onClick={() => setMenu(false)}
@@ -73,6 +73,19 @@ export default function Header() {
                   >
                      Admin
                   </Link>
+                  <Link
+                     className="link"
+                     onClick={() => setMenu(false)}
+                     to={"/profile"}
+                  >
+                     {user.username}'s Profile
+                  </Link>
+                  <Link className="link" onClick={handleLogout} to={"/"}>
+                     Logout
+                  </Link>
+               </div>
+            ) : (
+               <div className={`menu submenu ${menu ? "non-admin-drop" : ""}`}>
                   <Link
                      className="link"
                      onClick={() => setMenu(false)}
